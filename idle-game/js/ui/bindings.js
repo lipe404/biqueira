@@ -4,6 +4,7 @@ import { SaveSystem } from "../core/saveSystem.js";
 import { PrestigeSystem } from "../systems/prestigeSystem.js";
 import { NPCS } from "../data/npcs.js";
 import { UPGRADES } from "../data/upgrades.js";
+import { MathUtils } from "../utils/math.js";
 
 export const Bindings = {
   init: () => {
@@ -78,7 +79,8 @@ export const Bindings = {
     if (!npc) return;
 
     const count = state.automation.npcs[id] || 0;
-    const cost = Math.floor(npc.baseCost * Math.pow(npc.costMultiplier, count));
+    const discount = (state.discounts?.global || 0) + (state.discounts?.npcs?.[id] || 0);
+    const cost = MathUtils.calculateCost(npc.baseCost, npc.costMultiplier, count, discount);
 
     if (state.resources.money >= cost) {
       state.resources.money -= cost;

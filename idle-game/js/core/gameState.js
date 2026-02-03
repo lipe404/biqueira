@@ -22,6 +22,11 @@ const initialState = {
   automation: {
     npcs: {}, // { npcId: count }
   },
+  discounts: {
+    global: 0, // Global discount (0.0 to 1.0)
+    npcs: {}, // { npcId: discount }
+    upgrades: 0 // Discount for upgrades
+  },
   upgrades: [], // Array of upgrade IDs purchased
   events: {
     activeEvents: [],

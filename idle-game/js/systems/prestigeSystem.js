@@ -1,6 +1,7 @@
 import { gameState } from "../core/gameState.js";
 import { SaveSystem } from "../core/saveSystem.js";
 import { CONFIG } from "../core/config.js";
+import { MathUtils } from "../utils/math.js";
 
 /**
  * PrestigeSystem - Manages prestige mechanics (soft resets for bonuses).
@@ -28,13 +29,14 @@ export const PrestigeSystem = {
    */
   calculatePrestigeGain: () => {
     const state = gameState.get();
-    const totalMoney = state.stats.totalMoneyEarned;
+    const totalMoney = MathUtils.safe(state.stats.totalMoneyEarned);
 
     // Formula: 1 Influence per $10,000 earned, scaled
+    // Adjusted to ^0.6 to reduce stagnation in late game
     if (totalMoney < CONFIG.PRESTIGE.MONEY_PER_INFLUENCE) return 0;
 
-    const potential = Math.floor(Math.sqrt(totalMoney / CONFIG.PRESTIGE.MONEY_PER_INFLUENCE));
-    return potential;
+    const potential = Math.floor(Math.pow(totalMoney / CONFIG.PRESTIGE.MONEY_PER_INFLUENCE, 0.6));
+    return MathUtils.safe(potential);
   },
 
   /**

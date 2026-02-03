@@ -97,6 +97,30 @@ export const UPGRADES = {
     },
   },
 
+  // ECONOMY UPGRADES (DISCOUNTS)
+  negotiation_1: {
+    id: "negotiation_1",
+    name: "Lábia de Vendedor",
+    description: "Tudo fica 10% mais barato. Você aprendeu a pechinchar.",
+    cost: 1000,
+    trigger: (state) => state.resources.money >= 500,
+    effect: (state) => {
+      if (!state.discounts) state.discounts = { global: 0 };
+      state.discounts.global += 0.1;
+    },
+  },
+  supplier_contract_1: {
+    id: "supplier_contract_1",
+    name: "Parceria com Fornecedor",
+    description: "Reduz custo de produção/contratação em mais 5%.",
+    cost: 5000,
+    trigger: (state) => state.resources.money >= 2000,
+    effect: (state) => {
+      if (!state.discounts) state.discounts = { global: 0 };
+      state.discounts.global += 0.05;
+    },
+  },
+
   // RISK MANAGEMENT
   risk_management_1: {
     id: "risk_management_1",

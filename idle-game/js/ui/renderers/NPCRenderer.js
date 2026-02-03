@@ -1,4 +1,5 @@
 import { NPCS } from "../../data/npcs.js";
+import { MathUtils } from "../../utils/math.js";
 
 export const NPCRenderer = {
   renderList: (container) => {
@@ -30,9 +31,9 @@ export const NPCRenderer = {
     for (const key in NPCS) {
       const npc = NPCS[key];
       const count = state.automation.npcs[key] || 0;
-      const cost = Math.floor(
-        npc.baseCost * Math.pow(npc.costMultiplier, count),
-      );
+      
+      const discount = (state.discounts?.global || 0) + (state.discounts?.npcs?.[key] || 0);
+      const cost = MathUtils.calculateCost(npc.baseCost, npc.costMultiplier, count, discount);
 
       const el = document.getElementById(`npc-${npc.id}`);
       if (!el) continue;
