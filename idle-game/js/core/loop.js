@@ -59,6 +59,14 @@ export class GameLoop {
 
     this.accumulatedTime += dt;
 
+    // SPIRAL OF DEATH PROTECTION
+    // If accumulated time gets too high (more than 1 second, i.e., ~30-60 frames),
+    // we discard the backlog to prevent the game from freezing while trying to catch up.
+    if (this.accumulatedTime > 1.0) {
+        console.warn("Game loop death spiral detected! Skipping frames. Accumulated:", this.accumulatedTime);
+        this.accumulatedTime = 1.0;
+    }
+
     // Fixed time step for logic updates
     while (this.accumulatedTime >= this.step) {
       this.update(this.step);

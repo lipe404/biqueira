@@ -83,62 +83,104 @@ class GameState {
   }
 
   /**
-   * Load saved data into the state, performing a deep merge.
+   * Validate and repair data against the schema (initialState).
+   * @param {Object} data - Data to validate.
+   * @returns {Object} Validated data with missing keys filled from initialState.
+   */
+  validateSchema(data) {
+    if (!data) return JSON.parse(JSON.stringify(initialState));
+
+    const validate = (schema, input) => {
+      // If input is not an object or is null, revert to schema default
+      if (typeof input !== 'object' || input === null) {
+        return JSON.parse(JSON.stringify(schema));
+      }
+
+      const output = {};
+      for (const key in schema) {
+        if (schema.hasOwnProperty(key)) {
+          const schemaValue = schema[key];
+          const inputValue = input[key];
+
+          if (inputValue === undefined) {
+            // Missing key: fill with default
+            output[key] = JSON.parse(JSON.stringify(schemaValue));
+          } else if (
+            typeof schemaValue === 'object' && 
+            schemaValue !== null && 
+            !Array.isArray(schemaValue)
+          ) {
+            // Nested object: recurse
+            output[key] = validate(schemaValue, inputValue);
+          } else {
+            // Primitive or Array: keep input value (could add type check here)
+            output[key] = inputValue;
+          }
+        }
+      }
+      
+      // Preserve extra keys from input (optional, but good for backward compat if schema is strict subset)
+      // For strict schema validation, we would NOT do this loop.
+      // But for save data, sometimes we want to keep deprecated data for migration?
+      // Let's stick to STRICT schema for now to clean up state.
+      
+      return output;
+    };
+
+    return validate(initialState, data);
+  }
+
+  /**
+   * Load saved data into the state, performing validation and deep merge.
    * @param {Object} savedData - Data loaded from storage.
    */
   load(savedData) {
     if (!savedData) return;
 
-    // Recursive merge to ensure new fields in updates are preserved
-    const merge = (target, source) => {
-      for (const key in source) {
-        if (source[key] instanceof Object && key in target) {
-          Object.assign(source[key], merge(target[key], source[key]));
-        }
-      }
-      Object.assign(target || {}, source);
-      return target;
-    };
+    // 1. Validate and repair the loaded data
+    const validatedData = this.validateSchema(savedData);
 
-    this.data = merge(this.data, savedData);
+    // 2. Merge validated data into current state
+    this.data = validatedData;
+    
+    // 3. Notify
     this.notify();
   }
 
   /**
-   * Reset state to initial values.
+   * Centralized reset logic.
+   * @param {string} type - 'HARD' | 'PRESTIGE'
+   * @param {Object} payload - Optional data for the reset (e.g., gained influence).
    */
-  reset() {
-    this.data = JSON.parse(JSON.stringify(initialState));
+  reset(type = 'HARD', payload = {}) {
+    console.log(`Resetting Game State: ${type}`);
+    
+    if (type === 'HARD') {
+      this.data = JSON.parse(JSON.stringify(initialState));
+    } 
+    else if (type === 'PRESTIGE') {
+      // Keep persistent data
+      const influence = this.data.resources.influence + (payload.gainedInfluence || 0);
+      const stats = { ...this.data.stats };
+      const meta = { ...this.data.meta };
+      
+      // Reset state
+      this.data = JSON.parse(JSON.stringify(initialState));
+      
+      // Restore persistent data
+      this.data.resources.influence = influence;
+      this.data.stats = stats;
+      this.data.meta = meta;
+    }
+
     this.notify();
   }
 
   /**
-   * Perform a hard reset (wipes everything).
-   */
-  hardReset() {
-    this.reset();
-  }
-
-  /**
-   * Perform a prestige reset.
-   * Resets resources and production but keeps stats and influence.
-   * @param {number} gainedInfluence - Amount of influence gained.
+   * Deprecated: Use reset('PRESTIGE', { gainedInfluence }) instead.
    */
   prestigeReset(gainedInfluence) {
-    // Keep persistent data
-    const influence = this.data.resources.influence + gainedInfluence;
-    const stats = { ...this.data.stats };
-    const meta = { ...this.data.meta };
-    
-    // Reset everything else
-    this.reset();
-
-    // Restore persistent data
-    this.data.resources.influence = influence;
-    this.data.stats = stats;
-    this.data.meta = meta;
-    
-    this.notify();
+    this.reset('PRESTIGE', { gainedInfluence });
   }
 }
 

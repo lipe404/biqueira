@@ -14,8 +14,6 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 6 — Game Loop e Timers
 
-- [ ] Evitar espiral da morte (accumulatedTime > maxFrameTime).
-
 ## Categoria 7 — Sistema Idle (Produção Passiva)
 
 - [ ] Implementar simulação precisa offline (não apenas `prod * tempo`).
