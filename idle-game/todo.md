@@ -4,28 +4,10 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 1 — Arquitetura Geral
 
-- [X] Implementar padrão Observer para desacoplar a UI do Estado.
-- [X] Criar um `EventManager` central para comunicação entre sistemas sem dependência direta.
-- [X] Definir interfaces claras para os módulos de sistema (`update(dt)`, `init()`, `reset()`).
-- [X] Isolar a lógica de configuração (constantes mágicas) em um arquivo `config.js`.
-- [ ] Padronizar o tratamento de erros em todos os módulos (try-catch blocks globais no loop).
-- [ ] Modularizar o `renderer.js` em sub-renderizadores (ResourcesRenderer, UpgradesRenderer, etc.).
-- [ ] Padronizar a comunicação assíncrona (Promises/Async-Await) onde necessário.
-- [ ] Revisar acoplamento entre `RiskSystem` e `AutomationSystem` (usar eventos?).
-
 ## Categoria 2 — Organização de Pastas e Arquivos
 
-- [ ] Mover `main.js` para dentro de `js/core` ou renomear para `index.js`.
-- [ ] Separar `style.css` em múltiplos arquivos (modules, components, layout) na pasta `css/`.
-- [ ] Criar estrutura de pastas para assets de áudio (`assets/audio/sfx`, `assets/audio/music`).
-- [ ] Criar pasta `tests/` para testes unitários e de integração.
-- [ ] Mover configurações de jogo para `js/config/`.
 - [ ] Criar pasta `js/utils/` para helpers genéricos (matemática, formatação, data).
-- [ ] Organizar `assets/` em subpastas por tipo (`images/ui`, `images/backgrounds`, `icons/`).
-- [ ] Criar pasta `docs/api/` para documentação técnica gerada.
-- [ ] Separar componentes de UI em `js/ui/components/` (ex: `Modal.js`, `Toast.js`).
 - [ ] Mover definições de dados (`npcs.js`, `upgrades.js`) para arquivos JSON puros carregados via fetch (opcional).
-- [ ] Criar pasta `scripts/` para scripts de build/automação (node.js).
 - [ ] Organizar `events.js` separando eventos positivos, negativos e neutros em arquivos distintos se crescer.
 - [ ] Renomear `bindings.js` para `inputManager.js` ou `uiController.js` para clareza.
 - [ ] Criar pasta `js/factories/` para criação dinâmica de objetos complexos.

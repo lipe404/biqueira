@@ -59,7 +59,11 @@ export class GameLoop {
   update(dt) {
     // Update all systems
     this.systems.forEach((system) => {
-      if (system.update) system.update(dt);
+      try {
+        if (system.update) system.update(dt);
+      } catch (e) {
+        console.error(`Error updating system ${system.constructor.name || 'Anonymous'}:`, e);
+      }
     });
 
     // Handle Auto-save
@@ -74,7 +78,11 @@ export class GameLoop {
   render() {
     // Render all systems
     this.systems.forEach((system) => {
-      if (system.render) system.render();
+      try {
+        if (system.render) system.render();
+      } catch (e) {
+        console.error(`Error rendering system ${system.constructor.name || 'Anonymous'}:`, e);
+      }
     });
   }
 }
