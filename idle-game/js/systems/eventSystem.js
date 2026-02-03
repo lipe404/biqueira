@@ -1,10 +1,14 @@
 import { gameState } from "../core/gameState.js";
-import { EVENTS; EVENT_DATA } from "../data/events.js";
+import { EVENTS as EVENT_DATA } from "../data/events.js";
 import { EventManager, EVENTS } from "../core/eventManager.js";
+import { CONFIG } from "../core/config.js";
 
 export const EventSystem = {
-  checkInterval: 5, // Check every 5 seconds
+  checkInterval: CONFIG.EVENTS.CHECK_INTERVAL, // Check every 5 seconds
   timer: 0,
+
+  init: () => {},
+  reset: () => {},
 
   update: (dt) => {
     const state = gameState.get();
@@ -22,7 +26,7 @@ export const EventSystem = {
   tryTriggerEvent: (state) => {
     // Global cooldown on events
     const now = Date.now();
-    if (now - state.events.lastEventTime < 30000) return; // Min 30s between events
+    if (now - state.events.lastEventTime < CONFIG.EVENTS.GLOBAL_COOLDOWN) return; // Min 30s between events
 
     // Filter possible events
     const possibleEvents = EVENT_DATA.filter((event) => event.condition(state));
@@ -51,6 +55,6 @@ export const EventSystem = {
       message: message,
     });
 
-    if (state.logs.length > 10) state.logs.pop();
+    if (state.logs.length > CONFIG.EVENTS.LOG_LIMIT) state.logs.pop();
   },
 };

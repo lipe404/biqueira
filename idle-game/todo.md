@@ -6,41 +6,24 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 - [X] Implementar padrão Observer para desacoplar a UI do Estado.
 - [X] Criar um `EventManager` central para comunicação entre sistemas sem dependência direta.
-- [ ] Definir interfaces claras para os módulos de sistema (`update(dt)`, `init()`, `reset()`).
-- [ ] Documentar o fluxo de dados global em um diagrama (mermaid no README).
-- [ ] Isolar a lógica de configuração (constantes mágicas) em um arquivo `config.js`.
-- [ ] Implementar um Service Locator ou Injeção de Dependência simples para facilitar testes.
-- [ ] Separar a lógica de "renderização" da lógica de "manipulação de DOM" (Virtual DOM leve?).
-- [ ] Criar uma camada de abstração para APIs do navegador (localStorage, Audio, Vibration).
+- [X] Definir interfaces claras para os módulos de sistema (`update(dt)`, `init()`, `reset()`).
+- [X] Isolar a lógica de configuração (constantes mágicas) em um arquivo `config.js`.
 - [ ] Padronizar o tratamento de erros em todos os módulos (try-catch blocks globais no loop).
-- [ ] Implementar um sistema de Log centralizado com níveis (INFO, WARN, ERROR).
 - [ ] Modularizar o `renderer.js` em sub-renderizadores (ResourcesRenderer, UpgradesRenderer, etc.).
-- [ ] Criar um `GameManager` para orquestrar o ciclo de vida (Start, Pause, Stop, Resume).
-- [ ] Implementar padrão State Machine para os estados do jogo (Menu, Playing, Paused, Modal).
-- [ ] Abstrair o sistema de recursos para permitir adição dinâmica de novos tipos.
-- [ ] Criar um sistema de Plugins/Mods suporte básico (carregamento dinâmico de scripts).
-- [ ] Centralizar definições de tipos (JSDoc ou TypeScript definition files) para intellisense.
-- [ ] Implementar Feature Flags para ativar/desativar funcionalidades em desenvolvimento.
-- [ ] Criar arquitetura de "Buffs/Debuffs" genérica aplicada a qualquer entidade.
 - [ ] Padronizar a comunicação assíncrona (Promises/Async-Await) onde necessário.
 - [ ] Revisar acoplamento entre `RiskSystem` e `AutomationSystem` (usar eventos?).
 
 ## Categoria 2 — Organização de Pastas e Arquivos
 
 - [ ] Mover `main.js` para dentro de `js/core` ou renomear para `index.js`.
-- [ ] Criar pasta `js/lib` para bibliotecas de terceiros (se houver no futuro).
 - [ ] Separar `style.css` em múltiplos arquivos (modules, components, layout) na pasta `css/`.
 - [ ] Criar estrutura de pastas para assets de áudio (`assets/audio/sfx`, `assets/audio/music`).
-- [ ] Padronizar nomes de arquivos (camelCase vs kebab-case) - atualmente misto (`style.css`, `gameState.js`).
 - [ ] Criar pasta `tests/` para testes unitários e de integração.
 - [ ] Mover configurações de jogo para `js/config/`.
 - [ ] Criar pasta `js/utils/` para helpers genéricos (matemática, formatação, data).
 - [ ] Organizar `assets/` em subpastas por tipo (`images/ui`, `images/backgrounds`, `icons/`).
-- [ ] Criar arquivo `.editorconfig` para padronizar formatação entre editores.
-- [ ] Adicionar `.gitignore` completo para node_modules, logs, arquivos de sistema.
 - [ ] Criar pasta `docs/api/` para documentação técnica gerada.
 - [ ] Separar componentes de UI em `js/ui/components/` (ex: `Modal.js`, `Toast.js`).
-- [ ] Criar `js/constants/` para enums e constantes globais.
 - [ ] Mover definições de dados (`npcs.js`, `upgrades.js`) para arquivos JSON puros carregados via fetch (opcional).
 - [ ] Criar pasta `scripts/` para scripts de build/automação (node.js).
 - [ ] Organizar `events.js` separando eventos positivos, negativos e neutros em arquivos distintos se crescer.

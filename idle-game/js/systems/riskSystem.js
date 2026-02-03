@@ -1,7 +1,11 @@
 import { gameState } from "../core/gameState.js";
 import { EventManager, EVENTS } from "../core/eventManager.js";
+import { CONFIG } from "../core/config.js";
 
 export const RiskSystem = {
+  init: () => {},
+  reset: () => {},
+
   update: (dt) => {
     const state = gameState.get();
 
@@ -21,24 +25,24 @@ export const RiskSystem = {
     }
 
     // Threshold Check
-    if (state.resources.heat >= 100) {
+    if (state.resources.heat >= CONFIG.HEAT.MAX) {
       RiskSystem.triggerPenalty(state);
     }
   },
 
   triggerPenalty: (state) => {
     // Reset heat
-    state.resources.heat = 60; // Doesn't reset fully, stays dangerous
+    state.resources.heat = CONFIG.HEAT.RESET_VALUE; // Doesn't reset fully, stays dangerous
 
     // Penalty: Lose 50% of widgets and 30% of money
-    const lostWidgets = Math.floor(state.resources.widgets * 0.5);
-    const lostMoney = Math.floor(state.resources.money * 0.3);
+    const lostWidgets = Math.floor(state.resources.widgets * CONFIG.HEAT.WIDGET_LOSS_FACTOR);
+    const lostMoney = Math.floor(state.resources.money * CONFIG.HEAT.MONEY_LOSS_FACTOR);
 
     state.resources.widgets -= lostWidgets;
     state.resources.money -= lostMoney;
 
     // Block production for 15 seconds
-    state.riskPenaltyTime = 15;
+    state.riskPenaltyTime = CONFIG.HEAT.PENALTY_DURATION;
 
     // Log/Notify
     console.log("RISK PENALTY TRIGGERED!");
@@ -51,10 +55,10 @@ export const RiskSystem = {
     EventManager.emit(EVENTS.RISK_PENALTY, {
       lostWidgets,
       lostMoney,
-      duration: 15,
+      duration: CONFIG.HEAT.PENALTY_DURATION,
     });
 
     // Keep log size small
-    if (state.logs.length > 20) state.logs.pop();
+    if (state.logs.length > CONFIG.EVENTS.LOG_LIMIT) state.logs.pop();
   },
 };

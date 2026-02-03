@@ -1,7 +1,12 @@
 import { gameState } from "../core/gameState.js";
 import { EventManager, EVENTS } from "../core/eventManager.js";
+import { CONFIG } from "../core/config.js";
 
 export const ClickSystem = {
+  init: () => {},
+  reset: () => {},
+  update: (dt) => {}, // Not used, but good for interface consistency
+
   // Called when player clicks "Make Widget"
   clickMake: () => {
     const state = gameState.get();
@@ -9,12 +14,12 @@ export const ClickSystem = {
     const mult = state.click.multiplier;
 
     // Prestige Multiplier
-    const prestigeMult = 1 + state.resources.influence * 0.1;
+    const prestigeMult = 1 + state.resources.influence * CONFIG.PRESTIGE_MULTIPLIER_FACTOR;
 
     // Heat Penalty on Clicking (Harder to work under pressure)
     let heatMult = 1.0;
-    if (state.resources.heat > 90) heatMult = 0.5;
-    else if (state.resources.heat > 60) heatMult = 0.8;
+    if (state.resources.heat > CONFIG.CLICK.HEAT_THRESHOLD_HIGH) heatMult = CONFIG.CLICK.HEAT_MULT_HIGH;
+    else if (state.resources.heat > CONFIG.CLICK.HEAT_THRESHOLD_MEDIUM) heatMult = CONFIG.CLICK.HEAT_MULT_MEDIUM;
 
     const amount = base * mult * prestigeMult * heatMult;
 
@@ -24,10 +29,10 @@ export const ClickSystem = {
 
     // Heat generation from manual clicks
     // Increases if you click too fast (maybe handled by caller? nah simple here)
-    state.resources.heat += 0.05 * amount;
-    if (state.resources.heat > 100) state.resources.heat = 100;
+    state.resources.heat += CONFIG.HEAT.GENERATION_PER_CLICK * amount;
+    if (state.resources.heat > CONFIG.HEAT.MAX) state.resources.heat = CONFIG.HEAT.MAX;
 
-    return amount;
+    EventManager.emit(EVENTS.CLICK_MAKE, { amount });
   },
 
   // Called when player clicks "Sell Widget"
@@ -36,7 +41,7 @@ export const ClickSystem = {
     const base = state.click.basePower;
     const mult = state.click.multiplier;
 
-    const prestigeMult = 1 + state.resources.influence * 0.1;
+    const prestigeMult = 1 + state.resources.influence * CONFIG.PRESTIGE_MULTIPLIER_FACTOR;
 
     // Selling is manual too
     const amount = base * mult; // Amount of widgets to attempt to sell

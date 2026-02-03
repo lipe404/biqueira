@@ -25,11 +25,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // 3. Register Systems to Loop
   // Order matters for dependencies
-  gameLoop.registerSystem(IdleSystem); // Run once to process offline
-  gameLoop.registerSystem(AutomationSystem);
-  gameLoop.registerSystem(RiskSystem);
-  gameLoop.registerSystem(EventSystem);
-  // PrestigeSystem is triggered manually, not per frame
+  const systems = [
+    IdleSystem,
+    AutomationSystem,
+    RiskSystem,
+    EventSystem,
+    ClickSystem,
+    PrestigeSystem
+  ];
+
+  systems.forEach(system => {
+    if (system.init) system.init();
+    if (system.update) gameLoop.registerSystem(system);
+  });
 
   // 4. Start Loop
   gameLoop.start();

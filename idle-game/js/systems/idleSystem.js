@@ -1,8 +1,17 @@
 import { gameState } from "../core/gameState.js";
 import { AutomationSystem } from "./automationSystem.js";
+import { CONFIG } from "../core/config.js";
 
 export const IdleSystem = {
   processed: false,
+
+  init: () => {
+    IdleSystem.processed = false;
+  },
+
+  reset: () => {
+    IdleSystem.processed = false;
+  },
 
   update: (dt) => {
     if (IdleSystem.processed) return;
@@ -12,7 +21,7 @@ export const IdleSystem = {
 
     if (offlineSeconds && offlineSeconds > 0) {
       // Cap offline time (e.g., 8 hours = 28800 seconds)
-      const maxOffline = 8 * 60 * 60;
+      const maxOffline = CONFIG.IDLE.MAX_OFFLINE_SECONDS;
       const effectiveSeconds = Math.min(offlineSeconds, maxOffline);
 
       console.log(

@@ -1,7 +1,16 @@
 import { gameState } from "../core/gameState.js";
 import { NPCS } from "../data/npcs.js";
+import { CONFIG } from "../core/config.js";
 
 export const AutomationSystem = {
+  init: () => {
+    // Initialization logic if needed
+  },
+
+  reset: () => {
+    // Reset internal state if needed
+  },
+
   update: (dt) => {
     const state = gameState.get();
     const npcs = state.automation.npcs;
@@ -42,16 +51,16 @@ export const AutomationSystem = {
 
     // 1. Prestige (Respeito)
     // Each point of Influence adds 10% to production and sales
-    const prestigeMult = 1 + state.resources.influence * 0.1;
+    const prestigeMult = 1 + state.resources.influence * CONFIG.PRESTIGE_MULTIPLIER_FACTOR;
     totalProduction *= prestigeMult;
     totalSales *= prestigeMult;
 
     // 2. Heat Penalty (Suspeita)
     // High heat makes operation harder (police checkpoints, paranoia)
     let heatMult = 1.0;
-    if (state.resources.heat > 80) {
+    if (state.resources.heat > CONFIG.HEAT.THRESHOLD_HIGH) {
       heatMult = 0.7; // -30% efficiency
-    } else if (state.resources.heat > 50) {
+    } else if (state.resources.heat > CONFIG.HEAT.THRESHOLD_MEDIUM) {
       heatMult = 0.9; // -10% efficiency
     }
     totalProduction *= heatMult;
@@ -90,9 +99,9 @@ export const AutomationSystem = {
     // Natural cooling if heat is high and risk generation is low/negative
     // Cooling is faster if heat is higher
     if (netRiskChange <= 0) {
-      let coolingRate = 1.0;
-      if (state.resources.heat > 50) coolingRate = 2.0;
-      if (state.resources.heat > 80) coolingRate = 4.0;
+      let coolingRate = CONFIG.HEAT.COOLING_RATE_BASE;
+      if (state.resources.heat > CONFIG.HEAT.THRESHOLD_MEDIUM) coolingRate = CONFIG.HEAT.COOLING_RATE_MEDIUM;
+      if (state.resources.heat > CONFIG.HEAT.THRESHOLD_HIGH) coolingRate = CONFIG.HEAT.COOLING_RATE_HIGH;
 
       state.resources.heat -= coolingRate * dt;
     }

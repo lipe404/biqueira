@@ -1,5 +1,6 @@
 import { gameState } from "./gameState.js";
 import { SaveSystem } from "./saveSystem.js";
+import { CONFIG } from "./config.js";
 
 export class GameLoop {
   constructor() {
@@ -8,7 +9,7 @@ export class GameLoop {
     this.running = false;
     this.accumulatedTime = 0;
     this.autoSaveTimer = 0;
-    this.fps = 30; // Logic update rate
+    this.fps = CONFIG.FPS; // Logic update rate
     this.step = 1 / this.fps;
   }
 
@@ -63,7 +64,7 @@ export class GameLoop {
 
     // Handle Auto-save
     this.autoSaveTimer += dt;
-    const saveInterval = gameState.get().settings.autoSaveInterval / 1000;
+    const saveInterval = CONFIG.AUTO_SAVE_INTERVAL / 1000;
     if (this.autoSaveTimer >= saveInterval) {
       SaveSystem.save();
       this.autoSaveTimer = 0;
