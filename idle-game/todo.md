@@ -12,42 +12,9 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 5 — Gerenciamento de Estado
 
-- [ ] Migrar `gameState` para um padrão Store (semelhante a Redux ou Vuex simplificado).
-- [ ] Validar integridade do estado ao carregar (schema validation).
-- [ ] Separar estado "volátil" (visual, cache) do estado "persistente" (save data).
-- [ ] Criar getters computados para valores derivados (ex: `totalProduction`).
-- [ ] Centralizar lógica de reset (soft reset, hard reset, prestige reset).
-- [ ] Gerenciar estados de UI (qual aba aberta, posição do scroll) no estado global?
-- [ ] Criar mecanismo de "Cheat" ou "DevTools" para manipular estado em runtime.
-- [ ] Adicionar verificação de limites (clamp) em todos os setters numéricos.
-- [ ] Isolar estado de Configuração (settings) do estado de Jogo (progress).
-- [ ] Implementar sistema de Conquistas baseado em observação de estado.
-- [ ] Garantir que referências circulares não quebrem a serialização.
-- [ ] Adicionar timestamp de última atualização em cada sub-objeto do estado.
-- [ ] Criar testes unitários para as funções de mutação de estado.
-
 ## Categoria 6 — Game Loop e Timers
 
-- [ ] Implementar delta-time (`dt`) variável vs fixo: decidir e padronizar.
-- [ ] Criar sistema de agendamento de tarefas (`Scheduler`) no loop.
-- [ ] Implementar pausa real (parar updates lógicos, manter renderização).
-- [ ] Adicionar multiplicador de velocidade de jogo (para debug ou buffs).
-- [ ] Corrigir acumulação de tempo em abas inativas (throttling do navegador).
-- [ ] Sincronizar timers de eventos com o tempo do jogo, não tempo real.
-- [ ] Criar classe `Timer` reutilizável (start, stop, pause, reset, onComplete).
-- [ ] Implementar sistema de Cooldowns global gerenciado pelo loop.
-- [ ] Monitorar e exibir FPS/TPS (Ticks Per Second) em modo debug.
-- [ ] Garantir ordem de execução correta dos sistemas (ex: Produção -> Risco -> UI).
 - [ ] Evitar espiral da morte (accumulatedTime > maxFrameTime).
-- [ ] Implementar interpolação para renderização suave entre ticks (se necessário).
-- [ ] Separar `LogicTick` de `RenderTick` explicitamente.
-- [ ] Criar timers independentes para UI (animações) e Gameplay (lógica).
-- [ ] Tratamento de "saltos" de tempo (lag spikes) para não quebrar a física/lógica.
-- [ ] Implementar slow-motion (bullet time) como mecânica futura?
-- [ ] Otimizar `setInterval` do AutoSave para usar o Game Loop.
-- [ ] Garantir precisão de ponto flutuante no tempo acumulado.
-- [ ] Criar eventos de `onTick` e `onSecond` para sistemas se inscreverem.
-- [ ] Abstrair `requestAnimationFrame` para suportar ambientes sem janela (testes).
 
 ## Categoria 7 — Sistema Idle (Produção Passiva)
 

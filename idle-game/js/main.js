@@ -31,6 +31,14 @@ window.addEventListener("DOMContentLoaded", async () => {
   const loadedData = await DataLoader.loadAll();
   GameData.npcs = loadedData.npcs;
 
+  // Lazy load background (non-blocking)
+  DataLoader.loadImage("./assets/fundo.png")
+    .then(img => {
+      document.body.style.backgroundImage = `url('${img.src}')`;
+      document.body.classList.add('bg-loaded');
+    })
+    .catch(err => console.warn("Background load failed:", err));
+
   // 1. Load Save
   SaveSystem.load();
 

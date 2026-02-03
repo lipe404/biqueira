@@ -9,7 +9,7 @@ body {
   font-family: var(--font-body);
   font-size: 1.2rem; /* Teko is condensed, needs size */
   background-color: var(--bg-color);
-  background-image: url("../assets/fundo.png");
+  /* Background image loaded via JS lazy loading */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -17,6 +17,7 @@ body {
   color: var(--text-color);
   height: 100vh;
   overflow: hidden;
+  transition: background-image 1s ease-in-out;
 }
 
 /* Grime Overlay */
