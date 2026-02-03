@@ -10,7 +10,7 @@ export const AutomationSystem = {
         let totalSales = 0;
         let totalRiskChange = 0;
 
-        // Calculate totals
+        // Calculate totals from NPCs
         for (const [id, count] of Object.entries(npcs)) {
             if (count <= 0) continue;
             
@@ -38,7 +38,26 @@ export const AutomationSystem = {
             totalRiskChange += risk;
         }
 
-        // Apply Logic
+        // --- GLOBAL MULTIPLIERS ---
+
+        // 1. Prestige (Respeito)
+        // Each point of Influence adds 10% to production and sales
+        const prestigeMult = 1 + (state.resources.influence * 0.1);
+        totalProduction *= prestigeMult;
+        totalSales *= prestigeMult;
+
+        // 2. Heat Penalty (Suspeita)
+        // High heat makes operation harder (police checkpoints, paranoia)
+        let heatMult = 1.0;
+        if (state.resources.heat > 80) {
+            heatMult = 0.7; // -30% efficiency
+        } else if (state.resources.heat > 50) {
+            heatMult = 0.9; // -10% efficiency
+        }
+        totalProduction *= heatMult;
+        totalSales *= heatMult;
+
+        // --- APPLY LOGIC ---
         
         // 1. Production
         const produced = totalProduction * dt;
@@ -59,21 +78,23 @@ export const AutomationSystem = {
 
         // 3. Risk (Heat)
         // Heat decays naturally if no production/risk, or increases
-        // Let's say natural cooling is 0.5 per second
         let netRiskChange = totalRiskChange;
         
-        // If we have risk reduction multipliers
+        // If we have risk reduction multipliers (from upgrades)
         if (state.multipliers && state.multipliers.risk) {
-            // Apply to positive risk generation only? Or net?
-            // Let's apply to net if positive
              if (netRiskChange > 0) netRiskChange *= state.multipliers.risk;
         }
 
         state.resources.heat += netRiskChange * dt;
         
-        // Natural cooling if heat is high and risk generation is low
-        if (state.resources.heat > 0 && netRiskChange <= 0) {
-             state.resources.heat -= 1.0 * dt; // Cooling rate
+        // Natural cooling if heat is high and risk generation is low/negative
+        // Cooling is faster if heat is higher
+        if (netRiskChange <= 0) {
+             let coolingRate = 1.0;
+             if (state.resources.heat > 50) coolingRate = 2.0;
+             if (state.resources.heat > 80) coolingRate = 4.0;
+             
+             state.resources.heat -= coolingRate * dt;
         }
 
         // Clamp Heat

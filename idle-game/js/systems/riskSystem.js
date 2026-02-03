@@ -10,6 +10,11 @@ export const RiskSystem = {
             if (state.riskPenaltyTime <= 0) {
                 state.riskPenaltyTime = 0;
                 // Notify UI: Penalty over
+                if (!state.logs) state.logs = [];
+                state.logs.unshift({
+                    time: Date.now(),
+                    message: `POEIRA BAIXOU: De volta à ativa. Cuidado com o calor.`
+                });
             }
             return; // Skip normal risk checks if penalty is active
         }
@@ -22,28 +27,27 @@ export const RiskSystem = {
 
     triggerPenalty: (state) => {
         // Reset heat
-        state.resources.heat = 50; // Don't reset to 0, keeps tension
+        state.resources.heat = 60; // Doesn't reset fully, stays dangerous
 
-        // Penalty: Lose 50% of widgets and 20% of money
+        // Penalty: Lose 50% of widgets and 30% of money
         const lostWidgets = Math.floor(state.resources.widgets * 0.5);
-        const lostMoney = Math.floor(state.resources.money * 0.2);
+        const lostMoney = Math.floor(state.resources.money * 0.3);
 
         state.resources.widgets -= lostWidgets;
         state.resources.money -= lostMoney;
 
-        // Block production for 10 seconds
-        state.riskPenaltyTime = 10; 
+        // Block production for 15 seconds
+        state.riskPenaltyTime = 15; 
 
         // Log/Notify
         console.log('RISK PENALTY TRIGGERED!');
-        // Ideally we push this to an event log in the state for UI to pick up
         if (!state.logs) state.logs = [];
         state.logs.unshift({
             time: Date.now(),
-            message: `SUSPEITA MÁXIMA! Invasão! Perdeu ${lostWidgets} widgets e $${lostMoney}. Paralisado por 10s.`
+            message: `MOIOU! A CASA CAIU! A polícia levou ${lostWidgets} mercadorias e $${lostMoney}. Parado por 15s.`
         });
         
         // Keep log size small
-        if (state.logs.length > 10) state.logs.pop();
+        if (state.logs.length > 20) state.logs.pop();
     }
 };

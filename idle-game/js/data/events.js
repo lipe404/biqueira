@@ -1,42 +1,105 @@
 export const EVENTS = [
+    // NEGATIVE
+    {
+        id: 'police_raid',
+        name: 'Batida Policial',
+        description: 'A sirene tocou. Tivemos que descartar mercadoria.',
+        type: 'negative',
+        condition: (state) => state.resources.heat > 60,
+        chance: 0.08, 
+        effect: (state) => {
+            const lost = Math.floor(state.resources.widgets * 0.3);
+            state.resources.widgets -= lost;
+            state.resources.heat -= 25; // Heat drops after raid
+            return `Perdeu ${lost} mercadorias. Suspeita baixou 25%.`;
+        }
+    },
     {
         id: 'tax_audit',
-        name: 'Auditoria Surpresa',
-        description: 'As autoridades estão verificando seus livros.',
+        name: 'Cobrança do "Sindicato"',
+        description: 'Os caras vieram cobrar a proteção.',
         type: 'negative',
-        condition: (state) => state.resources.heat > 50,
-        chance: 0.05, // 5% chance per tick check if condition met
+        condition: (state) => state.resources.money > 1000,
+        chance: 0.05,
         effect: (state) => {
-            const fine = Math.floor(state.resources.money * 0.2);
+            const fine = Math.floor(state.resources.money * 0.15);
             state.resources.money -= fine;
-            state.resources.heat -= 20; // At least they leave after fining you
-            return `Você foi multado em $${fine}. Suspeita reduzida em 20%.`;
+            return `Pagou $${fine} de proteção.`;
         }
     },
+    {
+        id: 'snitch',
+        name: 'X9 na Área',
+        description: 'Alguém abriu o bico.',
+        type: 'negative',
+        condition: (state) => state.resources.heat > 30,
+        chance: 0.04,
+        effect: (state) => {
+            state.resources.heat += 15;
+            return `Suspeita subiu +15%. Fique esperto.`;
+        }
+    },
+
+    // POSITIVE
     {
         id: 'viral_post',
-        name: 'Marketing Viral',
-        description: 'Um influenciador mencionou seu produto.',
+        name: 'Trend no TikTok',
+        description: 'A molecada tá usando nosso produto nos vídeos.',
         type: 'positive',
         condition: (state) => true,
-        chance: 0.02,
+        chance: 0.03,
         effect: (state) => {
-            const bonus = Math.floor(state.production.moneyPerSecond * 60) || 100;
+            const bonus = Math.floor(state.production.moneyPerSecond * 120) || 200;
             state.resources.money += bonus;
-            state.resources.heat += 5; // Fame brings scrutiny
-            return `Vendas dispararam! Ganhou $${bonus}. Suspeita aumentou em 5%.`;
+            state.resources.heat += 5; 
+            return `Vendas estouraram! +$${bonus}. Suspeita +5%.`;
         }
     },
     {
-        id: 'safety_inspection',
-        name: 'Inspeção de Segurança',
-        description: 'Os inspetores não encontraram problemas... surpreendentemente.',
+        id: 'supplier_error',
+        name: 'Carga Tombada',
+        description: 'Caiu do caminhão, direto pro nosso estoque.',
+        type: 'positive',
+        condition: (state) => true,
+        chance: 0.04,
+        effect: (state) => {
+            const bonus = Math.floor(state.production.widgetsPerSecond * 60) || 50;
+            state.resources.widgets += bonus;
+            return `Chegou ${bonus} mercadorias "doadas".`;
+        }
+    },
+
+    // NEUTRAL / MIXED
+    {
+        id: 'bribe_success',
+        name: 'Cafézinho pro Guarda',
+        description: 'Molhou a mão certa.',
         type: 'neutral',
-        condition: (state) => state.resources.heat > 10,
+        condition: (state) => state.resources.money > 500 && state.resources.heat > 20,
+        chance: 0.05,
+        effect: (state) => {
+            const cost = 200;
+            if (state.resources.money >= cost) {
+                state.resources.money -= cost;
+                state.resources.heat -= 15;
+                return `Custou $${cost}. Suspeita caiu 15%.`;
+            }
+            return `Sem grana pro café. Nada mudou.`;
+        }
+    },
+    {
+        id: 'rival_gang',
+        name: 'Treta na Quebrada',
+        description: 'Gangues rivais trocando tiro. Movimento caiu.',
+        type: 'neutral',
+        condition: (state) => state.resources.heat < 80,
         chance: 0.03,
         effect: (state) => {
-            state.resources.heat -= 10;
-            return `Suspeita reduzida em 10%.`;
+            // Temporary debuff logic would go here, for now instant effect
+            const lostSales = Math.floor(state.resources.money * 0.05);
+            state.resources.money -= lostSales;
+            state.resources.heat -= 5; // Less heat cause everyone is hiding
+            return `Vendas caíram $${lostSales}. Mas a polícia tá ocupada (-5% Suspeita).`;
         }
     }
 ];

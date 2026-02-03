@@ -27,6 +27,11 @@ const initialState = {
     activeEvents: [],
     lastEventTime: 0,
   },
+  stats: {
+    totalWidgetsMade: 0,
+    totalMoneyEarned: 0,
+    startTime: Date.now(),
+  },
   meta: {
     startTime: Date.now(),
     lastSaveTime: Date.now(),
