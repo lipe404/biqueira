@@ -2,12 +2,30 @@ import { gameState } from "../core/gameState.js";
 import { EventManager, EVENTS } from "../core/eventManager.js";
 import { CONFIG } from "../core/config.js";
 
+/**
+ * ClickSystem - Manages manual player interactions (clicks).
+ */
 export const ClickSystem = {
+  /**
+   * Initialize the system.
+   */
   init: () => {},
-  reset: () => {},
-  update: (dt) => {}, // Not used, but good for interface consistency
 
-  // Called when player clicks "Make Widget"
+  /**
+   * Reset the system.
+   */
+  reset: () => {},
+
+  /**
+   * Update loop (unused for clicks but kept for consistency).
+   * @param {number} dt - Delta time in seconds.
+   */
+  update: (dt) => {}, 
+
+  /**
+   * Called when player clicks "Make Widget".
+   * Produces widgets based on click power and multipliers.
+   */
   clickMake: () => {
     const state = gameState.get();
     const base = state.click.basePower;
@@ -35,7 +53,11 @@ export const ClickSystem = {
     EventManager.emit(EVENTS.CLICK_MAKE, { amount });
   },
 
-  // Called when player clicks "Sell Widget"
+  /**
+   * Called when player clicks "Sell Widget".
+   * Sells widgets based on click power and multipliers.
+   * @returns {number} The revenue generated.
+   */
   clickSell: () => {
     const state = gameState.get();
     const base = state.click.basePower;
@@ -52,7 +74,7 @@ export const ClickSystem = {
 
       state.resources.widgets -= toSell;
 
-      const price = 1;
+      const price = CONFIG.ECONOMY.BASE_PRICE;
       const revenue = toSell * price * prestigeMult;
 
       state.resources.money += revenue;

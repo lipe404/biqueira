@@ -49,28 +49,43 @@ class GameState {
     this.observers = [];
   }
 
-  // Observer Pattern: Subscribe to state changes
+  /**
+   * Subscribe to state changes.
+   * @param {function} callback - Function to call when state changes.
+   */
   subscribe(callback) {
     if (typeof callback === "function") {
       this.observers.push(callback);
     }
   }
 
-  // Observer Pattern: Unsubscribe
+  /**
+   * Unsubscribe from state changes.
+   * @param {function} callback - Function to remove.
+   */
   unsubscribe(callback) {
     this.observers = this.observers.filter((cb) => cb !== callback);
   }
 
-  // Observer Pattern: Notify all observers
+  /**
+   * Notify all observers of state changes.
+   */
   notify() {
     this.observers.forEach((callback) => callback(this.data));
   }
 
+  /**
+   * Get the current game state.
+   * @returns {Object} The current game state.
+   */
   get() {
     return this.data;
   }
 
-  // Deep merge for loading saves
+  /**
+   * Load saved data into the state, performing a deep merge.
+   * @param {Object} savedData - Data loaded from storage.
+   */
   load(savedData) {
     if (!savedData) return;
 
@@ -89,21 +104,40 @@ class GameState {
     this.notify();
   }
 
+  /**
+   * Reset state to initial values.
+   */
   reset() {
     this.data = JSON.parse(JSON.stringify(initialState));
     this.notify();
   }
 
-  // Hard reset (wipes prestige too)
+  /**
+   * Perform a hard reset (wipes everything).
+   */
   hardReset() {
     this.reset();
   }
 
-  // Prestige reset (keeps influence, resets others)
-  prestigeReset(earnedInfluence) {
-    const influence = this.data.resources.influence + earnedInfluence;
+  /**
+   * Perform a prestige reset.
+   * Resets resources and production but keeps stats and influence.
+   * @param {number} gainedInfluence - Amount of influence gained.
+   */
+  prestigeReset(gainedInfluence) {
+    // Keep persistent data
+    const influence = this.data.resources.influence + gainedInfluence;
+    const stats = { ...this.data.stats };
+    const meta = { ...this.data.meta };
+    
+    // Reset everything else
     this.reset();
+
+    // Restore persistent data
     this.data.resources.influence = influence;
+    this.data.stats = stats;
+    this.data.meta = meta;
+    
     this.notify();
   }
 }

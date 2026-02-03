@@ -2,15 +2,28 @@ import { gameState } from "../core/gameState.js";
 import { NPCS } from "../data/npcs.js";
 import { CONFIG } from "../core/config.js";
 
+/**
+ * AutomationSystem - Manages automated production and sales from NPCs.
+ */
 export const AutomationSystem = {
+  /**
+   * Initialize the system.
+   */
   init: () => {
     // Initialization logic if needed
   },
 
+  /**
+   * Reset the system.
+   */
   reset: () => {
     // Reset internal state if needed
   },
 
+  /**
+   * Update the system logic.
+   * @param {number} dt - Delta time in seconds.
+   */
   update: (dt) => {
     const state = gameState.get();
     const npcs = state.automation.npcs;
@@ -59,9 +72,9 @@ export const AutomationSystem = {
     // High heat makes operation harder (police checkpoints, paranoia)
     let heatMult = 1.0;
     if (state.resources.heat > CONFIG.HEAT.THRESHOLD_HIGH) {
-      heatMult = 0.7; // -30% efficiency
+      heatMult = CONFIG.HEAT.PENALTY_MULT_HIGH; // -30% efficiency
     } else if (state.resources.heat > CONFIG.HEAT.THRESHOLD_MEDIUM) {
-      heatMult = 0.9; // -10% efficiency
+      heatMult = CONFIG.HEAT.PENALTY_MULT_MEDIUM; // -10% efficiency
     }
     totalProduction *= heatMult;
     totalSales *= heatMult;
@@ -81,7 +94,7 @@ export const AutomationSystem = {
     }
 
     state.resources.widgets -= toSell;
-    const revenue = toSell * 1; // Base price $1
+    const revenue = toSell * CONFIG.ECONOMY.BASE_PRICE;
     state.resources.money += revenue;
     state.stats.totalMoneyEarned += revenue;
 
@@ -98,17 +111,18 @@ export const AutomationSystem = {
 
     // Natural cooling if heat is high and risk generation is low/negative
     // Cooling is faster if heat is higher
-    if (netRiskChange <= 0) {
-      let coolingRate = CONFIG.HEAT.COOLING_RATE_BASE;
-      if (state.resources.heat > CONFIG.HEAT.THRESHOLD_MEDIUM) coolingRate = CONFIG.HEAT.COOLING_RATE_MEDIUM;
-      if (state.resources.heat > CONFIG.HEAT.THRESHOLD_HIGH) coolingRate = CONFIG.HEAT.COOLING_RATE_HIGH;
+    let cooling = 0;
+    if (state.resources.heat > CONFIG.HEAT.THRESHOLD_HIGH) cooling = CONFIG.HEAT.COOLING_RATE_HIGH;
+    else if (state.resources.heat > CONFIG.HEAT.THRESHOLD_MEDIUM) cooling = CONFIG.HEAT.COOLING_RATE_MEDIUM;
+    else cooling = CONFIG.HEAT.COOLING_RATE_BASE;
 
-      state.resources.heat -= coolingRate * dt;
-    }
+    // Only cool if we aren't generating massive heat (optional game design choice)
+    // For now, cooling always fights against heat generation
+    state.resources.heat -= cooling * dt;
 
     // Clamp Heat
     if (state.resources.heat < 0) state.resources.heat = 0;
-    if (state.resources.heat > 100) state.resources.heat = 100;
+    // Max heat check is done in RiskSystem
 
     // Update Global Rates for UI
     state.production.widgetsPerSecond = totalProduction;

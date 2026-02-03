@@ -8,45 +8,14 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 3 — Qualidade do Código JavaScript
 
-- [ ] Implementar JSDoc em todas as funções públicas e classes.
-- [ ] Eliminar números mágicos no código (extrair para constantes).
-
 ## Categoria 4 — Performance e Otimização
-
-- [ ] Implementar "Dirty Checking" no `renderer.js` para evitar updates de DOM desnecessários.
-- [ ] Utilizar `requestAnimationFrame` para animações visuais em vez de CSS transitions pesadas.
-- [ ] Otimizar o loop principal: limitar o processamento de lógica se o jogo estiver em background (tab inativa).
-- [ ] Implementar Object Pooling para partículas e elementos de UI efêmeros (logs).
-- [ ] Reduzir layout thrashing: agrupar leituras e escritas no DOM.
-- [ ] Utilizar `DocumentFragment` para inserção em massa de elementos (lista de upgrades).
-- [ ] Cachear seletores de DOM no `init()` (já feito parcialmente, revisar cobertura).
-- [ ] Debounce ou Throttle em event listeners de alta frequência (scroll, resize).
-- [ ] Otimizar imagens (WebP, compressão) para reduzir load time.
-- [ ] Implementar Lazy Loading para imagens ou recursos pesados.
-- [ ] Minificar JS e CSS para produção.
-- [ ] Utilizar CSS `will-change` com parcimônia para otimizar renderização de camadas.
-- [ ] Analisar memory leaks (event listeners não removidos).
-- [ ] Otimizar cálculos matemáticos no loop (pré-calcular constantes).
-- [ ] Reduzir o número de partículas ativas simultaneamente.
-- [ ] Utilizar Web Workers para cálculos pesados (ex: simulação offline muito longa).
-- [ ] Otimizar seletores CSS (evitar seletores muito profundos).
-- [ ] Monitorar FPS e ajustar qualidade gráfica dinamicamente.
-- [ ] Implementar Virtual Scrolling para listas muito longas (logs, upgrades futuros).
-- [ ] Perfilamento de código com Chrome DevTools para identificar gargalos.
 
 ## Categoria 5 — Gerenciamento de Estado
 
 - [ ] Migrar `gameState` para um padrão Store (semelhante a Redux ou Vuex simplificado).
-- [ ] Implementar imutabilidade no estado para facilitar debug e histórico.
-- [ ] Criar sistema de Snapshots do estado para rollback em caso de erro.
 - [ ] Validar integridade do estado ao carregar (schema validation).
 - [ ] Separar estado "volátil" (visual, cache) do estado "persistente" (save data).
-- [ ] Implementar sistema de Migração de Estado para atualizações de versão do save.
 - [ ] Criar getters computados para valores derivados (ex: `totalProduction`).
-- [ ] Adicionar eventos de mudança de estado (`onMoneyChange`, `onLevelUp`).
-- [ ] Proteger o estado contra modificação direta fora das Actions/Mutations.
-- [ ] Implementar logs de transição de estado para debug.
-- [ ] Persistir apenas o diff do estado (opcional, para saves menores).
 - [ ] Centralizar lógica de reset (soft reset, hard reset, prestige reset).
 - [ ] Gerenciar estados de UI (qual aba aberta, posição do scroll) no estado global?
 - [ ] Criar mecanismo de "Cheat" ou "DevTools" para manipular estado em runtime.

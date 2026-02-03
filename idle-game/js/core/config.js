@@ -20,6 +20,13 @@ export const CONFIG = {
     PENALTY_DURATION: 15,
     WIDGET_LOSS_FACTOR: 0.5,
     MONEY_LOSS_FACTOR: 0.3,
+    PENALTY_MULT_HIGH: 0.7,
+    PENALTY_MULT_MEDIUM: 0.9,
+  },
+
+  // Economy
+  ECONOMY: {
+    BASE_PRICE: 1,
   },
 
   // Click

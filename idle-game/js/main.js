@@ -14,6 +14,11 @@ import { Renderer } from "./ui/renderer.js";
 import { Bindings } from "./ui/bindings.js";
 
 // Global Data Holder (can be imported by others if needed, or attached to window)
+/**
+ * Global object to hold loaded static data.
+ * @type {Object}
+ * @property {Object} npcs - Loaded NPC definitions.
+ */
 export let GameData = {
   npcs: {}
 };

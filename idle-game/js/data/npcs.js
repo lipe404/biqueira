@@ -1,6 +1,9 @@
 import { GameData } from "../main.js";
 
-// Proxy to access GameData.npcs seamlessly
+/**
+ * NPCS - Proxy object to access loaded NPC data.
+ * Allows synchronous access to data loaded asynchronously.
+ */
 export const NPCS = new Proxy({}, {
   get: (target, prop) => {
     return GameData.npcs[prop];

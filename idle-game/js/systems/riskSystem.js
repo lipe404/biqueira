@@ -2,10 +2,24 @@ import { gameState } from "../core/gameState.js";
 import { EventManager, EVENTS } from "../core/eventManager.js";
 import { CONFIG } from "../core/config.js";
 
+/**
+ * RiskSystem - Manages heat/risk mechanics and penalties.
+ */
 export const RiskSystem = {
+  /**
+   * Initialize the system.
+   */
   init: () => {},
+
+  /**
+   * Reset the system.
+   */
   reset: () => {},
 
+  /**
+   * Update the system logic.
+   * @param {number} dt - Delta time in seconds.
+   */
   update: (dt) => {
     const state = gameState.get();
 
@@ -30,6 +44,10 @@ export const RiskSystem = {
     }
   },
 
+  /**
+   * Trigger a risk penalty (e.g., police raid).
+   * @param {Object} state - The current game state.
+   */
   triggerPenalty: (state) => {
     // Reset heat
     state.resources.heat = CONFIG.HEAT.RESET_VALUE; // Doesn't reset fully, stays dangerous

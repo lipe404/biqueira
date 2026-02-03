@@ -3,13 +3,27 @@ import { EVENTS as EVENT_DATA } from "../data/events.js";
 import { EventManager, EVENTS } from "../core/eventManager.js";
 import { CONFIG } from "../core/config.js";
 
+/**
+ * EventSystem - Manages random events.
+ */
 export const EventSystem = {
   checkInterval: CONFIG.EVENTS.CHECK_INTERVAL, // Check every 5 seconds
   timer: 0,
 
+  /**
+   * Initialize the system.
+   */
   init: () => {},
+
+  /**
+   * Reset the system.
+   */
   reset: () => {},
 
+  /**
+   * Update the system logic.
+   * @param {number} dt - Delta time in seconds.
+   */
   update: (dt) => {
     const state = gameState.get();
     EventSystem.timer += dt;
@@ -23,6 +37,10 @@ export const EventSystem = {
     // For now, events are instant effects.
   },
 
+  /**
+   * Attempt to trigger a random event.
+   * @param {Object} state - The current game state.
+   */
   tryTriggerEvent: (state) => {
     // Global cooldown on events
     const now = Date.now();
@@ -39,6 +57,11 @@ export const EventSystem = {
     }
   },
 
+  /**
+   * Trigger a specific event.
+   * @param {Object} state - The current game state.
+   * @param {Object} event - The event object to trigger.
+   */
   trigger: (state, event) => {
     const message = event.effect(state);
     state.events.lastEventTime = Date.now();

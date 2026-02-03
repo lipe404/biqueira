@@ -3,7 +3,14 @@ import { EventManager, EVENTS } from "./eventManager.js";
 
 const SAVE_KEY = "IDLE_GAME_SAVE_V1";
 
+/**
+ * SaveSystem - Handles saving and loading game state to localStorage.
+ */
 export const SaveSystem = {
+  /**
+   * Save the current game state to localStorage.
+   * @returns {boolean} True if save was successful, false otherwise.
+   */
   save: () => {
     try {
       const data = gameState.get();
@@ -29,6 +36,10 @@ export const SaveSystem = {
     }
   },
 
+  /**
+   * Load the game state from localStorage.
+   * @returns {boolean} True if load was successful, false otherwise.
+   */
   load: () => {
     try {
       const encoded = localStorage.getItem(SAVE_KEY);
@@ -55,11 +66,18 @@ export const SaveSystem = {
     }
   },
 
+  /**
+   * Delete the save and reload the page.
+   */
   reset: () => {
     localStorage.removeItem(SAVE_KEY);
     location.reload();
   },
 
+  /**
+   * Calculate time elapsed since last save.
+   * @param {number} lastTime - Timestamp of the last save.
+   */
   calculateOfflineProgress: (lastTime) => {
     const now = Date.now();
     const diff = now - lastTime;

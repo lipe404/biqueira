@@ -2,12 +2,30 @@ import { gameState } from "../core/gameState.js";
 import { SaveSystem } from "../core/saveSystem.js";
 import { CONFIG } from "../core/config.js";
 
+/**
+ * PrestigeSystem - Manages prestige mechanics (soft resets for bonuses).
+ */
 export const PrestigeSystem = {
+  /**
+   * Initialize the system.
+   */
   init: () => {},
+
+  /**
+   * Reset the system.
+   */
   reset: () => {},
+
+  /**
+   * Update the system logic.
+   * @param {number} dt - Delta time in seconds.
+   */
   update: (dt) => {},
 
-  // Calculate potential influence gain based on lifetime earnings
+  /**
+   * Calculate potential influence gain based on lifetime earnings.
+   * @returns {number} The amount of influence the player would gain on prestige.
+   */
   calculatePrestigeGain: () => {
     const state = gameState.get();
     const totalMoney = state.stats.totalMoneyEarned;
@@ -19,6 +37,10 @@ export const PrestigeSystem = {
     return potential;
   },
 
+  /**
+   * Perform the prestige reset if the player confirms.
+   * Resets progress but keeps influence and stats.
+   */
   prestige: () => {
     const gain = PrestigeSystem.calculatePrestigeGain();
     if (gain <= 0) {

@@ -2,6 +2,10 @@ import { gameState } from "./gameState.js";
 import { SaveSystem } from "./saveSystem.js";
 import { CONFIG } from "./config.js";
 
+/**
+ * GameLoop - Manages the game update cycle.
+ * Uses a fixed time step for logic updates and variable time step for rendering.
+ */
 export class GameLoop {
   constructor() {
     this.lastTime = 0;
@@ -13,10 +17,17 @@ export class GameLoop {
     this.step = 1 / this.fps;
   }
 
+  /**
+   * Register a system to be updated and rendered by the loop.
+   * @param {Object} system - System object with optional update(dt) and render() methods.
+   */
   registerSystem(system) {
     this.systems.push(system);
   }
 
+  /**
+   * Start the game loop.
+   */
   start() {
     if (this.running) return;
     this.running = true;
@@ -25,10 +36,17 @@ export class GameLoop {
     console.log("Game Loop Started");
   }
 
+  /**
+   * Stop the game loop.
+   */
   stop() {
     this.running = false;
   }
 
+  /**
+   * Main loop tick function.
+   * @param {number} currentTime - Current timestamp from requestAnimationFrame.
+   */
   tick(currentTime) {
     if (!this.running) return;
 
@@ -56,6 +74,10 @@ export class GameLoop {
     requestAnimationFrame((time) => this.tick(time));
   }
 
+  /**
+   * Update all registered systems.
+   * @param {number} dt - Delta time in seconds.
+   */
   update(dt) {
     // Update all systems
     this.systems.forEach((system) => {
@@ -75,6 +97,9 @@ export class GameLoop {
     }
   }
 
+  /**
+   * Render all registered systems.
+   */
   render() {
     // Render all systems
     this.systems.forEach((system) => {

@@ -2,17 +2,30 @@ import { gameState } from "../core/gameState.js";
 import { AutomationSystem } from "./automationSystem.js";
 import { CONFIG } from "../core/config.js";
 
+/**
+ * IdleSystem - Calculates and processes offline progress.
+ */
 export const IdleSystem = {
   processed: false,
 
+  /**
+   * Initialize the system.
+   */
   init: () => {
     IdleSystem.processed = false;
   },
 
+  /**
+   * Reset the system.
+   */
   reset: () => {
     IdleSystem.processed = false;
   },
 
+  /**
+   * Update logic. Runs only once per session to process offline time.
+   * @param {number} dt - Delta time in seconds.
+   */
   update: (dt) => {
     if (IdleSystem.processed) return;
 
