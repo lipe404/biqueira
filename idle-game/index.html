@@ -1,103 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A FIRMA: Tycoon do Corre</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Permanent+Marker&family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="game-container">
-        <header>
-            <h1>A FIRMA <span class="subtitle">"O progresso não para."</span></h1>
-            <div class="prestige-display">
-                <span id="influence-display">RESPEITO: 0</span>
-            </div>
-        </header>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>A FIRMA: Tycoon do Corre</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Permanent+Marker&family=Teko:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="game-container">
+            <header>
+                <h1>A FIRMA <span
+                        class="subtitle">"O progresso não para."</span></h1>
+                <div class="prestige-display">
+                    <span id="influence-display">RESPEITO: 0</span>
+                </div>
+            </header>
 
-        <main>
-            <!-- LEFT: Production & Resources -->
-            <section class="panel production-panel">
-                <h2>O PONTO</h2>
-                
-                <div class="resources">
-                    <div class="res-item money">
-                        <span class="label">CAIXA</span>
-                        <span class="value" id="money">$0.00</span>
-                        <span class="rate" id="money-rate">(+$0/s)</span>
-                    </div>
-                    <div class="res-item widgets">
-                        <span class="label">MERCADORIA</span>
-                        <span class="value" id="widgets">0</span>
-                        <span class="rate" id="widget-rate">(+0/s)</span>
-                    </div>
-                    <div class="res-item heat">
-                        <span class="label">CALOR</span>
-                        <div class="progress-bar">
-                            <div class="fill" id="heat-bar" style="width: 0%"></div>
+            <main>
+                <!-- LEFT: Production & Resources -->
+                <section class="panel production-panel">
+                    <h2>O PONTO</h2>
+
+                    <div class="resources">
+                        <div class="res-item money">
+                            <span class="label">CAIXA</span>
+                            <span class="value" id="money">$0.00</span>
+                            <span class="rate" id="money-rate">(+$0/s)</span>
                         </div>
-                        <span class="value" id="heat-val">0%</span>
+                        <div class="res-item widgets">
+                            <span class="label">MERCADORIA</span>
+                            <span class="value" id="widgets">0</span>
+                            <span class="rate" id="widget-rate">(+0/s)</span>
+                        </div>
+                        <div class="res-item heat">
+                            <span class="label">CALOR</span>
+                            <div class="progress-bar">
+                                <div class="fill" id="heat-bar"
+                                    style="width: 0%"></div>
+                            </div>
+                            <span class="value" id="heat-val">0%</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="actions">
-                    <button id="btn-make" class="btn-big make">
-                        PRODUZIR
-                        <small>+<span id="click-power">1</span> Mercadoria</small>
-                    </button>
-                    <button id="btn-sell" class="btn-big sell">
-                        PASSAR ADIANTE
-                        <small>Transformar Mercadoria em Grana</small>
-                    </button>
-                </div>
-            </section>
+                    <div class="actions">
+                        <button id="btn-make" class="btn-big make">
+                            PRODUZIR
+                            <small>+<span id="click-power">1</span>
+                                Mercadoria</small>
+                        </button>
+                        <button id="btn-sell" class="btn-big sell">
+                            PASSAR ADIANTE
+                            <small>Transformar Mercadoria em Grana</small>
+                        </button>
+                    </div>
+                </section>
 
-            <!-- CENTER: Upgrades & Management -->
-            <section class="panel upgrades-panel">
-                <h2>COMANDO</h2>
-                <div id="upgrades-list" class="scroll-list">
-                    <!-- Upgrades injected here -->
-                </div>
-            </section>
+                <!-- CENTER: Upgrades & Management -->
+                <section class="panel upgrades-panel">
+                    <h2>COMANDO</h2>
+                    <div id="upgrades-list" class="scroll-list">
+                        <!-- Upgrades injected here -->
+                    </div>
+                </section>
 
-            <!-- RIGHT: Automation & Logs -->
-            <section class="panel automation-panel">
-                <h2>EQUIPE DO CORRE</h2>
-                <div id="npcs-list" class="scroll-list">
-                    <!-- NPCs injected here -->
-                </div>
-                
-                <div class="logs-container">
-                    <h3>RÁDIO PEÃO</h3>
-                    <div id="game-logs" class="logs-list"></div>
-                </div>
-            </section>
-        </main>
+                <!-- RIGHT: Automation & Logs -->
+                <section class="panel automation-panel">
+                    <h2>EQUIPE DO CORRE</h2>
+                    <div id="npcs-list" class="scroll-list">
+                        <!-- NPCs injected here -->
+                    </div>
 
-        <footer>
-            <div class="stats">
-                Tempo de Corre: <span id="playtime">00:00:00</span>
-            </div>
-            <div class="system-controls">
-                <button id="btn-save">Guardar</button>
-                <button id="btn-reset">Começar do Zero</button>
-                <button id="btn-prestige" class="btn-prestige">Virar Patrão (Prestígio)</button>
-            </div>
-        </footer>
-    </div>
+                    <div class="logs-container">
+                        <h3>RÁDIO PEÃO</h3>
+                        <div id="game-logs" class="logs-list"></div>
+                    </div>
+                </section>
+            </main>
 
-    <!-- Modals or Overlays -->
-    <div id="penalty-overlay" class="overlay hidden">
-        <div class="modal">
-            <h2>MOIOU!</h2>
-            <p>A casa caiu. Operação policial em andamento.</p>
-            <div class="spinner"></div>
+            <footer>
+                <div class="stats">
+                    Tempo de Corre: <span id="playtime">00:00:00</span>
+                </div>
+                <div class="system-controls">
+                    <button id="btn-save">Guardar</button>
+                    <button id="btn-reset">Começar do Zero</button>
+                    <button id="btn-prestige" class="btn-prestige">Virar Patrão
+                        (Prestígio)</button>
+                </div>
+            </footer>
         </div>
-    </div>
 
-    <script type="module" src="js/main.js"></script>
-</body>
+        <!-- Modals or Overlays -->
+        <div id="penalty-overlay" class="overlay hidden">
+            <div class="modal">
+                <h2>MOIOU!</h2>
+                <p>A casa caiu. Operação policial em andamento.</p>
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <script type="module" src="js/main.js"></script>
+    </body>
 </html>
