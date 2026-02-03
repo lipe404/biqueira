@@ -9,8 +9,6 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 - [ ] Criar pasta `js/utils/` para helpers genéricos (matemática, formatação, data).
 - [ ] Mover definições de dados (`npcs.js`, `upgrades.js`) para arquivos JSON puros carregados via fetch (opcional).
 - [ ] Organizar `events.js` separando eventos positivos, negativos e neutros em arquivos distintos se crescer.
-- [ ] Renomear `bindings.js` para `inputManager.js` ou `uiController.js` para clareza.
-- [ ] Criar pasta `js/factories/` para criação dinâmica de objetos complexos.
 - [ ] Garantir que não haja arquivos órfãos ou não utilizados no projeto.
 
 ## Categoria 3 — Qualidade do Código JavaScript

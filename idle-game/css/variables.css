@@ -1,0 +1,19 @@
+:root {
+  --bg-color: #121212;
+  --panel-bg: rgba(20, 20, 25, 0.9);
+  --text-color: #e0e0e0;
+
+  /* Palette Street/Cria */
+  --street-green: #00ff41; /* Cyber/Spray Green */
+  --street-red: #ff003c; /* Alert Red */
+  --street-yellow: #ffee00; /* Hazard Yellow */
+  --street-blue: #00d9ff; /* Neon Blue */
+  --concrete: #2a2a2a;
+  --cardboard: #8d6e63;
+
+  --font-head: "Black Ops One", cursive;
+  --font-body: "Teko", sans-serif;
+  --font-hand: "Permanent Marker", cursive;
+
+  --border-style: 2px solid rgba(255, 255, 255, 0.1);
+}

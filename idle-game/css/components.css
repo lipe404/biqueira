@@ -1,72 +1,3 @@
-:root {
-  --bg-color: #121212;
-  --panel-bg: rgba(20, 20, 25, 0.9);
-  --text-color: #e0e0e0;
-
-  /* Palette Street/Cria */
-  --street-green: #00ff41; /* Cyber/Spray Green */
-  --street-red: #ff003c; /* Alert Red */
-  --street-yellow: #ffee00; /* Hazard Yellow */
-  --street-blue: #00d9ff; /* Neon Blue */
-  --concrete: #2a2a2a;
-  --cardboard: #8d6e63;
-
-  --font-head: "Black Ops One", cursive;
-  --font-body: "Teko", sans-serif;
-  --font-hand: "Permanent Marker", cursive;
-
-  --border-style: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-* {
-  box-sizing: border-box;
-  user-select: none;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-body);
-  font-size: 1.2rem; /* Teko is condensed, needs size */
-  background-color: var(--bg-color);
-  background-image: url("../assets/fundo.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: var(--text-color);
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* Grime Overlay */
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
-    repeating-linear-gradient(0deg, transparent, transparent 2px, #000 3px);
-  background-size:
-    cover,
-    100% 4px;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.9;
-}
-
-.game-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 15px;
-}
-
 /* Header - Metal Plate Style */
 header {
   display: flex;
@@ -106,15 +37,6 @@ h1 {
   border: 2px dashed var(--street-yellow);
   padding: 5px 15px;
   transform: rotate(1deg);
-}
-
-/* Main Layout */
-main {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  flex: 1;
-  overflow: hidden;
 }
 
 /* Panels - Concrete/Wall Look */
@@ -440,32 +362,6 @@ footer {
   color: #000 !important;
 }
 
-/* Animations & Effects */
-@keyframes vibrate {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-.vibrate {
-  animation: vibrate 0.1s linear;
-}
-
 /* Overlay/Modal */
 .overlay {
   backdrop-filter: blur(10px);
@@ -486,49 +382,4 @@ footer {
   color: var(--street-red);
   text-shadow: 0 0 10px var(--street-red);
   border-bottom: none;
-}
-
-/* Scrollbar Street Style */
-::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-track {
-  background: #1a1a1a;
-  border-left: 1px solid #333;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--street-green);
-  border: 2px solid #1a1a1a;
-  background-clip: padding-box;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #4dff79;
-}
-
-/* Firefox Scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--street-green) #1a1a1a;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  main {
-    grid-template-columns: 1fr;
-  }
-  header {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
-  .subtitle {
-    display: block;
-    margin: 5px 0;
-  }
-  .game-container {
-    padding: 5px;
-  }
-  .panel {
-    margin-bottom: 10px;
-  }
 }
