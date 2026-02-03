@@ -4,8 +4,8 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 1 — Arquitetura Geral
 
-- [ ] Implementar padrão Observer para desacoplar a UI do Estado.
-- [ ] Criar um `EventManager` central para comunicação entre sistemas sem dependência direta.
+- [X] Implementar padrão Observer para desacoplar a UI do Estado.
+- [X] Criar um `EventManager` central para comunicação entre sistemas sem dependência direta.
 - [ ] Definir interfaces claras para os módulos de sistema (`update(dt)`, `init()`, `reset()`).
 - [ ] Documentar o fluxo de dados global em um diagrama (mermaid no README).
 - [ ] Isolar a lógica de configuração (constantes mágicas) em um arquivo `config.js`.

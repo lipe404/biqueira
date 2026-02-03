@@ -1,4 +1,5 @@
 import { gameState } from "../core/gameState.js";
+import { EventManager, EVENTS } from "../core/eventManager.js";
 
 export const ClickSystem = {
   // Called when player clicks "Make Widget"
@@ -51,6 +52,9 @@ export const ClickSystem = {
 
       state.resources.money += revenue;
       state.stats.totalMoneyEarned += revenue;
+      
+      EventManager.emit(EVENTS.CLICK_SELL, { revenue });
+
       return revenue;
     }
     return 0;

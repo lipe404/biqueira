@@ -46,6 +46,9 @@ export class GameLoop {
       this.accumulatedTime -= this.step;
     }
 
+    // Notify observers of state changes (Observer Pattern)
+    gameState.notify();
+
     // Render (pass interpolation alpha if needed, but simple DOM updates usually just take latest state)
     this.render();
 

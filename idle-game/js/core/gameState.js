@@ -46,6 +46,24 @@ const initialState = {
 class GameState {
   constructor() {
     this.data = JSON.parse(JSON.stringify(initialState));
+    this.observers = [];
+  }
+
+  // Observer Pattern: Subscribe to state changes
+  subscribe(callback) {
+    if (typeof callback === "function") {
+      this.observers.push(callback);
+    }
+  }
+
+  // Observer Pattern: Unsubscribe
+  unsubscribe(callback) {
+    this.observers = this.observers.filter((cb) => cb !== callback);
+  }
+
+  // Observer Pattern: Notify all observers
+  notify() {
+    this.observers.forEach((callback) => callback(this.data));
   }
 
   get() {
@@ -68,10 +86,12 @@ class GameState {
     };
 
     this.data = merge(this.data, savedData);
+    this.notify();
   }
 
   reset() {
     this.data = JSON.parse(JSON.stringify(initialState));
+    this.notify();
   }
 
   // Hard reset (wipes prestige too)
@@ -84,6 +104,7 @@ class GameState {
     const influence = this.data.resources.influence + earnedInfluence;
     this.reset();
     this.data.resources.influence = influence;
+    this.notify();
   }
 }
 

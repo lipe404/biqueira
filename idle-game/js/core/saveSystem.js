@@ -1,4 +1,5 @@
 import { gameState } from "./gameState.js";
+import { EventManager, EVENTS } from "./eventManager.js";
 
 const SAVE_KEY = "IDLE_GAME_SAVE_V1";
 
@@ -18,6 +19,9 @@ export const SaveSystem = {
         "Game saved at " +
           new Date(data.meta.lastSaveTime).toLocaleTimeString(),
       );
+      
+      EventManager.emit(EVENTS.SAVE_GAME, { time: data.meta.lastSaveTime });
+
       return true;
     } catch (e) {
       console.error("Failed to save game:", e);
@@ -38,6 +42,8 @@ export const SaveSystem = {
 
       gameState.load(data);
       console.log("Game loaded successfully.");
+
+      EventManager.emit(EVENTS.LOAD_GAME, { data });
 
       // Calculate offline progress
       SaveSystem.calculateOfflineProgress(data.meta.lastSaveTime);

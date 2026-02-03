@@ -1,5 +1,6 @@
 import { gameState } from "../core/gameState.js";
-import { EVENTS } from "../data/events.js";
+import { EVENTS; EVENT_DATA } from "../data/events.js";
+import { EventManager, EVENTS } from "../core/eventManager.js";
 
 export const EventSystem = {
   checkInterval: 5, // Check every 5 seconds
@@ -24,7 +25,7 @@ export const EventSystem = {
     if (now - state.events.lastEventTime < 30000) return; // Min 30s between events
 
     // Filter possible events
-    const possibleEvents = EVENTS.filter((event) => event.condition(state));
+    const possibleEvents = EVENT_DATA.filter((event) => event.condition(state));
 
     for (const event of possibleEvents) {
       if (Math.random() < event.chance) {
@@ -43,6 +44,11 @@ export const EventSystem = {
     state.logs.unshift({
       time: Date.now(),
       message: `EVENT: ${event.name} - ${message}`,
+    });
+
+    EventManager.emit(EVENTS.RANDOM_EVENT, {
+      name: event.name,
+      message: message,
     });
 
     if (state.logs.length > 10) state.logs.pop();

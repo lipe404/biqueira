@@ -31,11 +31,6 @@ window.addEventListener("DOMContentLoaded", () => {
   gameLoop.registerSystem(EventSystem);
   // PrestigeSystem is triggered manually, not per frame
 
-  // UI Renderer is a system too
-  gameLoop.registerSystem({
-    render: () => Renderer.render(),
-  });
-
   // 4. Start Loop
   gameLoop.start();
 });

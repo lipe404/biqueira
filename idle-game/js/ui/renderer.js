@@ -1,6 +1,7 @@
 import { gameState } from "../core/gameState.js";
 import { NPCS } from "../data/npcs.js";
 import { UPGRADES } from "../data/upgrades.js";
+import { EventManager, EVENTS } from "../core/eventManager.js";
 
 export const Renderer = {
   // Cache DOM elements
@@ -25,6 +26,13 @@ export const Renderer = {
 
     // Initial Render of Static Lists
     Renderer.renderNPCList();
+
+    // Subscribe to State Changes (Observer Pattern)
+    gameState.subscribe(Renderer.render);
+
+    // Listen to specific events (EventManager)
+    EventManager.on(EVENTS.RISK_PENALTY, Renderer.showPenalty);
+    EventManager.on(EVENTS.RANDOM_EVENT, Renderer.logEvent);
   },
 
   formatNumber: (num) => {
@@ -43,8 +51,10 @@ export const Renderer = {
     );
   },
 
-  render: () => {
-    const state = gameState.get();
+  // Render function now accepts state (pushed from Observer)
+  render: (stateData) => {
+    // If called directly without args, get state (fallback)
+    const state = stateData || gameState.get();
     const els = Renderer.elements;
 
     // Resources
@@ -117,6 +127,16 @@ export const Renderer = {
             `;
       container.appendChild(div);
     }
+  },
+
+  // Helper methods for EventManager
+  showPenalty: (data) => {
+    const els = Renderer.elements;
+    if (els.penaltyOverlay) els.penaltyOverlay.classList.remove("hidden");
+  },
+
+  logEvent: (data) => {
+    console.log("Event Log:", data);
   },
 
   updateNPCList: (state) => {

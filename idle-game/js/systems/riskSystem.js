@@ -1,4 +1,5 @@
 import { gameState } from "../core/gameState.js";
+import { EventManager, EVENTS } from "../core/eventManager.js";
 
 export const RiskSystem = {
   update: (dt) => {
@@ -45,6 +46,12 @@ export const RiskSystem = {
     state.logs.unshift({
       time: Date.now(),
       message: `MOIOU! A CASA CAIU! A polícia levou ${lostWidgets} mercadorias e $${lostMoney}. Parado por 15s.`,
+    });
+
+    EventManager.emit(EVENTS.RISK_PENALTY, {
+      lostWidgets,
+      lostMoney,
+      duration: 15,
     });
 
     // Keep log size small
