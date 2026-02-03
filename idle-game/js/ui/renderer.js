@@ -57,7 +57,7 @@ export const Renderer = {
         else els.heatBar.style.backgroundColor = 'var(--accent-green)';
 
         els.clickPower.textContent = Renderer.formatNumber(state.click.basePower * state.click.multiplier);
-        els.influence.textContent = `Influência: ${state.resources.influence}`;
+        els.influence.textContent = `RESPEITO: ${state.resources.influence}`;
 
         // Playtime
         const totalSeconds = Math.floor((Date.now() - state.meta.startTime) / 1000);
@@ -144,7 +144,7 @@ export const Renderer = {
         });
 
         if (availableUpgrades.length === 0) {
-            container.innerHTML = '<div style="padding:10px; color:#666; text-align:center;">Nenhuma melhoria disponível.</div>';
+            container.innerHTML = '<div style="padding:10px; color:#666; text-align:center; font-style: italic;">Nada pra melhorar agora, chefe.</div>';
             return;
         }
 

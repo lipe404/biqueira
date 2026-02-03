@@ -8,23 +8,27 @@ import { UPGRADES } from '../data/upgrades.js';
 export const Bindings = {
     init: () => {
         // Main Buttons
-        document.getElementById('btn-make').addEventListener('click', () => {
+        const btnMake = document.getElementById('btn-make');
+        btnMake.addEventListener('click', () => {
             ClickSystem.clickMake();
+            Bindings.triggerVibration(btnMake);
             // Optional: Spawn particle effect
         });
 
-        document.getElementById('btn-sell').addEventListener('click', () => {
+        const btnSell = document.getElementById('btn-sell');
+        btnSell.addEventListener('click', () => {
             ClickSystem.clickSell();
+            Bindings.triggerVibration(btnSell);
         });
 
         // System Buttons
         document.getElementById('btn-save').addEventListener('click', () => {
             SaveSystem.save();
-            alert('Jogo Salvo!');
+            alert('Progresso Salvo na Fita!');
         });
 
         document.getElementById('btn-reset').addEventListener('click', () => {
-            if (confirm('RESET TOTAL: Isso apagará todo o progresso, incluindo prestígio. Tem certeza?')) {
+            if (confirm('ZERAR TUDO: Vai perder todo o corre e o respeito. Certeza, parça?')) {
                 SaveSystem.reset();
             }
         });
@@ -42,6 +46,9 @@ export const Bindings = {
             
             const id = item.dataset.id;
             Bindings.buyNPC(id);
+            
+            // Visual feedback on click even if locked (maybe shake?)
+            Bindings.triggerVibration(item);
         });
 
         // Upgrade Purchase
@@ -51,7 +58,14 @@ export const Bindings = {
             
             const id = item.dataset.id;
             Bindings.buyUpgrade(id);
+            Bindings.triggerVibration(item);
         });
+    },
+
+    triggerVibration: (element) => {
+        element.classList.remove('vibrate');
+        void element.offsetWidth; // trigger reflow
+        element.classList.add('vibrate');
     },
 
     buyNPC: (id) => {
