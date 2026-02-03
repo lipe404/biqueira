@@ -12,6 +12,7 @@ import { PrestigeSystem } from "./systems/prestigeSystem.js";
 
 import { Renderer } from "./ui/renderer.js";
 import { Bindings } from "./ui/bindings.js";
+import { CursorManager } from "./ui/cursorManager.js";
 
 // Global Data Holder (can be imported by others if needed, or attached to window)
 /**
@@ -45,6 +46,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   // 2. Initialize UI
   Renderer.init();
   Bindings.init();
+  CursorManager.init();
 
   // 3. Register Systems to Loop
   // Order matters for dependencies

@@ -16,72 +16,9 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 7 — Sistema Idle (Produção Passiva)
 
-- [ ] Implementar simulação precisa offline (não apenas `prod * tempo`).
-- [ ] Simular eventos aleatórios que teriam ocorrido offline (probabilístico).
-- [ ] Adicionar limite de tempo offline (banco de horas) melhorável com upgrades.
-- [ ] Criar modal de "Bem-vindo de volta" detalhado (recursos ganhos, eventos, mortes).
-- [ ] Implementar consumo de recursos offline (manutenção de NPCs).
-- [ ] Adicionar bônus por tempo offline (descanso da equipe?).
-- [ ] Permitir "acelerar" o tempo offline assistindo ads (hipotético) ou pagando recursos.
-- [ ] Corrigir bugs de arredondamento em grandes saltos de tempo.
-- [ ] Implementar progressão de upgrades/construções iniciadas offline.
-- [ ] Salvar timestamp de saída com precisão.
-- [ ] Tratar mudança de fuso horário/relógio do sistema (anti-cheat básico).
-- [ ] Calcular decaimento de Heat offline.
-- [ ] Permitir configurar comportamento dos NPCs offline (seguro vs arriscado).
-- [ ] Notificações locais (browser) quando o "banco de horas" encher.
-- [ ] Implementar "Sonho" ou mecânica onírica durante o idle?
-- [ ] Visualizar o progresso offline acontecendo acelerado (efeito visual).
-- [ ] Garantir que o cálculo offline use os multiplicadores do momento da saída.
-- [ ] Logar o tempo total em idle stats.
-- [ ] Criar mecânica de "Automação 2.0" que só funciona online vs offline.
-- [ ] Testar limites de integer overflow com tempos offline absurdos.
-
 ## Categoria 8 — Sistema de Clique (Active Gameplay)
 
-- [ ] Implementar "Critical Click" (chance de x10 produção).
-- [ ] Adicionar "Combo Meter": cliques rápidos aumentam multiplicador temporário.
-- [ ] Criar efeitos visuais distintos para clique normal, crítico e venda.
-- [ ] Implementar "Hold to Produce" (upgrade de acessibilidade/mid-game).
-- [ ] Adicionar sons variados por intensidade do clique.
-- [ ] Criar mecânica de "Overheat" no clique manual (dedo queimando).
-- [ ] Implementar cliques em elementos do cenário para easter eggs.
-- [ ] Adicionar upgrade de "Auto-Clicker" temporário (power-up).
-- [ ] Visualizar o dano/produção flutuante (floating text) com pooling.
-- [ ] Diferenciar clique de produção (botão esquerdo) e clique de venda (botão direito?).
-- [ ] Adicionar mecânica de ritmo (clicar no beat da música).
-- [ ] Implementar "Click Zones": áreas diferentes dão bônus diferentes.
-- [ ] Prevenir autoclickers externos (limite de cliques/segundo humano).
-- [ ] Adicionar animação de "esmagar" o botão.
-- [ ] Criar upgrades que sinergizam clique com automação (clique buffa NPCs).
-- [ ] Implementar "Charge Click": segurar para carregar um clique massivo.
-- [ ] Adicionar feedback háptico (vibração) configurável em mobile.
-- [ ] Criar conquistas baseadas em cliques (1000, 1M, cliques rápidos).
-- [ ] Implementar cursor personalizado que muda com upgrades.
-- [ ] Balancear escala de poder do clique vs automação no late game.
-
 ## Categoria 9 — Economia do Jogo
-
-- [ ] Definir curvas de custo exponencial para todos os upgrades e NPCs.
-- [ ] Implementar sistema de inflação (preços aumentam com o tempo/compras)?
-- [ ] Adicionar múltiplos tipos de moeda (Dólar, Bitcoin, FavelaCoin).
-- [ ] Criar mercado dinâmico: preço de venda do widget flutua.
-- [ ] Implementar sistema de "Stock Market" simplificado.
-- [ ] Adicionar custos de manutenção recorrentes para NPCs de alto nível.
-- [ ] Criar mecânica de empréstimo (Agiota) com juros compostos.
-- [ ] Balancear faucets (fontes) e sinks (drenos) de dinheiro.
-- [ ] Implementar multiplicadores globais multiplicativos e aditivos corretamente.
-- [ ] Adicionar conversão de recursos (ex: Influência -> Dinheiro).
-- [ ] Criar upgrades que reduzem custos (descontos).
-- [ ] Implementar sistema de Impostos (dreno automático baseado em renda).
-- [ ] Visualizar gráficos de economia (produção vs tempo).
-- [ ] Adicionar "Golden Widgets" (moeda premium ganhável).
-- [ ] Balancear o soft-cap de dinheiro (se houver).
-- [ ] Implementar "Black Market" para trocar recursos proibidos.
-- [ ] Criar eventos de crise econômica.
-- [ ] Adicionar mecânica de investimento (comprar baixo, vender alto).
-- [ ] Revisar fórmulas de prestígio para evitar estagnação.
-- [ ] Validar integridade matemática (evitar Infinity ou NaN).
 
 ## Categoria 10 — Progressão e Escalabilidade
 
