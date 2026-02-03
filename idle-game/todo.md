@@ -6,33 +6,10 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 2 — Organização de Pastas e Arquivos
 
-- [ ] Criar pasta `js/utils/` para helpers genéricos (matemática, formatação, data).
-- [ ] Mover definições de dados (`npcs.js`, `upgrades.js`) para arquivos JSON puros carregados via fetch (opcional).
-- [ ] Organizar `events.js` separando eventos positivos, negativos e neutros em arquivos distintos se crescer.
-- [ ] Garantir que não haja arquivos órfãos ou não utilizados no projeto.
-
 ## Categoria 3 — Qualidade do Código JavaScript
 
-- [ ] Adicionar verificação estrita (`"use strict";`) em todos os arquivos (já implícito em modules, mas bom garantir).
 - [ ] Implementar JSDoc em todas as funções públicas e classes.
-- [ ] Remover `console.log` de debug em produção (criar wrapper de log).
-- [ ] Substituir `var` por `let` e `const` (revisão geral, embora pareça ok).
-- [ ] Utilizar destructuring em parâmetros de função para clareza.
-- [ ] Padronizar retorno de funções (evitar retornar tipos mistos).
-- [ ] Evitar funções anônimas longas em event listeners (extrair para métodos nomeados).
-- [ ] Reduzir complexidade ciclomática em `AutomationSystem.update`.
 - [ ] Eliminar números mágicos no código (extrair para constantes).
-- [ ] Utilizar Optional Chaining (`?.`) para acesso seguro a propriedades aninhadas.
-- [ ] Utilizar Nullish Coalescing (`??`) para valores padrão.
-- [ ] Garantir imutabilidade onde possível (evitar efeitos colaterais indesejados).
-- [ ] Padronizar nomes de variáveis (inglês vs português - decidir um e refatorar).
-- [ ] Remover código comentado/morto.
-- [ ] Utilizar `Array.prototype` methods (map, filter, reduce) em vez de loops `for` onde legível.
-- [ ] Implementar verificação de tipos em runtime para funções críticas (dev mode).
-- [ ] Evitar poluição do escopo global (window).
-- [ ] Padronizar a ordem de imports no topo dos arquivos.
-- [ ] Utilizar Template Literals consistentemente para strings.
-- [ ] Refatorar condicionais aninhadas (arrow code) usando early returns.
 
 ## Categoria 4 — Performance e Otimização
 

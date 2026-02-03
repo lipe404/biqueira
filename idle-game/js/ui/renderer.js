@@ -1,5 +1,6 @@
 import { gameState } from "../core/gameState.js";
 import { EventManager, EVENTS } from "../core/eventManager.js";
+import { Formatter } from "../utils/formatting.js";
 
 // Sub-renderers
 import { ResourcesRenderer } from "./renderers/ResourcesRenderer.js";
@@ -40,22 +41,6 @@ export const Renderer = {
     EventManager.on(EVENTS.RANDOM_EVENT, Renderer.logEvent);
   },
 
-  formatNumber: (num) => {
-    if (num >= 1000000) return (num / 1000000).toFixed(2) + "M";
-    if (num >= 1000) return (num / 1000).toFixed(2) + "k";
-    return Math.floor(num).toString();
-  },
-
-  formatCurrency: (num) => {
-    return (
-      "$" +
-      num.toLocaleString("pt-BR", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      })
-    );
-  },
-
   // Render function now accepts state (pushed from Observer)
   render: (stateData) => {
     // If called directly without args, get state (fallback)
@@ -63,9 +48,9 @@ export const Renderer = {
     const els = Renderer.elements;
 
     // Delegate to sub-renderers
-    ResourcesRenderer.render(state, els, Renderer.formatNumber, Renderer.formatCurrency);
-    NPCRenderer.render(state, els, Renderer.formatCurrency);
-    UpgradesRenderer.render(state, els, Renderer.formatCurrency);
+    ResourcesRenderer.render(state, els, Formatter.formatNumber, Formatter.formatCurrency, Formatter.formatTime);
+    NPCRenderer.render(state, els, Formatter.formatCurrency);
+    UpgradesRenderer.render(state, els, Formatter.formatCurrency);
     LogsRenderer.render(state, els);
     FeedbackRenderer.render(state, els);
   },

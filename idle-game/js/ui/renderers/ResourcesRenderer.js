@@ -1,7 +1,7 @@
 import { CONFIG } from "../../core/config.js";
 
 export const ResourcesRenderer = {
-  render: (state, elements, formatNumber, formatCurrency) => {
+  render: (state, elements, formatNumber, formatCurrency, formatTime) => {
     const els = elements;
 
     // Resources
@@ -27,14 +27,7 @@ export const ResourcesRenderer = {
     els.influence.textContent = `RESPEITO: ${state.resources.influence}`;
 
     // Playtime
-    const totalSeconds = Math.floor((Date.now() - state.meta.startTime) / 1000);
-    const h = Math.floor(totalSeconds / 3600)
-      .toString()
-      .padStart(2, "0");
-    const m = Math.floor((totalSeconds % 3600) / 60)
-      .toString()
-      .padStart(2, "0");
-    const s = (totalSeconds % 60).toString().padStart(2, "0");
-    els.playtime.textContent = `${h}:${m}:${s}`;
+    const ms = Date.now() - state.meta.startTime;
+    els.playtime.textContent = formatTime(ms);
   }
 };

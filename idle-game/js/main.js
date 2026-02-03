@@ -1,6 +1,7 @@
 import { gameState } from "./core/gameState.js";
 import { gameLoop } from "./core/loop.js";
 import { SaveSystem } from "./core/saveSystem.js";
+import { DataLoader } from "./core/loader.js";
 
 import { ClickSystem } from "./systems/clickSystem.js";
 import { AutomationSystem } from "./systems/automationSystem.js";
@@ -12,9 +13,18 @@ import { PrestigeSystem } from "./systems/prestigeSystem.js";
 import { Renderer } from "./ui/renderer.js";
 import { Bindings } from "./ui/bindings.js";
 
+// Global Data Holder (can be imported by others if needed, or attached to window)
+export let GameData = {
+  npcs: {}
+};
+
 // Bootstrap
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
   console.log("Initializing Generic Corp...");
+
+  // 0. Load External Data
+  const loadedData = await DataLoader.loadAll();
+  GameData.npcs = loadedData.npcs;
 
   // 1. Load Save
   SaveSystem.load();

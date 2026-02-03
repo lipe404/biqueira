@@ -1,72 +1,14 @@
-export const NPCS = {
-  intern: {
-    id: "intern",
-    name: "Estagiário",
-    role: "producer",
-    description: "Monta widgets manualmente. Mão de obra barata.",
-    baseCost: 15,
-    baseProduction: 1, // Widgets per second
-    baseRisk: 0.1,
-    costMultiplier: 1.15,
+import { GameData } from "../main.js";
+
+// Proxy to access GameData.npcs seamlessly
+export const NPCS = new Proxy({}, {
+  get: (target, prop) => {
+    return GameData.npcs[prop];
   },
-  telemarketer: {
-    id: "telemarketer",
-    name: "Telemarketing",
-    role: "seller",
-    description: "Incomoda pessoas até elas comprarem widgets.",
-    baseCost: 20,
-    baseProduction: 1, // Sells 1 widget per second
-    baseRisk: 0.05,
-    costMultiplier: 1.15,
+  ownKeys: (target) => {
+    return Object.keys(GameData.npcs);
   },
-  assembly_bot: {
-    id: "assembly_bot",
-    name: "Robô de Montagem v1",
-    role: "producer",
-    description: "Linha de montagem automatizada.",
-    baseCost: 100,
-    baseProduction: 5,
-    baseRisk: 0,
-    costMultiplier: 1.15,
-  },
-  middle_manager: {
-    id: "middle_manager",
-    name: "Gerente Intermediário",
-    role: "manager",
-    description: "Otimiza o fluxo e culpa os outros. Reduz Suspeita.",
-    baseCost: 500,
-    baseProduction: 0,
-    baseRisk: -0.5,
-    costMultiplier: 1.2,
-  },
-  online_store: {
-    id: "online_store",
-    name: "Loja Virtual",
-    role: "seller",
-    description: "Vende widgets enquanto você dorme.",
-    baseCost: 1000,
-    baseProduction: 10, // Sells 10/s
-    baseRisk: 0.2, // Data leaks?
-    costMultiplier: 1.25,
-  },
-  offshore_factory: {
-    id: "offshore_factory",
-    name: "Fábrica Offshore",
-    role: "producer",
-    description: "Produção massiva, poluição massiva. Alto risco.",
-    baseCost: 12000,
-    baseProduction: 100,
-    baseRisk: 2.0,
-    costMultiplier: 1.25,
-  },
-  global_marketing: {
-    id: "global_marketing",
-    name: "Marketing Global",
-    role: "seller",
-    description: "Lavagem cerebral nas massas para consumir.",
-    baseCost: 50000,
-    baseProduction: 100,
-    baseRisk: 1.0,
-    costMultiplier: 1.3,
-  },
-};
+  getOwnPropertyDescriptor: (target, prop) => {
+    return Object.getOwnPropertyDescriptor(GameData.npcs, prop);
+  }
+});
