@@ -34,7 +34,7 @@ export const Renderer = {
     },
     
     formatCurrency: (num) => {
-        return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return '$' + num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     },
 
     render: () => {
@@ -57,7 +57,7 @@ export const Renderer = {
         else els.heatBar.style.backgroundColor = 'var(--accent-green)';
 
         els.clickPower.textContent = Renderer.formatNumber(state.click.basePower * state.click.multiplier);
-        els.influence.textContent = `Influence: ${state.resources.influence}`;
+        els.influence.textContent = `Influência: ${state.resources.influence}`;
 
         // Playtime
         const totalSeconds = Math.floor((Date.now() - state.meta.startTime) / 1000);
@@ -98,7 +98,7 @@ export const Renderer = {
                 <div class="item-cost" id="cost-${npc.id}">$0</div>
                 <div class="item-desc">${npc.description}</div>
                 <div class="item-stats">
-                    <small>Prod: ${npc.baseProduction}/s | Risk: ${npc.baseRisk}/s</small>
+                    <small>Prod: ${npc.baseProduction}/s | Risco: ${npc.baseRisk}/s</small>
                 </div>
             `;
             container.appendChild(div);
@@ -144,7 +144,7 @@ export const Renderer = {
         });
 
         if (availableUpgrades.length === 0) {
-            container.innerHTML = '<div style="padding:10px; color:#666; text-align:center;">No upgrades available.</div>';
+            container.innerHTML = '<div style="padding:10px; color:#666; text-align:center;">Nenhuma melhoria disponível.</div>';
             return;
         }
 

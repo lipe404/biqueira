@@ -27,7 +27,7 @@ export const IdleSystem = {
             if (!state.logs) state.logs = [];
             state.logs.unshift({
                 time: Date.now(),
-                message: `Welcome back! You were gone for ${(effectiveSeconds/3600).toFixed(1)}h.`
+                message: `Bem-vindo de volta! Você esteve fora por ${(effectiveSeconds/3600).toFixed(1)}h.`
             });
 
             // Clear the flag

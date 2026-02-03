@@ -20,11 +20,11 @@ export const Bindings = {
         // System Buttons
         document.getElementById('btn-save').addEventListener('click', () => {
             SaveSystem.save();
-            alert('Game Saved!');
+            alert('Jogo Salvo!');
         });
 
         document.getElementById('btn-reset').addEventListener('click', () => {
-            if (confirm('HARD RESET: This will wipe all progress including prestige. Are you sure?')) {
+            if (confirm('RESET TOTAL: Isso apagará todo o progresso, incluindo prestígio. Tem certeza?')) {
                 SaveSystem.reset();
             }
         });
@@ -70,7 +70,7 @@ export const Bindings = {
             if (!state.logs) state.logs = [];
             state.logs.unshift({
                 time: Date.now(),
-                message: `Hired ${npc.name} for $${cost}.`
+                message: `Contratou ${npc.name} por $${cost}.`
             });
         }
     },
@@ -91,7 +91,7 @@ export const Bindings = {
             if (!state.logs) state.logs = [];
             state.logs.unshift({
                 time: Date.now(),
-                message: `Purchased Upgrade: ${upgrade.name}`
+                message: `Comprou Melhoria: ${upgrade.name}`
             });
         }
     }

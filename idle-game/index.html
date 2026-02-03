@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generic Corp: Idle Tycoon</title>
+    <title>Corporação Genérica: Tycoon Idle</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="game-container">
         <header>
-            <h1>GENERIC CORP <span class="subtitle">"We make things."</span></h1>
+            <h1>CORPORAÇÃO GENÉRICA <span class="subtitle">"Nós fazemos coisas."</span></h1>
             <div class="prestige-display">
-                <span id="influence-display">Influence: 0</span>
+                <span id="influence-display">Influência: 0</span>
             </div>
         </header>
 
         <main>
             <!-- LEFT: Production & Resources -->
             <section class="panel production-panel">
-                <h2>Production Floor</h2>
+                <h2>Chão de Fábrica</h2>
                 
                 <div class="resources">
                     <div class="res-item money">
-                        <span class="label">FUNDS</span>
+                        <span class="label">FUNDOS</span>
                         <span class="value" id="money">$0.00</span>
                         <span class="rate" id="money-rate">(+$0/s)</span>
                     </div>
                     <div class="res-item widgets">
-                        <span class="label">STOCK</span>
+                        <span class="label">ESTOQUE</span>
                         <span class="value" id="widgets">0</span>
                         <span class="rate" id="widget-rate">(+0/s)</span>
                     </div>
                     <div class="res-item heat">
-                        <span class="label">SUSPICION</span>
+                        <span class="label">SUSPEITA</span>
                         <div class="progress-bar">
                             <div class="fill" id="heat-bar" style="width: 0%"></div>
                         </div>
@@ -42,19 +42,19 @@
 
                 <div class="actions">
                     <button id="btn-make" class="btn-big make">
-                        ASSEMBLE WIDGET
-                        <small>+<span id="click-power">1</span> Stock</small>
+                        MONTAR WIDGET
+                        <small>+<span id="click-power">1</span> Estoque</small>
                     </button>
                     <button id="btn-sell" class="btn-big sell">
-                        SELL STOCK
-                        <small>Convert Stock to Funds</small>
+                        VENDER ESTOQUE
+                        <small>Converter Estoque em Fundos</small>
                     </button>
                 </div>
             </section>
 
             <!-- CENTER: Upgrades & Management -->
             <section class="panel upgrades-panel">
-                <h2>Management</h2>
+                <h2>Gerenciamento</h2>
                 <div id="upgrades-list" class="scroll-list">
                     <!-- Upgrades injected here -->
                 </div>
@@ -62,13 +62,13 @@
 
             <!-- RIGHT: Automation & Logs -->
             <section class="panel automation-panel">
-                <h2>Workforce</h2>
+                <h2>Força de Trabalho</h2>
                 <div id="npcs-list" class="scroll-list">
                     <!-- NPCs injected here -->
                 </div>
                 
                 <div class="logs-container">
-                    <h3>System Logs</h3>
+                    <h3>Logs do Sistema</h3>
                     <div id="game-logs" class="logs-list"></div>
                 </div>
             </section>
@@ -76,12 +76,12 @@
 
         <footer>
             <div class="stats">
-                Playtime: <span id="playtime">00:00:00</span>
+                Tempo de Jogo: <span id="playtime">00:00:00</span>
             </div>
             <div class="system-controls">
-                <button id="btn-save">Save</button>
-                <button id="btn-reset">Hard Reset</button>
-                <button id="btn-prestige" class="btn-prestige">Retire (Prestige)</button>
+                <button id="btn-save">Salvar</button>
+                <button id="btn-reset">Reset Total</button>
+                <button id="btn-prestige" class="btn-prestige">Aposentar (Prestígio)</button>
             </div>
         </footer>
     </div>
@@ -89,8 +89,8 @@
     <!-- Modals or Overlays -->
     <div id="penalty-overlay" class="overlay hidden">
         <div class="modal">
-            <h2>RAID IN PROGRESS!</h2>
-            <p>Operations halted by authorities.</p>
+            <h2>INVASÃO EM ANDAMENTO!</h2>
+            <p>Operações paralisadas pelas autoridades.</p>
             <div class="spinner"></div>
         </div>
     </div>

@@ -40,7 +40,7 @@ export const RiskSystem = {
         if (!state.logs) state.logs = [];
         state.logs.unshift({
             time: Date.now(),
-            message: `MAX SUSPICION REACHED! Raided! Lost ${lostWidgets} widgets and $${lostMoney}. Halted for 10s.`
+            message: `SUSPEITA MÁXIMA! Invasão! Perdeu ${lostWidgets} widgets e $${lostMoney}. Paralisado por 10s.`
         });
         
         // Keep log size small

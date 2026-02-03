@@ -1,55 +1,55 @@
-# Generic Corp: Idle Tycoon - Design Document
+# Corporação Genérica: Tycoon Idle - Documento de Design
 
-## 1. Game Overview
-**Theme:** Satirical Corporate Simulator. The player manages "Generic Corp", a company that produces undefined "Widgets" to earn Money, while managing "Suspicion" (Risk) to avoid audits.
-**Genre:** Idle / Clicker / Incremental.
-**Platform:** Web (HTML5/JS).
+## 1. Visão Geral do Jogo
+**Tema:** Simulador Corporativo Satírico. O jogador gerencia a "Corporação Genérica", uma empresa que produz "Widgets" indefinidos para ganhar Dinheiro, enquanto gerencia "Suspeita" (Risco) para evitar auditorias.
+**Gênero:** Idle / Clicker / Incremental.
+**Plataforma:** Web (HTML5/JS).
 
-## 2. Core Loop
-1.  **Click/Produce:** Player clicks to produce Widgets (Stock).
-2.  **Sell:** Player sells Widgets for Money.
-3.  **Invest:** Money is used to buy NPCs (Automation) and Upgrades.
-4.  **Manage Risk:** High production generates Heat (Suspicion). If Heat hits 100%, penalties occur.
-5.  **Prestige:** Player retires to gain "Influence", which boosts future production permanently.
+## 2. Loop Principal (Core Loop)
+1.  **Clicar/Produzir:** O jogador clica para produzir Widgets (Estoque).
+2.  **Vender:** O jogador vende Widgets por Dinheiro.
+3.  **Investir:** Dinheiro é usado para comprar NPCs (Automação) e Melhorias.
+4.  **Gerenciar Risco:** Alta produção gera Calor (Suspeita). Se o Calor atingir 100%, ocorrem penalidades.
+5.  **Prestígio:** O jogador se aposenta para ganhar "Influência", que aumenta permanentemente a produção futura.
 
-## 3. Economy Model
--   **Money ($):** Primary currency.
--   **Widgets (Stock):** Intermediate resource. Must be sold to gain money.
--   **Heat (0-100%):** Risk meter. Decays slowly, increases with aggressive production.
--   **Influence:** Prestige currency. Multiplier for global production.
+## 3. Modelo Econômico
+-   **Dinheiro ($):** Moeda principal.
+-   **Widgets (Estoque):** Recurso intermediário. Deve ser vendido para ganhar dinheiro.
+-   **Calor (0-100%):** Medidor de risco. Decai lentamente, aumenta com produção agressiva.
+-   **Influência:** Moeda de prestígio. Multiplicador para a produção global.
 
-### Formulas
--   **NPC Cost:** `BaseCost * (1.15 ^ Count)`
--   **Production:** `BaseProd * Count * Multipliers * Influence`
--   **Heat Gen:** `BaseRisk * Count * Multipliers`
+### Fórmulas
+-   **Custo de NPC:** `CustoBase * (1.15 ^ Quantidade)`
+-   **Produção:** `ProdBase * Quantidade * Multiplicadores * Influência`
+-   **Geração de Calor:** `RiscoBase * Quantidade * Multiplicadores`
 
-## 4. Systems Architecture
-The codebase is modular and strictly separates data, state, and logic.
+## 4. Arquitetura de Sistemas
+A base de código é modular e separa estritamente dados, estado e lógica.
 
-### Directory Structure
--   `js/core/`: Game Loop, State Management, Save System.
--   `js/systems/`: Logic for each mechanic (Click, Automation, Risk, etc.).
--   `js/data/`: Static configuration (NPCs, Upgrades, Events).
--   `js/ui/`: DOM manipulation and Event binding.
+### Estrutura de Diretórios
+-   `js/core/`: Game Loop, Gerenciamento de Estado, Sistema de Save.
+-   `js/systems/`: Lógica para cada mecânica (Clique, Automação, Risco, etc.).
+-   `js/data/`: Configuração estática (NPCs, Melhorias, Eventos).
+-   `js/ui/`: Manipulação do DOM e Binding de Eventos.
 
-### Key Components
--   **GameState:** A singleton object containing the entire dynamic state of the game.
--   **GameLoop:** A fixed-step update loop using `requestAnimationFrame`.
--   **SaveSystem:** Uses `localStorage` with Base64 encoding for persistence. Handles offline time calculation.
+### Componentes Chave
+-   **GameState:** Um objeto singleton contendo todo o estado dinâmico do jogo.
+-   **GameLoop:** Um loop de atualização de passo fixo usando `requestAnimationFrame`.
+-   **SaveSystem:** Usa `localStorage` com codificação Base64 para persistência. Lida com o cálculo de tempo offline.
 
-## 5. Automation & NPCs
--   **Intern:** Basic producer. Cheap but risky.
--   **Telemarketer:** Basic seller. Converts Stock to Money.
--   **Assembly Bot:** Safe producer. No risk.
--   **Middle Manager:** Risk reducer.
--   **Offshore Factory:** High volume, high risk.
+## 5. Automação e NPCs
+-   **Estagiário:** Produtor básico. Barato, mas arriscado.
+-   **Telemarketing:** Vendedor básico. Converte Estoque em Dinheiro.
+-   **Robô de Montagem:** Produtor seguro. Sem risco.
+-   **Gerente Intermediário:** Redutor de risco.
+-   **Fábrica Offshore:** Alto volume, alto risco.
 
-## 6. Events
-Random events trigger based on conditions (mainly Heat).
--   **Audit:** Punishment for high Heat.
--   **Viral Marketing:** Bonus money.
+## 6. Eventos
+Eventos aleatórios são acionados com base em condições (principalmente Calor).
+-   **Auditoria:** Punição para alto Calor.
+-   **Marketing Viral:** Dinheiro bônus.
 
-## 7. Expansion Plan
--   **Backend:** Move `saveSystem.js` to call an API endpoint.
--   **Multiplayer:** Leaderboards based on "Net Worth".
--   **Visuals:** Add canvas-based factory visualization.
+## 7. Plano de Expansão
+-   **Backend:** Mover `saveSystem.js` para chamar um endpoint de API.
+-   **Multiplayer:** Placares baseados em "Patrimônio Líquido".
+-   **Visuais:** Adicionar visualização de fábrica baseada em canvas.

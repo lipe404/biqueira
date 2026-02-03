@@ -1,9 +1,9 @@
 export const NPCS = {
     intern: {
         id: 'intern',
-        name: 'Unpaid Intern',
+        name: 'Estagiário',
         role: 'producer',
-        description: 'Assembles widgets manually. Cheap labor.',
+        description: 'Monta widgets manualmente. Mão de obra barata.',
         baseCost: 15,
         baseProduction: 1, // Widgets per second
         baseRisk: 0.1, 
@@ -11,9 +11,9 @@ export const NPCS = {
     },
     telemarketer: {
         id: 'telemarketer',
-        name: 'Telemarketer',
+        name: 'Telemarketing',
         role: 'seller',
-        description: 'Annoys people until they buy widgets.',
+        description: 'Incomoda pessoas até elas comprarem widgets.',
         baseCost: 20,
         baseProduction: 1, // Sells 1 widget per second
         baseRisk: 0.05,
@@ -21,9 +21,9 @@ export const NPCS = {
     },
     assembly_bot: {
         id: 'assembly_bot',
-        name: 'Assembly Bot v1',
+        name: 'Robô de Montagem v1',
         role: 'producer',
-        description: 'Automated assembly line.',
+        description: 'Linha de montagem automatizada.',
         baseCost: 100,
         baseProduction: 5,
         baseRisk: 0,
@@ -31,9 +31,9 @@ export const NPCS = {
     },
     middle_manager: {
         id: 'middle_manager',
-        name: 'Middle Manager',
-        role: 'manager', // Special role? Or maybe just passive buffer
-        description: 'Optimizes workflow. Reduces Suspicion.',
+        name: 'Gerente Intermediário',
+        role: 'manager', 
+        description: 'Otimiza o fluxo e culpa os outros. Reduz Suspeita.',
         baseCost: 500,
         baseProduction: 0,
         baseRisk: -0.5, 
@@ -41,9 +41,9 @@ export const NPCS = {
     },
     online_store: {
         id: 'online_store',
-        name: 'E-Commerce Site',
+        name: 'Loja Virtual',
         role: 'seller',
-        description: 'Sells widgets while you sleep.',
+        description: 'Vende widgets enquanto você dorme.',
         baseCost: 1000,
         baseProduction: 10, // Sells 10/s
         baseRisk: 0.2, // Data leaks?
@@ -51,9 +51,9 @@ export const NPCS = {
     },
     offshore_factory: {
         id: 'offshore_factory',
-        name: 'Offshore Factory',
+        name: 'Fábrica Offshore',
         role: 'producer',
-        description: 'Massive production, high risk.',
+        description: 'Produção massiva, poluição massiva. Alto risco.',
         baseCost: 12000,
         baseProduction: 100,
         baseRisk: 2.0,
@@ -61,9 +61,9 @@ export const NPCS = {
     },
     global_marketing: {
         id: 'global_marketing',
-        name: 'Global Marketing',
+        name: 'Marketing Global',
         role: 'seller',
-        description: 'Brainwashes the masses to consume.',
+        description: 'Lavagem cerebral nas massas para consumir.',
         baseCost: 50000,
         baseProduction: 100,
         baseRisk: 1.0,

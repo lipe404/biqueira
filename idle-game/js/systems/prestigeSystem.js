@@ -18,7 +18,7 @@ export const PrestigeSystem = {
         const gain = PrestigeSystem.calculatePrestigeGain();
         if (gain <= 0) return false;
 
-        if (confirm(`Are you sure you want to retire? You will lose all progress but gain ${gain} Influence.`)) {
+        if (confirm(`Tem certeza de que deseja se aposentar? Você perderá todo o progresso, mas ganhará ${gain} de Influência.`)) {
             gameState.prestigeReset(gain);
             location.reload(); // Simplest way to ensure clean state re-render
         }
