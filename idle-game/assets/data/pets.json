@@ -6,7 +6,7 @@
     "cost": 5000,
     "effectType": "heat_reduction",
     "effectValue": 0.1,
-    "icon": "🐕"
+    "icon": "assets/caramelo.png"
   },
   "papagaio_x9": {
     "id": "papagaio_x9",
@@ -15,7 +15,7 @@
     "cost": 15000,
     "effectType": "risk_reduction",
     "effectValue": 0.2,
-    "icon": "🦜"
+    "icon": "assets/papagaio.png"
   },
   "gato_net": {
     "id": "gato_net",
@@ -24,7 +24,7 @@
     "cost": 30000,
     "effectType": "cost_reduction",
     "effectValue": 0.05,
-    "icon": "🐈"
+    "icon": "assets/gatonet.png"
   },
   "pitbull_blindado": {
     "id": "pitbull_blindado",
@@ -33,6 +33,6 @@
     "cost": 100000,
     "effectType": "production_multiplier",
     "effectValue": 0.1,
-    "icon": "🐕‍🦺"
+    "icon": "assets/pitbull.png"
   }
 }

@@ -26,8 +26,12 @@ export const PetsRenderer = {
              item.className = 'pet-item';
              item.dataset.id = id;
              
+             const iconContent = pet.icon.includes('.') 
+                ? `<img src="${pet.icon}" alt="${pet.name}" class="pet-img">` 
+                : pet.icon || '🐾';
+
              item.innerHTML = `
-               <div class="pet-icon">${pet.icon || '🐾'}</div>
+               <div class="pet-icon">${iconContent}</div>
                <div class="pet-details">
                    <div class="item-header">
                        <span class="item-name">${pet.name}</span>

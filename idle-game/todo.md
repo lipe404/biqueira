@@ -30,11 +30,6 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 - [ ] Implementar "Equipamentos" para o personagem principal.
 - [ ] Adicionar mecânica de "Gestão de Crise" (decisões morais em eventos).
 - [ ] Implementar "Laboratório": pesquisa de novas tecnologias.
-- [ ] Adicionar mecânica de "Lavagem de Dinheiro" (converter dinheiro sujo em limpo).
-- [ ] Criar "Mercado Negro": comprar itens raros com Heat alto.
-- [ ] Criar final de jogo (Endgame condition) ou narrativa cíclica.
-- [ ] Criar "Power-ups" que aparecem na tela e precisam ser clicados.
-- [ ] Adicionar personalização do escritório/fábrica (visual).
 
 ## Categoria 13 — UI (Interface Visual)
 
