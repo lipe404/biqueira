@@ -29,6 +29,8 @@ const initialState = {
   },
   upgrades: [], // Array of upgrade IDs purchased
   pets: [], // Array of pet IDs owned
+  territories: [], // Array of territory IDs owned
+  buildingLevel: 0, // Current building tier
   events: {
     activeEvents: [],
     lastEventTime: 0,

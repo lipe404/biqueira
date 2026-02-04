@@ -7,6 +7,8 @@ import { ResourcesRenderer } from "./renderers/ResourcesRenderer.js";
 import { NPCRenderer } from "./renderers/NPCRenderer.js";
 import { UpgradesRenderer } from "./renderers/UpgradesRenderer.js";
 import { PetsRenderer } from "./renderers/petsRenderer.js";
+import { BuildingRenderer } from "./renderers/buildingRenderer.js";
+import { TerritoryRenderer } from "./renderers/territoryRenderer.js";
 import { LogsRenderer } from "./renderers/LogsRenderer.js";
 import { FeedbackRenderer } from "./renderers/FeedbackRenderer.js";
 import { ProgressionRenderer } from "./renderers/ProgressionRenderer.js";
@@ -37,8 +39,13 @@ export const Renderer = {
       npcsList: document.getElementById("npcs-list"),
       upgradesList: document.getElementById("upgrades-list"),
       petsList: document.getElementById("pets-list"),
+      territoriesList: document.getElementById("territories-list"),
       logsList: document.getElementById("game-logs"),
       penaltyOverlay: document.getElementById("penalty-overlay"),
+      // Building Elements
+      buildingName: document.getElementById("building-name"),
+      buildingMultiplier: document.getElementById("building-multiplier"),
+      btnUpgradeBuilding: document.getElementById("btn-upgrade-building"),
       // Progression Elements
       rankName: document.getElementById("rank-name"),
       rankProgress: document.getElementById("rank-progress"),
@@ -76,6 +83,8 @@ export const Renderer = {
     NPCRenderer.render(state, els, Formatter.formatCurrency);
     UpgradesRenderer.render(state, els, Formatter.formatCurrency);
     PetsRenderer.render(els.petsList);
+    BuildingRenderer.render(state, els, Formatter.formatCurrency);
+    TerritoryRenderer.render(els.territoriesList, state, Formatter.formatCurrency);
     LogsRenderer.render(state, els);
     FeedbackRenderer.render(state, els);
     ProgressionRenderer.render(state, els);

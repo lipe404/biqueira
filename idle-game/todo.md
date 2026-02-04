@@ -22,17 +22,11 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 10 — Progressão e Escalabilidade
 
-- [ ] Adicionar Tiers de construções (Barraco -> Loja -> Galpão -> Prédio).
-
 ## Categoria 11 — Balanceamento de Gameplay
 
 ## Categoria 12 — Game Design (Core Loop)
 
-- [ ] Adicionar mecânica de "Território": dominar áreas para bônus.
-- [ ] Criar sistema de "Reputação" com facções (Polícia, Milícia, Traf... opositores).
-- [ ] Implementar "Crafting": combinar widgets para criar produtos melhores.
 - [ ] Adicionar minigames ativos para quebrar a monotonia do clique.
-- [ ] Criar sistema de "Clima/Tempo": chuva afeta vendas, noite afeta risco.
 - [ ] Implementar "Equipamentos" para o personagem principal.
 - [ ] Adicionar mecânica de "Gestão de Crise" (decisões morais em eventos).
 - [ ] Implementar "Laboratório": pesquisa de novas tecnologias.

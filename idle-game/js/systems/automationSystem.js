@@ -1,4 +1,6 @@
 import { PetSystem } from "./petSystem.js";
+import { BuildingSystem } from "./buildingSystem.js";
+import { TerritorySystem } from "./territorySystem.js";
 import { gameState } from "../core/gameState.js";
 import { NPCS } from "../data/npcs.js";
 import { CONFIG } from "../core/config.js";
@@ -63,6 +65,25 @@ export const AutomationSystem = {
 
     // --- GLOBAL MULTIPLIERS ---
 
+    // 0. Building & Territory Multipliers
+    const buildingMult = BuildingSystem.getMultiplier();
+    const territoryBonuses = TerritorySystem.getBonuses();
+    
+    totalProduction *= buildingMult;
+    totalSales *= buildingMult;
+    
+    // Territory: Global Multiplier (Morro Alto)
+    if (territoryBonuses.global_multiplier > 0) {
+        const tGlobal = 1 + territoryBonuses.global_multiplier;
+        totalProduction *= tGlobal;
+        totalSales *= tGlobal;
+    }
+
+    // Territory: Production Specific
+    if (territoryBonuses.production_rate > 0) {
+        totalProduction *= (1 + territoryBonuses.production_rate);
+    }
+
     // 1. Prestige (Respeito)
     // Each point of Influence adds 10% to production and sales
     const prestigeMult = 1 + state.resources.influence * CONFIG.PRESTIGE_MULTIPLIER_FACTOR;
@@ -102,7 +123,14 @@ export const AutomationSystem = {
     }
 
     state.resources.widgets -= toSell;
-    const revenue = toSell * CONFIG.ECONOMY.BASE_PRICE;
+    
+    // Calculate Price Multiplier (Territory)
+    let priceMult = 1.0;
+    if (territoryBonuses.sell_price > 0) {
+        priceMult += territoryBonuses.sell_price;
+    }
+
+    const revenue = toSell * CONFIG.ECONOMY.BASE_PRICE * priceMult;
     state.resources.money += revenue;
     state.stats.totalMoneyEarned += revenue;
 
@@ -119,6 +147,11 @@ export const AutomationSystem = {
     const petRiskReduction = PetSystem.getBonus('risk_reduction');
     if (netRiskChange > 0 && petRiskReduction > 0) {
         netRiskChange *= Math.max(0, 1 - petRiskReduction);
+    }
+
+    // Territory Risk Reduction
+    if (netRiskChange > 0 && territoryBonuses.heat_reduction > 0) {
+        netRiskChange *= Math.max(0, 1 - territoryBonuses.heat_reduction);
     }
 
     state.resources.heat += netRiskChange * dt;

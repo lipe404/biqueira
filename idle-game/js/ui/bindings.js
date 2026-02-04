@@ -11,6 +11,8 @@ import { CONFIG } from "../core/config.js";
 
 import { VisualFX } from "./visualFX.js";
 import { PetSystem } from "../systems/petSystem.js";
+import { BuildingSystem } from "../systems/buildingSystem.js";
+import { TerritorySystem } from "../systems/territorySystem.js";
 
 export const Bindings = {
   init: () => {
@@ -209,6 +211,26 @@ export const Bindings = {
             e.target.ariaPressed = "true";
         });
     });
+
+    // Building Upgrade
+    const btnUpgradeBuilding = document.getElementById("btn-upgrade-building");
+    if (btnUpgradeBuilding) {
+        btnUpgradeBuilding.addEventListener("click", () => {
+            Bindings.upgradeBuilding();
+        });
+    }
+
+    // Territory Purchase
+    const territoryList = document.getElementById("territories-list");
+    if (territoryList) {
+        territoryList.addEventListener("click", (e) => {
+            const btn = e.target.closest(".btn-hire"); // Reusing class btn-hire
+            if (btn) {
+                const id = btn.dataset.id;
+                Bindings.buyTerritory(id, btn.closest(".territory-item"));
+            }
+        });
+    }
     
     // Init state
     const currentState = gameState.get();
@@ -303,26 +325,44 @@ export const Bindings = {
     }
   },
 
-  buyPet: (id, itemElement) => {
-    // Import PetSystem dynamically if needed, or use global if attached
-    // Assuming PetSystem is available via main or import
-    // Ideally we should import it at the top, let's assume it's imported or available
-    
-    // Check if PetSystem is available (we need to add import at top)
-    import("../systems/petSystem.js").then(module => {
-        const PetSystem = module.PetSystem;
-        if (PetSystem.buyPet(id)) {
-             Bindings.triggerVibration(itemElement);
-             VisualFX.spawnFloatingText(
-                  itemElement.getBoundingClientRect().left + 100, 
-                  itemElement.getBoundingClientRect().top, 
-                  "Adotado!", 
-                  'positive'
-              );
-        } else {
-             VisualFX.showError(itemElement, "Sem Grana ou Já Tem!");
-        }
-    });
+  buyPet: (id, element) => {
+    if (PetSystem.buyPet(id)) {
+        VisualFX.spawnFloatingText(
+            element.getBoundingClientRect().left + 100,
+            element.getBoundingClientRect().top,
+            "ADOTADO!",
+            "default"
+        );
+    } else {
+        VisualFX.showError(element, "Falta Grana!");
+    }
+  },
+
+  upgradeBuilding: () => {
+      const btn = document.getElementById("btn-upgrade-building");
+      if (BuildingSystem.upgrade()) {
+          VisualFX.spawnFloatingText(
+              btn.getBoundingClientRect().left,
+              btn.getBoundingClientRect().top - 50,
+              "QUEBRADA EXPANDIDA!",
+              "money" // Gold color
+          );
+      } else {
+          VisualFX.showError(btn, "Falta Grana!");
+      }
+  },
+
+  buyTerritory: (id, element) => {
+      if (TerritorySystem.conquer(id)) {
+          VisualFX.spawnFloatingText(
+              element.getBoundingClientRect().left + 50,
+              element.getBoundingClientRect().top,
+              "DOMINADO!",
+              "money"
+          );
+      } else {
+          VisualFX.showError(element, "Falta Grana!");
+      }
   },
 
   buyUpgrade: (id) => {
