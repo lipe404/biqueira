@@ -13,6 +13,17 @@ export const VisualFX = {
         const el = document.createElement('div');
         el.className = `floating-text ${type}`;
         el.textContent = text;
+
+        switch (type) {
+            case "money":
+                el.style.color = "var(--money-gold)";
+                el.style.textShadow = "0 0 5px rgba(255, 215, 0, 0.5)";
+                break;
+            case "science":
+                el.style.color = "#00ffff";
+                el.style.textShadow = "0 0 5px rgba(0, 255, 255, 0.5)";
+                break;
+        }
         
         // Randomize position slightly
         const offsetX = (Math.random() - 0.5) * 20;

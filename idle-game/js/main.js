@@ -12,6 +12,7 @@ import { PetSystem } from "./systems/petSystem.js";
 import { PrestigeSystem } from "./systems/prestigeSystem.js";
 import { ProgressionSystem } from "./systems/progressionSystem.js";
 import { EquipmentSystem } from "./systems/equipmentSystem.js";
+import { ResearchSystem } from "./systems/researchSystem.js";
 
 import { Renderer } from "./ui/renderer.js";
 import { Bindings } from "./ui/bindings.js";
@@ -66,7 +67,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     ClickSystem,
     PrestigeSystem,
     ProgressionSystem,
-    EquipmentSystem
+    EquipmentSystem,
+    ResearchSystem
   ];
 
   systems.forEach(system => {

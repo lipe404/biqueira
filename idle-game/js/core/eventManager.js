@@ -62,4 +62,5 @@ export const EVENTS = {
   RANDOM_EVENT: "RANDOM_EVENT",
   LOG_ADD: "LOG_ADD",
   RANK_UP: "RANK_UP",
+  SHOW_CHOICE: "SHOW_CHOICE",
 };

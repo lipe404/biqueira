@@ -14,10 +14,11 @@ import { PetSystem } from "../systems/petSystem.js";
 import { BuildingSystem } from "../systems/buildingSystem.js";
 import { TerritorySystem } from "../systems/territorySystem.js";
 import { EquipmentSystem } from "../systems/equipmentSystem.js";
+import { ResearchSystem } from "../systems/researchSystem.js";
 
 export const Bindings = {
   init: () => {
-    // Main Buttons
+    // ... previous code ...Buttons
     const btnMake = document.getElementById("btn-make");
     btnMake.addEventListener("click", (e) => {
       const amount = ClickSystem.clickMake();
@@ -185,15 +186,20 @@ export const Bindings = {
                 // Get rect BEFORE action (element might be removed/replaced)
                 const rect = e.target.closest(".action-buy").getBoundingClientRect();
                 
-                if (EquipmentSystem.buy(id)) {
-                    VisualFX.spawnFloatingText(
-                        rect.left,
-                        rect.top - 20,
-                        "COMPRADO!",
-                        "money"
-                    );
-                } else {
-                    VisualFX.showError(item, "Sem Grana!");
+                try {
+                    if (EquipmentSystem.buy(id)) {
+                        VisualFX.spawnFloatingText(
+                            rect.left,
+                            rect.top - 20,
+                            "COMPRADO!",
+                            "money"
+                        );
+                    } else {
+                        VisualFX.showError(item, "Sem Grana!");
+                    }
+                } catch (err) {
+                    console.error("Error buying equipment:", err);
+                    VisualFX.showError(item, "Erro!");
                 }
             }
             // Equip
@@ -293,6 +299,32 @@ export const Bindings = {
         });
     }
     
+    // Research Purchase
+    const researchList = document.getElementById("research-list");
+    if (researchList) {
+        researchList.addEventListener("click", (e) => {
+            const btn = e.target.closest(".action-research");
+            if (!btn) return;
+
+            const item = btn.closest(".research-item");
+            if (!item) return;
+
+            const id = item.dataset.id;
+            const rect = btn.getBoundingClientRect();
+
+            if (ResearchSystem.buy(id)) {
+                VisualFX.spawnFloatingText(
+                    rect.left,
+                    rect.top - 20,
+                    "PESQUISADO!",
+                    "science" // We need to add 'science' style or use default
+                );
+            } else {
+                VisualFX.showError(item, "Sem Grana!");
+            }
+        });
+    }
+    
     // Init state
     const currentState = gameState.get();
     if (!currentState.settings) currentState.settings = {};
@@ -381,6 +413,9 @@ export const Bindings = {
               'default'
           );
       }
+
+      // Force UI Update
+      gameState.notify();
     } else {
         // Not enough money for fixed amount
         if (item) VisualFX.showError(item, "Sem Grana!");
@@ -431,6 +466,7 @@ export const Bindings = {
     const state = gameState.get();
     const upgrade = UPGRADES[id];
     if (!upgrade) return false;
+    if (state.upgrades.includes(id)) return false;
 
     const item = document.querySelector(`.upgrade-item[data-id="${id}"]`);
 
@@ -447,6 +483,8 @@ export const Bindings = {
         time: Date.now(),
         message: `Comprou Melhoria: ${upgrade.name}`,
       });
+      
+      gameState.notify(); // Force UI Update
       return true;
     } else {
         if (item) VisualFX.showError(item, "Sem Grana!");

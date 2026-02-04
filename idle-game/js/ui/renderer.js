@@ -13,6 +13,8 @@ import { EquipmentRenderer } from "./renderers/EquipmentRenderer.js";
 import { LogsRenderer } from "./renderers/LogsRenderer.js";
 import { FeedbackRenderer } from "./renderers/FeedbackRenderer.js";
 import { ProgressionRenderer } from "./renderers/ProgressionRenderer.js";
+import { ResearchRenderer } from "./renderers/researchRenderer.js";
+import { EventRenderer } from "./renderers/EventRenderer.js";
 
 /**
  * Renderer - Main UI rendering module.
@@ -42,6 +44,7 @@ export const Renderer = {
       petsList: document.getElementById("pets-list"),
       territoriesList: document.getElementById("territories-list"),
       equipmentList: document.getElementById("equipment-list"),
+      researchList: document.getElementById("research-list"),
       logsList: document.getElementById("game-logs"),
       penaltyOverlay: document.getElementById("penalty-overlay"),
       // Building Elements
@@ -60,6 +63,9 @@ export const Renderer = {
 
     // Initial Render of Static Lists
     NPCRenderer.renderList(Renderer.elements.npcsList);
+
+    // Initialize Event Modal
+    EventRenderer.init(Renderer.elements);
 
     // Subscribe to State Changes (Observer Pattern)
     gameState.subscribe(Renderer.render);
@@ -88,6 +94,7 @@ export const Renderer = {
     BuildingRenderer.render(state, els, Formatter.formatCurrency);
     TerritoryRenderer.render(els.territoriesList, state, Formatter.formatCurrency);
     EquipmentRenderer.render(els.equipmentList);
+    ResearchRenderer.render(els.researchList, state);
     LogsRenderer.render(state, els);
     FeedbackRenderer.render(state, els);
     ProgressionRenderer.render(state, els);
