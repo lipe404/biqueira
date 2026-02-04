@@ -9,6 +9,7 @@ import { UpgradesRenderer } from "./renderers/UpgradesRenderer.js";
 import { PetsRenderer } from "./renderers/petsRenderer.js";
 import { BuildingRenderer } from "./renderers/buildingRenderer.js";
 import { TerritoryRenderer } from "./renderers/territoryRenderer.js";
+import { EquipmentRenderer } from "./renderers/EquipmentRenderer.js";
 import { LogsRenderer } from "./renderers/LogsRenderer.js";
 import { FeedbackRenderer } from "./renderers/FeedbackRenderer.js";
 import { ProgressionRenderer } from "./renderers/ProgressionRenderer.js";
@@ -40,6 +41,7 @@ export const Renderer = {
       upgradesList: document.getElementById("upgrades-list"),
       petsList: document.getElementById("pets-list"),
       territoriesList: document.getElementById("territories-list"),
+      equipmentList: document.getElementById("equipment-list"),
       logsList: document.getElementById("game-logs"),
       penaltyOverlay: document.getElementById("penalty-overlay"),
       // Building Elements
@@ -85,6 +87,7 @@ export const Renderer = {
     PetsRenderer.render(els.petsList);
     BuildingRenderer.render(state, els, Formatter.formatCurrency);
     TerritoryRenderer.render(els.territoriesList, state, Formatter.formatCurrency);
+    EquipmentRenderer.render(els.equipmentList);
     LogsRenderer.render(state, els);
     FeedbackRenderer.render(state, els);
     ProgressionRenderer.render(state, els);

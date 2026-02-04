@@ -1,6 +1,7 @@
 import { gameState } from "../core/gameState.js";
 import { EventManager, EVENTS } from "../core/eventManager.js";
 import { CONFIG } from "../core/config.js";
+import { EquipmentSystem } from "./equipmentSystem.js";
 
 /**
  * ClickSystem - Manages manual player interactions (clicks).
@@ -31,6 +32,10 @@ export const ClickSystem = {
     const base = state.click.basePower;
     const mult = state.click.multiplier;
 
+    // Equipment Bonuses
+    const equipBonuses = EquipmentSystem.getBonuses();
+    const equipPower = equipBonuses.click_power || 0;
+
     // Prestige Multiplier
     const prestigeMult = 1 + state.resources.influence * CONFIG.PRESTIGE_MULTIPLIER_FACTOR;
 
@@ -39,7 +44,8 @@ export const ClickSystem = {
     if (state.resources.heat > CONFIG.CLICK.HEAT_THRESHOLD_HIGH) heatMult = CONFIG.CLICK.HEAT_MULT_HIGH;
     else if (state.resources.heat > CONFIG.CLICK.HEAT_THRESHOLD_MEDIUM) heatMult = CONFIG.CLICK.HEAT_MULT_MEDIUM;
 
-    const amount = base * mult * prestigeMult * heatMult;
+    // Formula: (Base + Equipment) * Multiplier * Prestige * Heat
+    const amount = (base + equipPower) * mult * prestigeMult * heatMult;
 
     state.resources.widgets += amount;
     state.stats.totalWidgetsMade += amount;
@@ -65,6 +71,10 @@ export const ClickSystem = {
     const mult = state.click.multiplier;
 
     const prestigeMult = 1 + state.resources.influence * CONFIG.PRESTIGE_MULTIPLIER_FACTOR;
+    
+    // Equipment Bonuses
+    const equipBonuses = EquipmentSystem.getBonuses();
+    const equipSellBonus = 1 + (equipBonuses.sell_price || 0);
 
     // Selling is manual too
     const amount = base * mult; // Amount of widgets to attempt to sell
@@ -76,7 +86,7 @@ export const ClickSystem = {
       state.resources.widgets -= toSell;
 
       const price = CONFIG.ECONOMY.BASE_PRICE;
-      const revenue = toSell * price * prestigeMult;
+      const revenue = toSell * price * prestigeMult * equipSellBonus;
 
       state.resources.money += revenue;
       state.stats.totalMoneyEarned += revenue;

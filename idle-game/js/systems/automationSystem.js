@@ -1,6 +1,7 @@
 import { PetSystem } from "./petSystem.js";
 import { BuildingSystem } from "./buildingSystem.js";
 import { TerritorySystem } from "./territorySystem.js";
+import { EquipmentSystem } from "./equipmentSystem.js";
 import { gameState } from "../core/gameState.js";
 import { NPCS } from "../data/npcs.js";
 import { CONFIG } from "../core/config.js";
@@ -97,6 +98,20 @@ export const AutomationSystem = {
         totalSales *= (1 + petProdBonus);
     }
     
+    // --- EQUIPMENT BONUSES ---
+    const equipBonuses = EquipmentSystem.getBonuses();
+    const equipProdBonus = equipBonuses.production_rate || 0;
+    if (equipProdBonus > 0) {
+        totalProduction *= (1 + equipProdBonus);
+        totalSales *= (1 + equipProdBonus);
+    }
+
+    const equipGlobal = equipBonuses.global_multiplier || 0;
+    if (equipGlobal > 0) {
+        totalProduction *= (1 + equipGlobal);
+        totalSales *= (1 + equipGlobal);
+    }
+
     // 2. Heat Penalty (Suspeita)
     // High heat makes operation harder (police checkpoints, paranoia)
     let heatMult = 1.0;
@@ -152,6 +167,12 @@ export const AutomationSystem = {
     // Territory Risk Reduction
     if (netRiskChange > 0 && territoryBonuses.heat_reduction > 0) {
         netRiskChange *= Math.max(0, 1 - territoryBonuses.heat_reduction);
+    }
+
+    // Equipment Risk/Heat Reduction
+    const equipHeatRed = equipBonuses.heat_reduction || 0;
+    if (netRiskChange > 0 && equipHeatRed > 0) {
+        netRiskChange *= Math.max(0, 1 - equipHeatRed);
     }
 
     state.resources.heat += netRiskChange * dt;

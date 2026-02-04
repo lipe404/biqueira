@@ -30,6 +30,15 @@ const initialState = {
   upgrades: [], // Array of upgrade IDs purchased
   pets: [], // Array of pet IDs owned
   territories: [], // Array of territory IDs owned
+  equipment: {
+      owned: [], // Array of owned equipment IDs
+      equipped: { // Currently equipped items by slot
+          weapon: null,
+          clothing: null,
+          accessory: null,
+          shoes: null
+      }
+  },
   buildingLevel: 0, // Current building tier
   events: {
     activeEvents: [],

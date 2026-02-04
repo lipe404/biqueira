@@ -13,6 +13,7 @@ import { VisualFX } from "./visualFX.js";
 import { PetSystem } from "../systems/petSystem.js";
 import { BuildingSystem } from "../systems/buildingSystem.js";
 import { TerritorySystem } from "../systems/territorySystem.js";
+import { EquipmentSystem } from "../systems/equipmentSystem.js";
 
 export const Bindings = {
   init: () => {
@@ -170,6 +171,47 @@ export const Bindings = {
       });
     }
 
+    // Equipment Purchase/Equip
+    const equipList = document.getElementById("equipment-list");
+    if (equipList) {
+        equipList.addEventListener("click", (e) => {
+            const item = e.target.closest(".equipment-item");
+            if (!item) return;
+
+            const id = item.dataset.id;
+            
+            // Buy
+            if (e.target.closest(".action-buy")) {
+                // Get rect BEFORE action (element might be removed/replaced)
+                const rect = e.target.closest(".action-buy").getBoundingClientRect();
+                
+                if (EquipmentSystem.buy(id)) {
+                    VisualFX.spawnFloatingText(
+                        rect.left,
+                        rect.top - 20,
+                        "COMPRADO!",
+                        "money"
+                    );
+                } else {
+                    VisualFX.showError(item, "Sem Grana!");
+                }
+            }
+            // Equip
+            else if (e.target.closest(".action-equip")) {
+                const rect = e.target.closest(".action-equip").getBoundingClientRect();
+                
+                if (EquipmentSystem.equip(id)) {
+                    VisualFX.spawnFloatingText(
+                        rect.left,
+                        rect.top - 20,
+                        "EQUIPADO!",
+                        "default"
+                    );
+                }
+            }
+        });
+    }
+
     // NPC Purchase
     document.getElementById("npcs-list").addEventListener("click", (e) => {
       const item = e.target.closest(".npc-item");
@@ -270,9 +312,10 @@ export const Bindings = {
 
     const count = state.automation.npcs[id] || 0;
     
-    // Calculate total discount including pets
+    // Calculate total discount including pets and equipment
     const petDiscount = PetSystem.getBonus('cost_reduction') || 0;
-    const discount = (state.discounts?.global || 0) + (state.discounts?.npcs?.[id] || 0) + petDiscount;
+    const equipDiscount = (EquipmentSystem.getBonuses().cost_reduction || 0);
+    const discount = (state.discounts?.global || 0) + (state.discounts?.npcs?.[id] || 0) + petDiscount + equipDiscount;
     
     const multiplier = state.settings?.buyMultiplier || 1;
     

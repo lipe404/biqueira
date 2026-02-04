@@ -1,7 +1,5 @@
 # TODO.MD — ROADMAP DE DESENVOLVIMENTO: A FIRMA
 
-Este documento serve como o roteiro central para o desenvolvimento, manutenção e expansão do projeto "A FIRMA".
-
 ## Categoria 1 — Arquitetura Geral
 
 ## Categoria 2 — Organização de Pastas e Arquivos
@@ -26,8 +24,7 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 12 — Game Design (Core Loop)
 
-- [ ] Adicionar minigames ativos para quebrar a monotonia do clique.
-- [ ] Implementar "Equipamentos" para o personagem principal.
+- 
 - [ ] Adicionar mecânica de "Gestão de Crise" (decisões morais em eventos).
 - [ ] Implementar "Laboratório": pesquisa de novas tecnologias.
 
@@ -35,24 +32,11 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 14 — UX (Experiência do Jogador)
 
-- [ ] Adicionar feedback sonoro para ações importantes (opcional).
-
 ## Categoria 15 — Acessibilidade
 
 ## Categoria 16 — Responsividade (Mobile / Desktop)
 
 ## Categoria 17 — Feedback Visual e Sonoro
-
-- [ ] Criar biblioteca de sons (SFX): clique, moeda, erro, sucesso, alerta.
-- [ ] Adicionar trilha sonora (BGM) dinâmica (muda com Heat ou Progresso).
-- [ ] Implementar controle de volume independente (SFX, Música, Master).
-- [ ] Adicionar "Juice": screenshake, partículas, flash, escala.
-- [ ] Criar sons de ambiente (cidade, sirenes, fábrica).
-- [ ] Sincronizar áudio com animações visuais.
-- [ ] Permitir silenciar o jogo quando em background.
-- [ ] Criar jingle de Level Up ou Conquista.
-- [ ] Implementar áudio espacial (stereo panning) básico.
-- [ ] Adicionar opção de "Audio Ducking" (baixar música quando toca SFX).
 
 ## Categoria 18 — Sistema de Save / Load
 
