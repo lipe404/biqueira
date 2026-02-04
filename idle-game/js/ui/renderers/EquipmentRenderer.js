@@ -65,7 +65,7 @@ export const EquipmentRenderer = {
                     const btnClass = canAfford ? "btn-buy action-buy" : "btn-buy action-buy disabled";
                     const btnText = canAfford ? "COMPRAR" : "SEM GRANA";
                     
-                    actionBtn = `<button class="${btnClass}" ${!canAfford ? 'disabled' : ''}>
+                    actionBtn = `<button class="${btnClass}">
                         ${btnText} (${Formatter.formatCurrency(item.cost)})
                     </button>`;
                 }

@@ -40,12 +40,18 @@ export const UpgradesRenderer = {
       if (u.id.includes("intern")) icon = "☕";
       if (u.id.includes("risk")) icon = "🚓";
 
+      const canAfford = state.resources.money >= u.cost;
+      const btnClass = canAfford ? "btn-buy action-buy" : "btn-buy action-buy disabled";
+      const btnText = canAfford ? "COMPRAR" : "SEM GRANA";
+      
       div.innerHTML = `
                 <div class="item-header">
                     <span class="item-name">${icon} ${u.name}</span>
-                    <span class="item-cost">${formatCurrency(u.cost)}</span>
                 </div>
                 <div class="item-desc">${u.description}</div>
+                <button class="${btnClass}">
+                    ${btnText} (${formatCurrency(u.cost)})
+                </button>
             `;
       container.appendChild(div);
     });

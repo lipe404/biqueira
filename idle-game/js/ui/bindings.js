@@ -229,11 +229,30 @@ export const Bindings = {
 
     // Upgrade Purchase
     document.getElementById("upgrades-list").addEventListener("click", (e) => {
-      const item = e.target.closest(".upgrade-item");
+      // Look for the buy button specifically
+      const btn = e.target.closest(".action-buy");
+      if (!btn) return;
+
+      const item = btn.closest(".upgrade-item");
       if (!item) return;
 
       const id = item.dataset.id;
-      Bindings.buyUpgrade(id);
+      
+      // Get rect for feedback
+      const rect = btn.getBoundingClientRect();
+
+      if (Bindings.buyUpgrade(id)) {
+          VisualFX.spawnFloatingText(
+              rect.left,
+              rect.top - 20,
+              "MELHORADO!",
+              "money"
+          );
+      } else {
+          // Error handling is inside buyUpgrade too, but we can do it here if buyUpgrade returns false
+          // Current buyUpgrade void, let's change it to return boolean
+      }
+      
       Bindings.triggerVibration(item);
     });
 
@@ -411,7 +430,7 @@ export const Bindings = {
   buyUpgrade: (id) => {
     const state = gameState.get();
     const upgrade = UPGRADES[id];
-    if (!upgrade) return;
+    if (!upgrade) return false;
 
     const item = document.querySelector(`.upgrade-item[data-id="${id}"]`);
 
@@ -428,8 +447,10 @@ export const Bindings = {
         time: Date.now(),
         message: `Comprou Melhoria: ${upgrade.name}`,
       });
+      return true;
     } else {
         if (item) VisualFX.showError(item, "Sem Grana!");
+        return false;
     }
   },
 
