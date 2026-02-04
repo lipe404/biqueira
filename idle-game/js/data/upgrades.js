@@ -24,10 +24,20 @@ export const UPGRADES = {
     id: "click_upgrade_3",
     name: "Macro Ilegal",
     description: "Um scriptzinho maroto. Clique 3x mais forte.",
-    cost: 2500,
-    trigger: (state) => state.resources.money >= 1000,
+    cost: 7500,
+    trigger: (state) => state.resources.money >= 2500,
     effect: (state) => {
       state.click.multiplier *= 3;
+    },
+  },
+  click_upgrade_4: {
+    id: "click_upgrade_4",
+    name: "Botnet Privada",
+    description: "Uma rede de zumbis clicando por você. Clique 5x mais forte.",
+    cost: 50000,
+    trigger: (state) => state.resources.money >= 15000,
+    effect: (state) => {
+      state.click.multiplier *= 5;
     },
   },
 
@@ -37,7 +47,7 @@ export const UPGRADES = {
     name: "Chicote Psicológico",
     description:
       'Estagiários produzem 50% mais. "A experiência é o pagamento."',
-    cost: 200,
+    cost: 500,
     trigger: (state) => state.automation.npcs["intern"] >= 10,
     effect: (state) => {
       if (!state.multipliers) state.multipliers = {};
@@ -76,7 +86,7 @@ export const UPGRADES = {
     id: "telemarketer_efficiency_1",
     name: "Lista Vazada",
     description: 'Números "quentes". Telemarketing vende 50% mais.',
-    cost: 300,
+    cost: 600,
     trigger: (state) => state.automation.npcs["telemarketer"] >= 10,
     effect: (state) => {
       if (!state.multipliers) state.multipliers = {};

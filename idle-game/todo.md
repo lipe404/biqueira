@@ -26,9 +26,6 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 11 — Balanceamento de Gameplay
 
-- [ ] Ajustar frequência e impacto dos eventos aleatórios.
-- [ ] Revisar custo dos upgrades de Click vs Automação.
-- [ ] Balancear o bônus de Prestígio (muito fraco ou muito forte?).
 - [ ] Testar pacing: quanto tempo para o primeiro NPC? Primeiro upgrade?
 - [ ] Ajustar penalidades de morte/prisão (não ser punitivo demais).
 - [ ] Balancear multiplicadores de sinergia.

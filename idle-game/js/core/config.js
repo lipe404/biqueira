@@ -4,7 +4,7 @@ export const CONFIG = {
   AUTO_SAVE_INTERVAL: 30000,
 
   // Automation
-  PRESTIGE_MULTIPLIER_FACTOR: 0.1, // +10% per influence point
+  PRESTIGE_MULTIPLIER_FACTOR: 0.05, // +5% per influence point
   
   // Heat / Risk
   HEAT: {
@@ -40,13 +40,13 @@ export const CONFIG = {
   // Events
   EVENTS: {
     CHECK_INTERVAL: 5,
-    GLOBAL_COOLDOWN: 30000,
+    GLOBAL_COOLDOWN: 120000, // 2 minutes
     LOG_LIMIT: 20,
   },
 
   // Prestige
   PRESTIGE: {
-    MONEY_PER_INFLUENCE: 10000,
+    MONEY_PER_INFLUENCE: 1000000, // 1 Million
   },
 
   // Idle
