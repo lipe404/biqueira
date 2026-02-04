@@ -166,26 +166,12 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 18 — Sistema de Save / Load
 
-- [ ] Implementar múltiplos slots de save.
-- [ ] Adicionar Cloud Save (Firebase/PlayFab) futuro.
-- [ ] Criar backup automático local antes de resetar.
-- [ ] Implementar criptografia simples ou obfuscation no save string.
-- [ ] Adicionar validação de versão (semver) para migração de saves.
 - [ ] Permitir download do save como arquivo `.json` ou `.txt`.
 - [ ] Permitir upload de arquivo de save.
-- [ ] Implementar "Hardcore Mode" (permadeath/save delete)?
-- [ ] Adicionar checksum para detectar saves adulterados.
-- [ ] Comprimir string de save (LZString) para economizar espaço.
 - [ ] Mostrar metadados do save no menu de load (Data, Dinheiro, Tempo).
 - [ ] Implementar autosave configurável (tempo, eventos).
-- [ ] Tratar quota excedida do localStorage.
-- [ ] Adicionar confirmação ao carregar save antigo sobre o atual.
-- [ ] Criar mecanismo de "Rescue Save" se o jogo travar/corromper.
-- [ ] Sincronizar configurações globais separadas do save do jogo.
-- [ ] Implementar sistema de "Import from Clipboard".
-- [ ] Adicionar "Export to Clipboard".
+- [ ] Adicionar confirmação ao carregar save antigo sobre o atual
 - [ ] Logar erros de save/load para diagnóstico.
-- [ ] Testar compatibilidade de saves entre navegadores.
 
 ## Categoria 19 — Expansões Futuras e Conteúdo
 
@@ -211,5 +197,3 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 - [ ] Criar editor de mods simples para a comunidade.
 
 ## Categoria 20 — Manutenibilidade e Evolução do Projeto
-
-- [ ] Criar testes automatizados (Jest/Cypress).

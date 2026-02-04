@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "test": "node tests/stress_test.mjs"
+    "test": "npm run test:unit",
+    "test:unit": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:stress": "node tests/stress_test.mjs"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
