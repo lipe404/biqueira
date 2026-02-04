@@ -52,5 +52,16 @@ export const CONFIG = {
   // Idle
   IDLE: {
     MAX_OFFLINE_SECONDS: 8 * 60 * 60, // 8 hours
-  }
+  },
+
+  // Progression Ranks (Rank da Quebrada)
+  RANKS: [
+    { id: 0, name: "Vapor", req: 0, bonus: 0 },
+    { id: 1, name: "Aviãozinho", req: 1000, bonus: 0.05 }, // +5% global prod
+    { id: 2, name: "Fogueteiro", req: 10000, bonus: 0.10 }, // +10%
+    { id: 3, name: "Gerente da Boca", req: 100000, bonus: 0.20 }, // +20%
+    { id: 4, name: "Dono do Morro", req: 1000000, bonus: 0.50 }, // +50%
+    { id: 5, name: "Patrão", req: 10000000, bonus: 1.00 }, // +100%
+    { id: 6, name: "Lenda Urbana", req: 100000000, bonus: 2.00 } // +200%
+  ]
 };

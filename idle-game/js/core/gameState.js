@@ -37,6 +37,10 @@ const initialState = {
     totalMoneyEarned: 0,
     startTime: Date.now(),
   },
+  progression: {
+    rank: 0, // Current rank index
+    title: "Vapor" // Current rank name
+  },
   meta: {
     startTime: Date.now(),
     lastSaveTime: Date.now(),

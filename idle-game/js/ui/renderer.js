@@ -8,6 +8,7 @@ import { NPCRenderer } from "./renderers/NPCRenderer.js";
 import { UpgradesRenderer } from "./renderers/UpgradesRenderer.js";
 import { LogsRenderer } from "./renderers/LogsRenderer.js";
 import { FeedbackRenderer } from "./renderers/FeedbackRenderer.js";
+import { ProgressionRenderer } from "./renderers/ProgressionRenderer.js";
 
 /**
  * Renderer - Main UI rendering module.
@@ -36,6 +37,14 @@ export const Renderer = {
       upgradesList: document.getElementById("upgrades-list"),
       logsList: document.getElementById("game-logs"),
       penaltyOverlay: document.getElementById("penalty-overlay"),
+      // Progression Elements
+      rankName: document.getElementById("rank-name"),
+      rankProgress: document.getElementById("rank-progress"),
+      // Rank Overlay Elements
+      rankOverlay: document.getElementById("rank-overlay"),
+      rankMsg: document.getElementById("rank-msg-display"),
+      rankBonus: document.getElementById("rank-bonus-display"),
+      btnCloseRank: document.getElementById("btn-close-rank"),
     };
 
     // Initial Render of Static Lists
@@ -46,6 +55,7 @@ export const Renderer = {
 
     // Listen to specific events (EventManager)
     EventManager.on(EVENTS.RISK_PENALTY, () => FeedbackRenderer.showPenalty(Renderer.elements));
+    EventManager.on(EVENTS.RANK_UP, (data) => FeedbackRenderer.showRankUp(Renderer.elements, data));
     EventManager.on(EVENTS.RANDOM_EVENT, Renderer.logEvent);
   },
 
@@ -65,6 +75,7 @@ export const Renderer = {
     UpgradesRenderer.render(state, els, Formatter.formatCurrency);
     LogsRenderer.render(state, els);
     FeedbackRenderer.render(state, els);
+    ProgressionRenderer.render(state, els);
   },
 
   /**

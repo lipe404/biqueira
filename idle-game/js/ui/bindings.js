@@ -42,6 +42,14 @@ export const Bindings = {
       PrestigeSystem.prestige();
     });
 
+    // Rank Modal Close
+    const btnCloseRank = document.getElementById("btn-close-rank");
+    if (btnCloseRank) {
+        btnCloseRank.addEventListener("click", () => {
+            document.getElementById("rank-overlay").classList.add("hidden");
+        });
+    }
+
     // Delegated Listeners for Lists
 
     // NPC Purchase

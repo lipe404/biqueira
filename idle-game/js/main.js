@@ -56,7 +56,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     RiskSystem,
     EventSystem,
     ClickSystem,
-    PrestigeSystem
+    PrestigeSystem,
+    ProgressionSystem
   ];
 
   systems.forEach(system => {

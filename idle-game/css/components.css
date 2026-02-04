@@ -39,6 +39,60 @@ h1 {
   transform: rotate(1deg);
 }
 
+/* Header Stats Container */
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Rank Display - Badge Style */
+.rank-display {
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  border: 1px solid #555;
+  padding: 8px 12px;
+  transform: skewX(-5deg);
+  min-width: 160px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+.rank-label {
+  font-family: var(--font-sub);
+  font-size: 0.7rem;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rank-value {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 1.1;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.rank-progress-container {
+  width: 100%;
+  height: 6px;
+  background: #000;
+  margin-top: 5px;
+  border: 1px solid #444;
+  position: relative;
+  overflow: hidden;
+}
+
+.rank-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--street-green), #4caf50);
+  width: 0%;
+  transition: width 0.5s ease-out;
+  box-shadow: 0 0 5px var(--street-green);
+}
+
 /* Panels - Concrete/Wall Look */
 .panel {
     background-color: var(--panel-bg); /* Fallback */

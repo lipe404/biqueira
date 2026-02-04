@@ -22,30 +22,20 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 10 — Progressão e Escalabilidade
 
-- [ ] Mapear a curva de progressão (Early, Mid, Late, End Game).
-- [ ] Adicionar sistema de Níveis de Jogador (Rank da Quebrada).
-- [ ] Criar Árvore de Habilidades (Skill Tree) visual.
-- [ ] Implementar "Milestones" (Desbloqueios por total produzido).
 - [ ] Adicionar Tiers de construções (Barraco -> Loja -> Galpão -> Prédio).
 - [ ] Criar sistema de "Rebirth" ou "Ascension" (além do prestígio).
 - [ ] Adicionar mecânicas que só desbloqueiam após X resets.
-- [ ] Implementar "Challenge Runs" (zerar com restrições por bônus).
-- [ ] Escalar números para notação científica (1e10, 1e50) ou sufixos (K, M, B, T).
 - [ ] Adicionar conteúdo procedural para o endgame infinito.
 - [ ] Criar "Boss Battles": desafios de produção temporizados.
 - [ ] Balancear o "Muro" (momento onde o progresso fica lento) para não frustrar.
 - [ ] Adicionar colecionáveis (Cards, Skins) que dão bônus passivos.
-- [ ] Implementar sistema de missões diárias/semanais.
 - [ ] Criar narrativa que evolui com a progressão.
 - [ ] Adicionar desbloqueio de novas áreas da cidade (novos painéis).
 - [ ] Escalar a UI para comportar números gigantes sem quebrar layout.
-- [ ] Adicionar "Soft Caps" e "Hard Caps" onde necessário.
-- [ ] Criar mecânica de "Legacy" (herança entre resets).
 - [ ] Testar o jogo em estágios avançados (simular meses de jogo).
 
 ## Categoria 11 — Balanceamento de Gameplay
 
-- [ ] Criar planilha de balanceamento (Excel/Sheets) para simular curvas.
 - [ ] Ajustar ROI (Return on Investment) de cada NPC.
 - [ ] Balancear risco vs recompensa do sistema de Heat.
 - [ ] Ajustar frequência e impacto dos eventos aleatórios.
