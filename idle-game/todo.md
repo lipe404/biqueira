@@ -212,23 +212,4 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 20 — Manutenibilidade e Evolução do Projeto
 
-- [ ] Configurar CI/CD (GitHub Actions) para deploy automático.
-- [ ] Adicionar linter (ESLint) e formatador (Prettier) ao projeto.
 - [ ] Criar testes automatizados (Jest/Cypress).
-- [ ] Documentar o código com comentários de bloco explicativos.
-- [ ] Manter um CHANGELOG.md atualizado.
-- [ ] Versionar o projeto semanticamente (SemVer).
-- [ ] Criar issues templates no GitHub para bugs/features.
-- [ ] Revisar dependências regularmente (se houver).
-- [ ] Realizar Code Reviews periódicos (auto-revisão ou par).
-- [ ] Monitorar performance em produção.
-- [ ] Refatorar código legado periodicamente (Tech Debt payoff).
-- [ ] Manter backups do repositório.
-- [ ] Documentar decisões de design (ADRs - Architecture Decision Records).
-- [ ] Criar guia de contribuição (CONTRIBUTING.md).
-- [ ] Automatizar minificação e otimização de assets.
-- [ ] Verificar compatibilidade com novos padrões Web.
-- [ ] Manter lista de "Known Issues" visível.
-- [ ] Realizar backups dos assets originais (PSDs, arquivos de som).
-- [ ] Planejar migração para TypeScript (futuro distante).
-- [ ] Manter a chama da "Visão do Projeto" acesa e documentada.
