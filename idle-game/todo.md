@@ -23,21 +23,9 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 ## Categoria 10 — Progressão e Escalabilidade
 
 - [ ] Adicionar Tiers de construções (Barraco -> Loja -> Galpão -> Prédio).
-- [ ] Criar sistema de "Rebirth" ou "Ascension" (além do prestígio).
-- [ ] Adicionar mecânicas que só desbloqueiam após X resets.
-- [ ] Adicionar conteúdo procedural para o endgame infinito.
-- [ ] Criar "Boss Battles": desafios de produção temporizados.
-- [ ] Balancear o "Muro" (momento onde o progresso fica lento) para não frustrar.
-- [ ] Adicionar colecionáveis (Cards, Skins) que dão bônus passivos.
-- [ ] Criar narrativa que evolui com a progressão.
-- [ ] Adicionar desbloqueio de novas áreas da cidade (novos painéis).
-- [ ] Escalar a UI para comportar números gigantes sem quebrar layout.
-- [ ] Testar o jogo em estágios avançados (simular meses de jogo).
 
 ## Categoria 11 — Balanceamento de Gameplay
 
-- [ ] Ajustar ROI (Return on Investment) de cada NPC.
-- [ ] Balancear risco vs recompensa do sistema de Heat.
 - [ ] Ajustar frequência e impacto dos eventos aleatórios.
 - [ ] Revisar custo dos upgrades de Click vs Automação.
 - [ ] Balancear o bônus de Prestígio (muito fraco ou muito forte?).

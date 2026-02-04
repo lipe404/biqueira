@@ -13,6 +13,7 @@ import { PrestigeSystem } from "./systems/prestigeSystem.js";
 import { Renderer } from "./ui/renderer.js";
 import { Bindings } from "./ui/bindings.js";
 import { CursorManager } from "./ui/cursorManager.js";
+import { Simulator } from "./utils/simulator.js"; // Import Simulator
 
 // Global Data Holder (can be imported by others if needed, or attached to window)
 /**
@@ -27,6 +28,9 @@ export let GameData = {
 // Bootstrap
 window.addEventListener("DOMContentLoaded", async () => {
   console.log("Initializing Generic Corp...");
+
+  // Expose Simulator to global scope for testing
+  window.Simulator = Simulator;
 
   // 0. Load External Data
   const loadedData = await DataLoader.loadAll();
