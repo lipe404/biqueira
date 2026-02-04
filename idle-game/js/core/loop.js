@@ -99,7 +99,11 @@ export class GameLoop {
     // Handle Auto-save
     this.autoSaveTimer += dt;
     const saveInterval = CONFIG.AUTO_SAVE_INTERVAL / 1000;
-    if (this.autoSaveTimer >= saveInterval) {
+    
+    // Check setting (default to true)
+    const autosaveEnabled = gameState.get().settings?.autosaveEnabled ?? true;
+
+    if (autosaveEnabled && this.autoSaveTimer >= saveInterval) {
       SaveSystem.save();
       this.autoSaveTimer = 0;
     }

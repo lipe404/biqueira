@@ -5,6 +5,8 @@ import { PrestigeSystem } from "../systems/prestigeSystem.js";
 import { NPCS } from "../data/npcs.js";
 import { UPGRADES } from "../data/upgrades.js";
 import { MathUtils } from "../utils/math.js";
+import { Formatter } from "../utils/formatting.js";
+import { CONFIG } from "../core/config.js";
 
 export const Bindings = {
   init: () => {
@@ -22,21 +24,81 @@ export const Bindings = {
       Bindings.triggerVibration(btnSell);
     });
 
-    // System Buttons
-    document.getElementById("btn-save").addEventListener("click", () => {
-      SaveSystem.save();
-      alert("Progresso Salvo na Fita!");
+    // Save Menu
+    document.getElementById("btn-save-menu").addEventListener("click", () => {
+      Bindings.openSaveMenu();
     });
 
-    document.getElementById("btn-reset").addEventListener("click", () => {
-      if (
-        confirm(
-          "ZERAR TUDO: Vai perder todo o corre e o respeito. Certeza, parça?",
-        )
-      ) {
+    // Save Modal Buttons
+    document.getElementById("btn-close-save").addEventListener("click", () => {
+      document.getElementById("save-overlay").classList.add("hidden");
+    });
+
+    document.getElementById("btn-modal-save").addEventListener("click", () => {
+      if (SaveSystem.save()) {
+        alert("Progresso salvo com sucesso!");
+        Bindings.updateSaveMetadata();
+      }
+    });
+
+    document.getElementById("btn-modal-load").addEventListener("click", () => {
+      if (confirm("Tem certeza? O progresso não salvo será perdido.")) {
+        if (SaveSystem.load()) {
+          alert("Progresso carregado!");
+          document.getElementById("save-overlay").classList.add("hidden");
+        }
+      }
+    });
+
+    document.getElementById("btn-modal-reset").addEventListener("click", () => {
+      if (confirm("ZERAR TUDO: Vai perder todo o corre e o respeito. Certeza, parça?")) {
         SaveSystem.reset();
       }
     });
+
+    document.getElementById("btn-export").addEventListener("click", () => {
+      SaveSystem.exportSave();
+    });
+
+    const fileInput = document.getElementById("file-import");
+    document.getElementById("btn-import-trigger").addEventListener("click", () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (confirm("Importar este save irá sobrescrever o jogo atual. Continuar?")) {
+            if (SaveSystem.importSave(event.target.result)) {
+                alert("Save importado com sucesso!");
+                document.getElementById("save-overlay").classList.add("hidden");
+            }
+        }
+        // Reset input so same file can be selected again if needed
+        fileInput.value = '';
+      };
+      reader.readAsText(file);
+    });
+
+    // Autosave Toggle
+    const chkAutosave = document.getElementById("chk-autosave");
+    chkAutosave.addEventListener("change", (e) => {
+        // We can update a runtime setting here
+        // For now, let's just toggle the interval in CONFIG (dirty but works if object is shared)
+        // Better: Update GameState.settings
+        const state = gameState.get();
+        if (!state.settings) state.settings = {};
+        state.settings.autosaveEnabled = e.target.checked;
+    });
+    
+    // Sync Checkbox with state
+    const state = gameState.get();
+    if (state.settings && state.settings.autosaveEnabled !== undefined) {
+        chkAutosave.checked = state.settings.autosaveEnabled;
+    }
 
     document.getElementById("btn-prestige").addEventListener("click", () => {
       PrestigeSystem.prestige();
@@ -123,4 +185,34 @@ export const Bindings = {
       });
     }
   },
+
+  openSaveMenu: () => {
+    document.getElementById("save-overlay").classList.remove("hidden");
+    Bindings.updateSaveMetadata();
+  },
+
+  updateSaveMetadata: () => {
+    const meta = SaveSystem.getMetadata();
+    const container = document.getElementById("save-metadata");
+    
+    if (!meta) {
+        container.innerHTML = "<p>Nenhum save local encontrado.</p>";
+        document.getElementById("btn-modal-load").disabled = true;
+        return;
+    }
+    
+    document.getElementById("btn-modal-load").disabled = false;
+    
+    const date = new Date(meta.saveTime).toLocaleString("pt-BR");
+    const money = Formatter.formatCurrency(meta.money);
+    const hours = Math.floor(meta.playTime / 3600);
+    const minutes = Math.floor((meta.playTime % 3600) / 60);
+    
+    container.innerHTML = `
+        <p><strong>Último Save:</strong> ${date}</p>
+        <p><strong>Posto:</strong> ${meta.rank}</p>
+        <p><strong>Grana:</strong> ${money}</p>
+        <p><strong>Tempo Jogado:</strong> ${hours}h ${minutes}m</p>
+    `;
+  }
 };

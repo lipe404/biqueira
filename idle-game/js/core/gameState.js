@@ -48,7 +48,7 @@ const initialState = {
     version: "1.0.0",
   },
   settings: {
-    // autoSaveInterval: 30000, // Moved to CONFIG
+    autosaveEnabled: true,
   },
 };
 

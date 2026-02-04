@@ -37,6 +37,93 @@ export const SaveSystem = {
   },
 
   /**
+   * Export the save as a JSON file download.
+   */
+  exportSave: () => {
+    try {
+      const data = gameState.get();
+      // Ensure we have the latest save time
+      data.meta.lastSaveTime = Date.now();
+      
+      const json = JSON.stringify(data, null, 2); // Pretty print for readability
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `biqueira_save_${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      console.log("Save exported successfully.");
+      return true;
+    } catch (e) {
+      console.error("Failed to export save:", e);
+      return false;
+    }
+  },
+
+  /**
+   * Import a save from a JSON string.
+   * @param {string} jsonContent - The JSON string content of the save file.
+   * @returns {boolean} True if import was successful.
+   */
+  importSave: (jsonContent) => {
+    try {
+      const data = JSON.parse(jsonContent);
+      
+      // Validate schema
+      const validatedData = gameState.validateSchema(data);
+      
+      // Load into state
+      gameState.load(validatedData);
+      
+      // Save to local storage immediately
+      SaveSystem.save();
+      
+      console.log("Save imported successfully.");
+      EventManager.emit(EVENTS.LOAD_GAME, { data: validatedData });
+      
+      // Calculate offline progress if applicable
+      if (validatedData.meta && validatedData.meta.lastSaveTime) {
+        SaveSystem.calculateOfflineProgress(validatedData.meta.lastSaveTime);
+      }
+      
+      return true;
+    } catch (e) {
+      console.error("Failed to import save:", e);
+      alert("Erro ao importar save: Arquivo inválido ou corrompido.");
+      return false;
+    }
+  },
+
+  /**
+   * Get metadata from the current local save without loading it.
+   * @returns {Object|null} Metadata object or null if no save exists.
+   */
+  getMetadata: () => {
+    try {
+      const encoded = localStorage.getItem(SAVE_KEY);
+      if (!encoded) return null;
+
+      const json = atob(encoded);
+      const data = JSON.parse(json);
+      
+      return {
+        money: data.resources.money || 0,
+        playTime: data.meta.totalPlayTime || 0,
+        saveTime: data.meta.lastSaveTime || Date.now(),
+        rank: data.progression ? data.progression.title : "Vapor"
+      };
+    } catch (e) {
+      console.error("Failed to read save metadata:", e);
+      return null;
+    }
+  },
+
+  /**
    * Load the game state from localStorage.
    * @returns {boolean} True if load was successful, false otherwise.
    */

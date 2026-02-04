@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/layout.css">
         <link rel="stylesheet" href="css/components.css">
+        <link rel="stylesheet" href="css/save_modal.css">
         <link rel="stylesheet" href="css/animations.css">
     </head>
     <body>
@@ -102,8 +103,7 @@
                     Tempo de Corre: <span id="playtime">00:00:00</span>
                 </div>
                 <div class="system-controls">
-                    <button id="btn-save">Guardar</button>
-                    <button id="btn-reset">Começar do Zero</button>
+                    <button id="btn-save-menu">OPÇÕES / SAVE</button>
                     <button id="btn-prestige" class="btn-prestige">Virar Patrão
                         (Prestígio)</button>
                 </div>
@@ -126,6 +126,42 @@
                 <p id="rank-msg-display">Você agora é Vapor.</p>
                 <p class="rank-bonus" id="rank-bonus-display">+0% Bônus Global</p>
                 <button id="btn-close-rank" class="btn-modal">JÁ É</button>
+            </div>
+        </div>
+
+        <div id="save-overlay" class="overlay hidden">
+            <div class="modal save-modal">
+                <h2>GERENCIAR PROGRESSO</h2>
+                
+                <div class="save-info" id="save-metadata">
+                    <p>Carregando dados...</p>
+                </div>
+
+                <div class="save-controls">
+                    <div class="control-group">
+                        <h3>Local</h3>
+                        <button id="btn-modal-save" class="btn-modal">Salvar Agora</button>
+                        <button id="btn-modal-load" class="btn-modal">Carregar Save</button>
+                        <button id="btn-modal-reset" class="btn-modal danger">Apagar Tudo</button>
+                    </div>
+
+                    <div class="control-group">
+                        <h3>Arquivo</h3>
+                        <button id="btn-export" class="btn-modal">Exportar (Download)</button>
+                        <button id="btn-import-trigger" class="btn-modal">Importar</button>
+                        <input type="file" id="file-import" accept=".json,.txt" style="display: none;">
+                    </div>
+
+                    <div class="control-group">
+                        <h3>Opções</h3>
+                        <label>
+                            <input type="checkbox" id="chk-autosave" checked>
+                            Autosave (30s)
+                        </label>
+                    </div>
+                </div>
+
+                <button id="btn-close-save" class="btn-modal">FECHAR</button>
             </div>
         </div>
 

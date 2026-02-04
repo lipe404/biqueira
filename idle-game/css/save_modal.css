@@ -1,0 +1,55 @@
+
+/* Save Modal Styles */
+.save-modal {
+    min-width: 500px;
+    max-width: 90%;
+}
+
+.save-info {
+    background: #111;
+    border: 1px solid #333;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-family: monospace;
+    color: var(--street-green);
+    text-align: left;
+}
+
+.save-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.control-group {
+    background: #222;
+    padding: 10px;
+    border: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control-group h3 {
+    margin: 0 0 5px 0;
+    font-size: 0.9rem;
+    color: #aaa;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.control-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.control-group input[type="checkbox"] {
+    accent-color: var(--street-green);
+    width: 18px;
+    height: 18px;
+}

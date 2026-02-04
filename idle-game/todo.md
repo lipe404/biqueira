@@ -166,13 +166,6 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 18 — Sistema de Save / Load
 
-- [ ] Permitir download do save como arquivo `.json` ou `.txt`.
-- [ ] Permitir upload de arquivo de save.
-- [ ] Mostrar metadados do save no menu de load (Data, Dinheiro, Tempo).
-- [ ] Implementar autosave configurável (tempo, eventos).
-- [ ] Adicionar confirmação ao carregar save antigo sobre o atual
-- [ ] Logar erros de save/load para diagnóstico.
-
 ## Categoria 19 — Expansões Futuras e Conteúdo
 
 - [ ] Planejar DLC/Expansão "O Sindicato".
