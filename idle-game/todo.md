@@ -26,21 +26,6 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 11 — Balanceamento de Gameplay
 
-- [ ] Testar pacing: quanto tempo para o primeiro NPC? Primeiro upgrade?
-- [ ] Ajustar penalidades de morte/prisão (não ser punitivo demais).
-- [ ] Balancear multiplicadores de sinergia.
-- [ ] Verificar se alguma estratégia dominante quebra o jogo.
-- [ ] Ajustar escala de preços (linear, exponencial, fibonacci?).
-- [ ] Balancear o impacto dos buffs temporários.
-- [ ] Garantir que o jogador ativo tenha vantagem sobre o puramente idle.
-- [ ] Ajustar tempo de cooldown de habilidades.
-- [ ] Balancear custos de remoção de Heat.
-- [ ] Revisar descrições para refletir números reais.
-- [ ] Criar "Catch-up mechanics" para jogadores que ficaram para trás?
-- [ ] Balancear o RNG (Random Number Generation) para evitar maré de azar.
-- [ ] Ajustar progressão de dificuldade das "Boss Battles".
-- [ ] Coletar métricas de analytics (local) para ajuste fino.
-
 ## Categoria 12 — Game Design (Core Loop)
 
 - [ ] Refinar o tema "Cria/Favela" em todas as mecânicas.

@@ -9,6 +9,7 @@ import { RiskSystem } from "./systems/riskSystem.js";
 import { IdleSystem } from "./systems/idleSystem.js";
 import { EventSystem } from "./systems/eventSystem.js";
 import { PrestigeSystem } from "./systems/prestigeSystem.js";
+import { ProgressionSystem } from "./systems/progressionSystem.js";
 
 import { Renderer } from "./ui/renderer.js";
 import { Bindings } from "./ui/bindings.js";
