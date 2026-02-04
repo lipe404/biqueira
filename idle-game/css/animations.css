@@ -10,8 +10,22 @@
   100% { transform: translate(0); }
 }
 
+@keyframes shake-hard {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(5px, 5px) rotate(5deg); }
+  50% { transform: translate(0, 0) rotate(0eg); }
+  75% { transform: translate(-5px, 5px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
 .vibrate {
   animation: vibrate 0.1s linear;
+}
+
+.shake-error {
+  animation: shake-hard 0.3s ease-in-out;
+  border-color: var(--street-red) !important;
+  box-shadow: 0 0 10px var(--street-red) !important;
 }
 
 /* Floating Text Animation */
@@ -41,6 +55,56 @@
 .floating-text.money { color: var(--street-green); }
 .floating-text.widgets { color: var(--neon-blue); }
 .floating-text.heat { color: var(--alert-red); }
+.floating-text.error { 
+    color: var(--street-red); 
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0 #000;
+    z-index: 10000;
+}
+
+/* Save Indicator Animation */
+@keyframes spin-save {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.save-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--street-green);
+    color: var(--street-green);
+    padding: 10px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-sub);
+    font-size: 0.9rem;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+}
+
+.save-indicator.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.save-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--street-green);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin-save 1s linear infinite;
+}
 
 /* Idle Animations for Icons */
 @keyframes pulse-glow {

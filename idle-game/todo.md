@@ -51,31 +51,8 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 13 — UI (Interface Visual)
 
-- [ ] Criar sistema de Temas (Claro, Escuro, Alto Contraste, Cyberpunk).
-- [ ] Melhorar feedback visual dos botões (estados: hover, active, disabled, cooldown).
-- [ ] Implementar Tooltips ricos (hover sobre stats explica origem).
-- [ ] Adicionar ícones (SVG/FontAwesome) para recursos e ações.
-- [ ] Criar animações de entrada para novos elementos da lista.
-- [ ] Melhorar a barra de progresso de Heat (efeito de fogo/pulsação).
-- [ ] Padronizar tipografia (tamanhos, pesos, hierarquia).
-- [ ] Criar modais personalizados (substituir alert/confirm nativos).
-- [ ] Adicionar efeitos de partículas no clique (dinheiro voando).
-- [ ] Melhorar layout do log (ícones por tipo de evento, cores).
-- [ ] Implementar HUD flutuante para mensagens importantes.
-- [ ] Criar menu de Configurações acessível e completo.
-- [ ] Melhorar visualização da loja (grid vs lista, filtros).
-- [ ] Adicionar indicadores de "Novidade" em abas/itens desbloqueados.
-- [ ] Criar tela de "Estatísticas" detalhada com gráficos.
-- [ ] Melhorar visual do Prestige (animação de ascensão).
-- [ ] Implementar "Toast Notifications" para saves e achievements.
-- [ ] Refinar paleta de cores para garantir consistência e contraste.
-- [ ] Adicionar background parallax ou animado (sutil).
-- [ ] Criar tela de carregamento (splash screen) estilosa.
-
 ## Categoria 14 — UX (Experiência do Jogador)
 
-- [ ] Melhorar mensagem de erro/feedback quando não pode comprar.
-- [ ] Melhorar feedback de save (ícone girando, mensagem discreta).
 - [ ] Adicionar feedback sonoro para ações importantes (opcional).
 
 ## Categoria 15 — Acessibilidade

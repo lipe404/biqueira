@@ -38,5 +38,47 @@ export const VisualFX = {
         void element.offsetWidth; // Trigger reflow
         element.classList.add('btn-clicked');
         element.classList.add('btn-cooldown'); // Ensure base class is there
+    },
+
+    /**
+     * Shows a visual error feedback on an element.
+     * @param {HTMLElement} element - The element that caused the error
+     * @param {string} message - Short error message
+     */
+    showError: (element, message = "Sem Grana!") => {
+        // 1. Shake animation
+        element.classList.remove('shake-error');
+        void element.offsetWidth; // Trigger reflow
+        element.classList.add('shake-error');
+        
+        // Remove class after animation
+        setTimeout(() => {
+            element.classList.remove('shake-error');
+        }, 500);
+
+        // 2. Floating text in red
+        const rect = element.getBoundingClientRect();
+        // Center of the element
+        const x = rect.left + rect.width / 2;
+        const y = rect.top;
+        
+        VisualFX.spawnFloatingText(x, y, message, 'error');
+    },
+
+    /**
+     * Shows the save indicator for a short duration.
+     */
+    showSaveIndicator: () => {
+        const indicator = document.getElementById('save-indicator');
+        if (!indicator) return;
+
+        indicator.classList.add('visible');
+        
+        // Hide after 2 seconds
+        if (indicator.timeoutId) clearTimeout(indicator.timeoutId);
+        
+        indicator.timeoutId = setTimeout(() => {
+            indicator.classList.remove('visible');
+        }, 2000);
     }
 };

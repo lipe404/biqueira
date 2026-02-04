@@ -1,4 +1,5 @@
 import { gameState } from "../core/gameState.js";
+import { EventManager, EVENTS } from "../core/eventManager.js";
 import { ClickSystem } from "../systems/clickSystem.js";
 import { SaveSystem } from "../core/saveSystem.js";
 import { PrestigeSystem } from "../systems/prestigeSystem.js";
@@ -176,6 +177,11 @@ export const Bindings = {
         multiplierBtns.forEach(b => b.classList.remove('active'));
         activeBtn.classList.add('active');
     }
+
+    // Save Game Event Listener
+    EventManager.on(EVENTS.SAVE_GAME, () => {
+        VisualFX.showSaveIndicator();
+    });
   },
 
   setMultiplier: (val) => {
@@ -201,10 +207,21 @@ export const Bindings = {
     
     let quantity = 1;
     let totalCost = 0;
+    
+    // Find Element for feedback
+    const item = document.querySelector(`.npc-item[data-id="${id}"]`);
 
     if (multiplier === 'MAX') {
         quantity = MathUtils.calculateMaxAffordable(npc.baseCost, npc.costMultiplier, count, state.resources.money, discount);
-        if (quantity <= 0) return; // Can't afford any
+        // If can't afford any, calculate cost for 1 just to check/show error
+        if (quantity <= 0) {
+             const costForOne = MathUtils.calculateBatchCost(npc.baseCost, npc.costMultiplier, count, 1, discount);
+             if (state.resources.money < costForOne) {
+                 if (item) VisualFX.showError(item, "Sem Grana!");
+                 return;
+             }
+             return; // Should not happen if logic is correct
+        }
         totalCost = MathUtils.calculateBatchCost(npc.baseCost, npc.costMultiplier, count, quantity, discount);
     } else {
         quantity = multiplier;
@@ -223,7 +240,6 @@ export const Bindings = {
       });
       
       // Visual Feedback for bulk
-      const item = document.querySelector(`.npc-item[data-id="${id}"]`);
       if (item) {
           VisualFX.spawnFloatingText(
               item.getBoundingClientRect().left + 100, 
@@ -232,6 +248,9 @@ export const Bindings = {
               'default'
           );
       }
+    } else {
+        // Not enough money for fixed amount
+        if (item) VisualFX.showError(item, "Sem Grana!");
     }
   },
 
@@ -239,6 +258,8 @@ export const Bindings = {
     const state = gameState.get();
     const upgrade = UPGRADES[id];
     if (!upgrade) return;
+
+    const item = document.querySelector(`.upgrade-item[data-id="${id}"]`);
 
     if (state.resources.money >= upgrade.cost) {
       state.resources.money -= upgrade.cost;
@@ -253,6 +274,8 @@ export const Bindings = {
         time: Date.now(),
         message: `Comprou Melhoria: ${upgrade.name}`,
       });
+    } else {
+        if (item) VisualFX.showError(item, "Sem Grana!");
     }
   },
 
