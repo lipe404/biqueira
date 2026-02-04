@@ -120,25 +120,6 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 16 — Responsividade (Mobile / Desktop)
 
-- [ ] Implementar layout fluido que se adapta a qualquer largura.
-- [ ] Otimizar menus para toque (touch-friendly) vs mouse.
-- [ ] Gerenciar teclado virtual em mobile (não cobrir UI).
-- [ ] Implementar gestos (swipe) para trocar de abas em mobile.
-- [ ] Prevenir zoom acidental em duplo toque.
-- [ ] Adicionar meta tags corretas para PWA (Progressive Web App).
-- [ ] Otimizar performance de bateria em mobile.
-- [ ] Tratar orientação (paisagem vs retrato) com layouts diferentes.
-- [ ] Esconder elementos menos importantes em telas pequenas.
-- [ ] Implementar menu "Hambúrguer" ou abas inferiores em mobile.
-- [ ] Ajustar densidade de informações (compacto vs espaçado).
-- [ ] Testar em navegadores móveis (Chrome, Safari, Firefox).
-- [ ] Tratar "Notch" e áreas seguras (safe-area-inset).
-- [ ] Permitir jogar em tela cheia (Fullscreen API).
-- [ ] Sincronizar estado entre abas/dispositivos (futuro backend?).
-- [ ] Otimizar assets para conexões móveis (data saver).
-- [ ] Adicionar botão de "Voltar ao Topo" em listas longas mobile.
-- [ ] Garantir que popups/modais caibam na tela do celular.
-
 ## Categoria 17 — Feedback Visual e Sonoro
 
 - [ ] Criar biblioteca de sons (SFX): clique, moeda, erro, sucesso, alerta.

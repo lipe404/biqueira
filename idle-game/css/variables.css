@@ -16,4 +16,22 @@
   --font-hand: "Permanent Marker", cursive;
 
   --border-style: 2px solid rgba(255, 255, 255, 0.1);
+
+  /* Spacing / Density Variables */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 25px;
+
+  --touch-target-size: 44px; /* Min height for touch */
+}
+
+/* Compact Density (can be toggled via class on body) */
+body.compact {
+  --spacing-xs: 2px;
+  --spacing-sm: 5px;
+  --spacing-md: 10px;
+  --spacing-lg: 15px;
+  --spacing-xl: 20px;
 }

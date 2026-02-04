@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 1400px;
+  max-width: 100%; /* Fluid full width */
   margin: 0 auto;
-  padding: 15px;
-  opacity: 0; /* Start hidden */
+  padding: var(--spacing-md);
+  opacity: 0;
   transition: opacity 0.8s ease-out;
 }
 
@@ -16,30 +16,54 @@
 /* Main Layout */
 main {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  /* Fluid Grid: Adapts columns based on available width */
+  /* Min column width 320px ensures readability on phones */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-lg);
   flex: 1;
-  overflow: hidden;
+  overflow-y: auto; /* Allow main scroll if content overflows viewport */
+  overflow-x: hidden;
+}
+
+/* Tablet / Moderate Screens */
+@media (max-width: 1024px) {
+  .game-container {
+    padding: var(--spacing-sm);
+  }
+  
+  main {
+    gap: var(--spacing-md);
+  }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   main {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Force single column on mobile */
+    gap: var(--spacing-sm);
   }
+
   header {
     flex-direction: column;
-    gap: 10px;
+    gap: var(--spacing-sm);
     text-align: center;
+    padding: var(--spacing-sm);
   }
+
   .subtitle {
     display: block;
     margin: 5px 0;
   }
-  .game-container {
-    padding: 5px;
-  }
+
   .panel {
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-sm);
+    /* Mobile optimization: remove fixed height constraints if any */
+    max-height: none; 
+    overflow: visible;
+  }
+  
+  /* Ensure touch targets are large enough */
+  button, .list-item {
+    min-height: var(--touch-target-size);
   }
 }

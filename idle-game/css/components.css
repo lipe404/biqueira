@@ -97,7 +97,7 @@ h1 {
 .panel {
     background-color: var(--panel-bg); /* Fallback */
     border: 2px solid #444;
-    padding: 15px; /* Reduced padding */
+    padding: var(--spacing-md);
     display: flex;
     flex-direction: column;
     position: relative;
@@ -248,13 +248,13 @@ h2 {
 .actions {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--spacing-md);
 }
 
 .btn-big {
-  padding: 15px; /* Reduced from 25px */
+  padding: var(--spacing-md);
   font-family: var(--font-head);
-  font-size: 1.3rem; /* Reduced from 1.5rem */
+  font-size: 1.3rem; 
   border: none;
   cursor: pointer;
   text-transform: uppercase;
@@ -263,6 +263,12 @@ h2 {
   transition: all 0.1s;
   color: #000;
   font-weight: bold;
+  /* Touch Optimization */
+  min-height: var(--touch-target-size);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-big:active {
