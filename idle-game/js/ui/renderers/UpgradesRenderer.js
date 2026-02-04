@@ -34,8 +34,15 @@ export const UpgradesRenderer = {
       div.dataset.id = u.id;
       div.dataset.type = "upgrade";
 
+      // Icon logic based on ID or keywords
+      let icon = "🔧";
+      if (u.id.includes("click")) icon = "👆";
+      if (u.id.includes("intern")) icon = "☕";
+      if (u.id.includes("risk")) icon = "🚓";
+
       div.innerHTML = `
                 <div class="item-header">
+                    <span class="icon-pulse">${icon}</span>
                     <span>${u.name}</span>
                     <span class="item-cost">${formatCurrency(u.cost)}</span>
                 </div>

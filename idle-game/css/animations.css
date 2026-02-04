@@ -1,25 +1,110 @@
 /* Animations & Effects */
+
+/* Vibration for errors/actions */
 @keyframes vibrate {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
 }
 
 .vibrate {
   animation: vibrate 0.1s linear;
+}
+
+/* Floating Text Animation */
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(1.2);
+  }
+}
+
+.floating-text {
+  position: absolute;
+  pointer-events: none;
+  font-family: 'Teko', sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  animation: floatUp 1s ease-out forwards;
+  z-index: 9999;
+}
+
+.floating-text.money { color: var(--street-green); }
+.floating-text.widgets { color: var(--neon-blue); }
+.floating-text.heat { color: var(--alert-red); }
+
+/* Idle Animations for Icons */
+@keyframes pulse-glow {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.05); filter: brightness(1.2); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+@keyframes float-idle {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+.icon-pulse {
+  display: inline-block;
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+.icon-float {
+  display: inline-block;
+  animation: float-idle 3s infinite ease-in-out;
+}
+
+/* Cooldown / Click Feedback */
+@keyframes ripple-effect {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+}
+
+.btn-cooldown {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cooldown::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.btn-clicked::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(40, 40);
+    opacity: 0;
+  }
 }

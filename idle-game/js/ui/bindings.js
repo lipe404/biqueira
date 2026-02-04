@@ -8,20 +8,31 @@ import { MathUtils } from "../utils/math.js";
 import { Formatter } from "../utils/formatting.js";
 import { CONFIG } from "../core/config.js";
 
+import { VisualFX } from "./visualFX.js";
+
 export const Bindings = {
   init: () => {
     // Main Buttons
     const btnMake = document.getElementById("btn-make");
-    btnMake.addEventListener("click", () => {
-      ClickSystem.clickMake();
+    btnMake.addEventListener("click", (e) => {
+      const amount = ClickSystem.clickMake();
       Bindings.triggerVibration(btnMake);
-      // Optional: Spawn particle effect
+      VisualFX.triggerCooldown(btnMake);
+      
+      if (amount > 0) {
+        VisualFX.spawnFloatingText(e.clientX, e.clientY, `+${Math.floor(amount)}`, 'widgets');
+      }
     });
 
     const btnSell = document.getElementById("btn-sell");
-    btnSell.addEventListener("click", () => {
-      ClickSystem.clickSell();
+    btnSell.addEventListener("click", (e) => {
+      const revenue = ClickSystem.clickSell();
       Bindings.triggerVibration(btnSell);
+      VisualFX.triggerCooldown(btnSell);
+
+      if (revenue > 0) {
+        VisualFX.spawnFloatingText(e.clientX, e.clientY, Formatter.formatCurrency(revenue), 'money');
+      }
     });
 
     // Save Menu

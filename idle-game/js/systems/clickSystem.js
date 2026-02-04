@@ -51,6 +51,7 @@ export const ClickSystem = {
     if (state.resources.heat > CONFIG.HEAT.MAX) state.resources.heat = CONFIG.HEAT.MAX;
 
     EventManager.emit(EVENTS.CLICK_MAKE, { amount });
+    return amount;
   },
 
   /**

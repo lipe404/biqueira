@@ -12,8 +12,12 @@ export const NPCRenderer = {
       div.id = `npc-${npc.id}`;
       div.dataset.id = npc.id; // For binding
 
+      // Simple icon logic (can be expanded)
+      const icon = "👤"; // Default
+      
       div.innerHTML = `
                 <div class="item-header">
+                    <span class="icon-float">${icon}</span>
                     <span>${npc.name}</span>
                     <span class="item-count" id="count-${npc.id}">0</span>
                 </div>
