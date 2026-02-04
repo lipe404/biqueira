@@ -38,4 +38,32 @@ export const NEGATIVE_EVENTS = [
       return `Suspeita subiu +15%. Fique esperto.`;
     },
   },
+  {
+    id: "operacao_choque",
+    name: "Operação de Choque",
+    description: "Caveirão subiu o morro. Tudo parado.",
+    type: "negative",
+    condition: (state) => state.resources.heat > 80,
+    chance: 0.06,
+    effect: (state) => {
+      const lost = Math.floor(state.resources.widgets * 0.5);
+      state.resources.widgets -= lost;
+      state.resources.heat -= 40; 
+      return `Apreenderam ${lost} cargas. Mas a poeira baixou (Suspeita -40%).`;
+    },
+  },
+  {
+    id: "invasao_alemao",
+    name: "Invasão de Alemão",
+    description: "Tentaram tomar a boca. Tivemos prejuízo pra defender.",
+    type: "negative",
+    condition: (state) => state.resources.money > 5000,
+    chance: 0.04,
+    effect: (state) => {
+      const cost = Math.floor(state.resources.money * 0.25);
+      state.resources.money -= cost;
+      state.resources.heat += 20;
+      return `Defesa custou $${cost}. O clima esquentou (Suspeita +20%).`;
+    },
+  },
 ];

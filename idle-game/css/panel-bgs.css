@@ -1,0 +1,24 @@
+
+/* Panel Backgrounds with Lighter Overlay for Better Visibility */
+.production-panel {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/ponto.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.upgrades-panel {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/comando.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.automation-panel {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/equipe.png');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Ensure lists inside panels are transparent so panel BG shows through */
+.scroll-list {
+    background: transparent;
+}

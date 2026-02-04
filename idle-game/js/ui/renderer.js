@@ -6,6 +6,7 @@ import { Formatter } from "../utils/formatting.js";
 import { ResourcesRenderer } from "./renderers/ResourcesRenderer.js";
 import { NPCRenderer } from "./renderers/NPCRenderer.js";
 import { UpgradesRenderer } from "./renderers/UpgradesRenderer.js";
+import { PetsRenderer } from "./renderers/petsRenderer.js";
 import { LogsRenderer } from "./renderers/LogsRenderer.js";
 import { FeedbackRenderer } from "./renderers/FeedbackRenderer.js";
 import { ProgressionRenderer } from "./renderers/ProgressionRenderer.js";
@@ -35,6 +36,7 @@ export const Renderer = {
       playtime: document.getElementById("playtime"),
       npcsList: document.getElementById("npcs-list"),
       upgradesList: document.getElementById("upgrades-list"),
+      petsList: document.getElementById("pets-list"),
       logsList: document.getElementById("game-logs"),
       penaltyOverlay: document.getElementById("penalty-overlay"),
       // Progression Elements
@@ -73,6 +75,7 @@ export const Renderer = {
     ResourcesRenderer.render(state, els, Formatter.formatNumber, Formatter.formatCurrency, Formatter.formatTime);
     NPCRenderer.render(state, els, Formatter.formatCurrency);
     UpgradesRenderer.render(state, els, Formatter.formatCurrency);
+    PetsRenderer.render(els.petsList);
     LogsRenderer.render(state, els);
     FeedbackRenderer.render(state, els);
     ProgressionRenderer.render(state, els);

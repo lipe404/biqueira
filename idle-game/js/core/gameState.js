@@ -28,6 +28,7 @@ const initialState = {
     upgrades: 0 // Discount for upgrades
   },
   upgrades: [], // Array of upgrade IDs purchased
+  pets: [], // Array of pet IDs owned
   events: {
     activeEvents: [],
     lastEventTime: 0,

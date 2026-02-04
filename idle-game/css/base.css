@@ -9,7 +9,7 @@ body {
   font-family: var(--font-body);
   font-size: 1.2rem; /* Teko is condensed, needs size */
   background-color: var(--bg-color);
-  /* Background image loaded via JS lazy loading */
+  background-image: url('../assets/fundo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -37,6 +37,11 @@ body::before {
   z-index: -1;
   pointer-events: none;
   opacity: 0.9;
+}
+
+/* Global Utilities */
+.hidden {
+  display: none !important;
 }
 
 /* Scrollbar Street Style */

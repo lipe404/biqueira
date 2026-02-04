@@ -8,6 +8,7 @@ import { AutomationSystem } from "./systems/automationSystem.js";
 import { RiskSystem } from "./systems/riskSystem.js";
 import { IdleSystem } from "./systems/idleSystem.js";
 import { EventSystem } from "./systems/eventSystem.js";
+import { PetSystem } from "./systems/petSystem.js";
 import { PrestigeSystem } from "./systems/prestigeSystem.js";
 import { ProgressionSystem } from "./systems/progressionSystem.js";
 
@@ -60,6 +61,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     AutomationSystem,
     RiskSystem,
     EventSystem,
+    PetSystem,
     ClickSystem,
     PrestigeSystem,
     ProgressionSystem

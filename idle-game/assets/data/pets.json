@@ -1,0 +1,38 @@
+{
+  "caramelo": {
+    "id": "caramelo",
+    "name": "Vira-lata Caramelo",
+    "description": "Todo mundo ama. Acalma os ânimos da comunidade.",
+    "cost": 5000,
+    "effectType": "heat_reduction",
+    "effectValue": 0.1,
+    "icon": "🐕"
+  },
+  "papagaio_x9": {
+    "id": "papagaio_x9",
+    "name": "Papagaio X9",
+    "description": "Avisa quando vem gente. Aumenta chance de escapar.",
+    "cost": 15000,
+    "effectType": "risk_reduction",
+    "effectValue": 0.2,
+    "icon": "🦜"
+  },
+  "gato_net": {
+    "id": "gato_net",
+    "name": "Gato da GatoNet",
+    "description": "Puxa uns fios pra economizar luz. Reduz custos operacionais.",
+    "cost": 30000,
+    "effectType": "cost_reduction",
+    "effectValue": 0.05,
+    "icon": "🐈"
+  },
+  "pitbull_blindado": {
+    "id": "pitbull_blindado",
+    "name": "Pitbull Blindado",
+    "description": "Ninguém mexe com sua mercadoria. Aumenta produção.",
+    "cost": 100000,
+    "effectType": "production_multiplier",
+    "effectValue": 0.1,
+    "icon": "🐕‍🦺"
+  }
+}

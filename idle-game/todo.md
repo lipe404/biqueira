@@ -28,7 +28,6 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 12 — Game Design (Core Loop)
 
-- [ ] Refinar o tema "Cria/Favela" em todas as mecânicas.
 - [ ] Adicionar mecânica de "Território": dominar áreas para bônus.
 - [ ] Criar sistema de "Reputação" com facções (Polícia, Milícia, Traf... opositores).
 - [ ] Implementar "Crafting": combinar widgets para criar produtos melhores.
@@ -36,16 +35,10 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 - [ ] Criar sistema de "Clima/Tempo": chuva afeta vendas, noite afeta risco.
 - [ ] Implementar "Equipamentos" para o personagem principal.
 - [ ] Adicionar mecânica de "Gestão de Crise" (decisões morais em eventos).
-- [ ] Criar "Chain Reactions": eventos que desencadeiam outros eventos.
-- [ ] Adicionar NPC "Consultor" que dá dicas baseadas no estado atual.
 - [ ] Implementar "Laboratório": pesquisa de novas tecnologias.
 - [ ] Adicionar mecânica de "Lavagem de Dinheiro" (converter dinheiro sujo em limpo).
 - [ ] Criar "Mercado Negro": comprar itens raros com Heat alto.
-- [ ] Adicionar "Pets" ou mascotes que dão bônus passivos.
-- [ ] Implementar sistema de "Combo" entre upgrades.
 - [ ] Criar final de jogo (Endgame condition) ou narrativa cíclica.
-- [ ] Adicionar "Set Bonuses": ter todos os upgrades de um tipo dá bônus extra.
-- [ ] Implementar mecânica de "Risco Controlado": manter Heat alto por bônus.
 - [ ] Criar "Power-ups" que aparecem na tela e precisam ser clicados.
 - [ ] Adicionar personalização do escritório/fábrica (visual).
 

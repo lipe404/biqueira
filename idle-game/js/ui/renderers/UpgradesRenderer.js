@@ -23,7 +23,7 @@ export const UpgradesRenderer = {
 
     availableUpgrades.forEach((u) => {
       const div = document.createElement("div");
-      div.className = "list-item upgrade-item";
+      div.className = "upgrade-item";
       if (state.resources.money >= u.cost) {
         div.classList.add("affordable");
       } else {
@@ -42,8 +42,7 @@ export const UpgradesRenderer = {
 
       div.innerHTML = `
                 <div class="item-header">
-                    <span class="icon-pulse">${icon}</span>
-                    <span>${u.name}</span>
+                    <span class="item-name">${icon} ${u.name}</span>
                     <span class="item-cost">${formatCurrency(u.cost)}</span>
                 </div>
                 <div class="item-desc">${u.description}</div>

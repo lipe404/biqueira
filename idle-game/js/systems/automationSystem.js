@@ -1,3 +1,4 @@
+import { PetSystem } from "./petSystem.js";
 import { gameState } from "../core/gameState.js";
 import { NPCS } from "../data/npcs.js";
 import { CONFIG } from "../core/config.js";
@@ -67,7 +68,14 @@ export const AutomationSystem = {
     const prestigeMult = 1 + state.resources.influence * CONFIG.PRESTIGE_MULTIPLIER_FACTOR;
     totalProduction *= prestigeMult;
     totalSales *= prestigeMult;
-
+    
+    // --- PET BONUSES ---
+    const petProdBonus = PetSystem.getBonus('production_multiplier');
+    if (petProdBonus > 0) {
+        totalProduction *= (1 + petProdBonus);
+        totalSales *= (1 + petProdBonus);
+    }
+    
     // 2. Heat Penalty (Suspeita)
     // High heat makes operation harder (police checkpoints, paranoia)
     let heatMult = 1.0;
@@ -105,6 +113,12 @@ export const AutomationSystem = {
     // If we have risk reduction multipliers (from upgrades)
     if (state.multipliers && state.multipliers.risk) {
       if (netRiskChange > 0) netRiskChange *= state.multipliers.risk;
+    }
+    
+    // Pet Risk Reduction
+    const petRiskReduction = PetSystem.getBonus('risk_reduction');
+    if (netRiskChange > 0 && petRiskReduction > 0) {
+        netRiskChange *= Math.max(0, 1 - petRiskReduction);
     }
 
     state.resources.heat += netRiskChange * dt;

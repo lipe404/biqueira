@@ -1,72 +1,112 @@
 {
-  "intern": {
-    "id": "intern",
-    "name": "Estagiário",
+  "menor_corre": {
+    "id": "menor_corre",
+    "name": "Menor do Corre",
     "role": "producer",
-    "description": "Monta widgets manualmente. Mão de obra barata.",
+    "description": "Muleque ágil. Busca e leva mercadoria rápido.",
     "baseCost": 15,
     "baseProduction": 1,
     "baseRisk": 0.1,
     "costMultiplier": 1.15
   },
-  "telemarketer": {
-    "id": "telemarketer",
-    "name": "Telemarketing",
+  "vapor_esquina": {
+    "id": "vapor_esquina",
+    "name": "Vapor da Esquina",
     "role": "seller",
-    "description": "Incomoda pessoas até elas comprarem widgets.",
-    "baseCost": 20,
+    "description": "Fica na atividade vendendo pros passantes.",
+    "baseCost": 25,
     "baseProduction": 1,
     "baseRisk": 0.05,
     "costMultiplier": 1.15
   },
-  "assembly_bot": {
-    "id": "assembly_bot",
-    "name": "Robô de Montagem v1",
+  "cozinha_boca": {
+    "id": "cozinha_boca",
+    "name": "Cozinha da Boca",
     "role": "producer",
-    "description": "Linha de montagem automatizada.",
-    "baseCost": 100,
+    "description": "Produção caseira e organizada. Qualidade duvidosa.",
+    "baseCost": 120,
     "baseProduction": 5,
-    "baseRisk": 0,
+    "baseRisk": 0.2,
     "costMultiplier": 1.15
   },
-  "middle_manager": {
-    "id": "middle_manager",
-    "name": "Gerente Intermediário",
+  "fogueteiro": {
+    "id": "fogueteiro",
+    "name": "Fogueteiro",
     "role": "manager",
-    "description": "Otimiza o fluxo e culpa os outros. Reduz Suspeita.",
-    "baseCost": 500,
+    "description": "Avisa quando a barca sobe. Reduz risco de B.O.",
+    "baseCost": 600,
     "baseProduction": 0,
-    "baseRisk": -0.5,
+    "baseRisk": -0.8,
     "costMultiplier": 1.2
   },
-  "online_store": {
-    "id": "online_store",
-    "name": "Loja Virtual",
+  "grupo_zap": {
+    "id": "grupo_zap",
+    "name": "Grupo do Zap",
     "role": "seller",
-    "description": "Vende widgets enquanto você dorme.",
-    "baseCost": 1000,
-    "baseProduction": 10,
-    "baseRisk": 0.2,
+    "description": "Vendas criptografadas e entregas via motoboy.",
+    "baseCost": 1500,
+    "baseProduction": 12,
+    "baseRisk": 0.3,
     "costMultiplier": 1.25
   },
-  "offshore_factory": {
-    "id": "offshore_factory",
-    "name": "Fábrica Offshore",
+  "moto_taxi": {
+    "id": "moto_taxi",
+    "name": "Moto Táxi",
     "role": "producer",
-    "description": "Produção massiva, poluição massiva. Alto risco.",
-    "baseCost": 12000,
-    "baseProduction": 100,
-    "baseRisk": 2.0,
+    "description": "Logística rápida pra entrega na comunidade toda.",
+    "baseCost": 3500,
+    "baseProduction": 25,
+    "baseRisk": 0.5,
     "costMultiplier": 1.25
   },
-  "global_marketing": {
-    "id": "global_marketing",
-    "name": "Marketing Global",
-    "role": "seller",
-    "description": "Lavagem cerebral nas massas para consumir.",
-    "baseCost": 50000,
-    "baseProduction": 100,
-    "baseRisk": 1.0,
+  "advogado_porta": {
+    "id": "advogado_porta",
+    "name": "Advogado Porta de Cadeia",
+    "role": "manager",
+    "description": "Resolve B.O.s pequenos e desenrola fiança. Reduz muito risco.",
+    "baseCost": 8000,
+    "baseProduction": 0,
+    "baseRisk": -1.5,
     "costMultiplier": 1.3
+  },
+  "laboratorio_fundo": {
+    "id": "laboratorio_fundo",
+    "name": "Laboratório de Fundo",
+    "role": "producer",
+    "description": "Química avançada no quintal da tia.",
+    "baseCost": 15000,
+    "baseProduction": 120,
+    "baseRisk": 2.5,
+    "costMultiplier": 1.3
+  },
+  "influencer_crime": {
+    "id": "influencer_crime",
+    "name": "Influencer do Crime",
+    "role": "seller",
+    "description": "Ostentação no Insta atrai clientes (e cana).",
+    "baseCost": 60000,
+    "baseProduction": 150,
+    "baseRisk": 1.5,
+    "costMultiplier": 1.35
+  },
+  "conexao_fronteira": {
+    "id": "conexao_fronteira",
+    "name": "Conexão da Fronteira",
+    "role": "producer",
+    "description": "Caminhões chegando direto da fonte.",
+    "baseCost": 250000,
+    "baseProduction": 800,
+    "baseRisk": 5.0,
+    "costMultiplier": 1.4
+  },
+  "dono_morro": {
+    "id": "dono_morro",
+    "name": "Dono do Morro",
+    "role": "manager",
+    "description": "A palavra final. Organiza tudo e impõe respeito.",
+    "baseCost": 1000000,
+    "baseProduction": 500,
+    "baseRisk": -5.0,
+    "costMultiplier": 1.5
   }
 }

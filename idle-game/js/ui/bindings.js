@@ -10,6 +10,7 @@ import { Formatter } from "../utils/formatting.js";
 import { CONFIG } from "../core/config.js";
 
 import { VisualFX } from "./visualFX.js";
+import { PetSystem } from "../systems/petSystem.js";
 
 export const Bindings = {
   init: () => {
@@ -124,18 +125,62 @@ export const Bindings = {
         });
     }
 
-    // Delegated Listeners for Lists
+    // Tab Switching for Upgrades/Pets
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    tabBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const tabId = btn.dataset.tab;
+        
+        // Update Buttons
+        tabBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        
+        // Update Content
+        const tabContents = document.querySelectorAll(".tab-content");
+        tabContents.forEach(content => {
+          content.classList.add("hidden");
+          content.classList.remove("active");
+        });
+        
+        const activeContent = document.getElementById(`${tabId}-list`);
+        if (activeContent) {
+          activeContent.classList.remove("hidden");
+          activeContent.classList.add("active");
+        }
+      });
+    });
+
+    // Pet Purchase
+    const petsList = document.getElementById("pets-list");
+    if (petsList) {
+      petsList.addEventListener("click", (e) => {
+        const item = e.target.closest(".pet-item");
+        if (!item) return;
+
+        const id = item.dataset.id;
+        const adoptBtn = e.target.closest(".btn-adopt");
+        
+        if (adoptBtn) {
+          Bindings.buyPet(id, item);
+        } else {
+          Bindings.triggerVibration(item);
+        }
+      });
+    }
 
     // NPC Purchase
     document.getElementById("npcs-list").addEventListener("click", (e) => {
       const item = e.target.closest(".npc-item");
       if (!item) return;
 
-      const id = item.dataset.id;
-      Bindings.buyNPC(id);
-
-      // Visual feedback on click even if locked (maybe shake?)
-      Bindings.triggerVibration(item);
+      const hireBtn = e.target.closest(".btn-hire");
+      
+      if (hireBtn) {
+          const id = item.dataset.id;
+          Bindings.buyNPC(id);
+      } else {
+          Bindings.triggerVibration(item);
+      }
     });
 
     // Upgrade Purchase
@@ -202,7 +247,11 @@ export const Bindings = {
     if (!npc) return;
 
     const count = state.automation.npcs[id] || 0;
-    const discount = (state.discounts?.global || 0) + (state.discounts?.npcs?.[id] || 0);
+    
+    // Calculate total discount including pets
+    const petDiscount = PetSystem.getBonus('cost_reduction') || 0;
+    const discount = (state.discounts?.global || 0) + (state.discounts?.npcs?.[id] || 0) + petDiscount;
+    
     const multiplier = state.settings?.buyMultiplier || 1;
     
     let quantity = 1;
@@ -252,6 +301,28 @@ export const Bindings = {
         // Not enough money for fixed amount
         if (item) VisualFX.showError(item, "Sem Grana!");
     }
+  },
+
+  buyPet: (id, itemElement) => {
+    // Import PetSystem dynamically if needed, or use global if attached
+    // Assuming PetSystem is available via main or import
+    // Ideally we should import it at the top, let's assume it's imported or available
+    
+    // Check if PetSystem is available (we need to add import at top)
+    import("../systems/petSystem.js").then(module => {
+        const PetSystem = module.PetSystem;
+        if (PetSystem.buyPet(id)) {
+             Bindings.triggerVibration(itemElement);
+             VisualFX.spawnFloatingText(
+                  itemElement.getBoundingClientRect().left + 100, 
+                  itemElement.getBoundingClientRect().top, 
+                  "Adotado!", 
+                  'positive'
+              );
+        } else {
+             VisualFX.showError(itemElement, "Sem Grana ou Já Tem!");
+        }
+    });
   },
 
   buyUpgrade: (id) => {

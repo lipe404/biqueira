@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/layout.css">
         <link rel="stylesheet" href="css/components.css">
+        <link rel="stylesheet" href="css/panel-bgs.css">
         <link rel="stylesheet" href="css/save_modal.css">
         <link rel="stylesheet" href="css/animations.css">
     </head>
@@ -78,9 +79,19 @@
 
                 <!-- CENTER: Upgrades & Management -->
                 <section class="panel upgrades-panel" aria-labelledby="heading-upgrades">
-                    <h2 id="heading-upgrades">COMANDO</h2>
-                    <div id="upgrades-list" class="scroll-list" aria-label="Lista de Melhorias">
+                    <div class="panel-header-tabs">
+                        <h2 id="heading-upgrades">COMANDO</h2>
+                        <div class="tabs-container">
+                            <button class="tab-btn active" data-tab="upgrades">Melhorias</button>
+                            <button class="tab-btn" data-tab="pets">Mascotes</button>
+                        </div>
+                    </div>
+                    
+                    <div id="upgrades-list" class="scroll-list tab-content active" aria-label="Lista de Melhorias">
                         <!-- Upgrades injected here -->
+                    </div>
+                    <div id="pets-list" class="scroll-list tab-content hidden" aria-label="Lista de Mascotes">
+                        <!-- Pets injected here -->
                     </div>
                 </section>
 

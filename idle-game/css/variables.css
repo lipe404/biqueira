@@ -1,37 +1,49 @@
 :root {
-  --bg-color: #121212;
-  --panel-bg: rgba(20, 20, 25, 0.9);
+  /* Colors */
+  --bg-color: #050505;
+  --bg-dark: #0a0a0a;
+  --bg-panel: rgba(18, 18, 20, 0.95);
+  --bg-card: rgba(255, 255, 255, 0.05);
+  
   --text-color: #e0e0e0;
+  --text-muted: #888888;
+  --text-bright: #ffffff;
 
   /* Palette Street/Cria */
-  --street-green: #00ff41; /* Cyber/Spray Green */
-  --street-red: #ff003c; /* Alert Red */
-  --street-yellow: #ffee00; /* Hazard Yellow */
-  --street-blue: #00d9ff; /* Neon Blue */
-  --concrete: #2a2a2a;
-  --cardboard: #8d6e63;
+  --street-green: #00ff41; /* Matrix/Cyber Green */
+  --street-red: #ff2a2a; /* Alert Red */
+  --street-yellow: #fce803; /* Hazard Yellow */
+  --street-blue: #00f2ff; /* Neon Blue */
+  --street-purple: #bd00ff; /* Neon Purple */
+  --street-orange: #ff9100;
+  
+  --border-color: rgba(255, 255, 255, 0.15);
+  --border-focus: var(--street-green);
 
-  --font-head: "Black Ops One", cursive;
+  /* Fonts */
+  --font-display: "Black Ops One", cursive;
   --font-body: "Teko", sans-serif;
   --font-hand: "Permanent Marker", cursive;
+  --font-sub: "Teko", sans-serif;
+  --font-mono: monospace;
 
-  --border-style: 2px solid rgba(255, 255, 255, 0.1);
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
 
-  /* Spacing / Density Variables */
-  --spacing-xs: 5px;
-  --spacing-sm: 10px;
-  --spacing-md: 15px;
-  --spacing-lg: 20px;
-  --spacing-xl: 25px;
-
-  --touch-target-size: 44px; /* Min height for touch */
+  /* UI Elements */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --shadow-panel: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --glow-green: 0 0 10px rgba(0, 255, 65, 0.3);
+  
+  --touch-target-size: 44px;
 }
 
-/* Compact Density (can be toggled via class on body) */
 body.compact {
-  --spacing-xs: 2px;
-  --spacing-sm: 5px;
-  --spacing-md: 10px;
-  --spacing-lg: 15px;
-  --spacing-xl: 20px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
 }
