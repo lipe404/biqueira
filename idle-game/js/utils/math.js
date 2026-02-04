@@ -61,5 +61,63 @@ export const MathUtils = {
       cost *= (1 - discount);
     }
     return Math.floor(cost);
+  },
+
+  /**
+   * Calculate the cost for a batch of items (Geometric Series).
+   * @param {number} base - Base cost.
+   * @param {number} multiplier - Growth factor.
+   * @param {number} count - Current quantity owned.
+   * @param {number} quantity - Number of items to buy.
+   * @param {number} discount - Discount percentage.
+   * @returns {number} Total cost for the batch.
+   */
+  calculateBatchCost: (base, multiplier, count, quantity, discount = 0) => {
+    if (quantity <= 0) return 0;
+    if (multiplier === 1) {
+      return Math.floor(base * quantity * (1 - discount));
+    }
+    
+    // Cost of next item (at index 'count')
+    const startCost = base * Math.pow(multiplier, count);
+    
+    // Sum of geometric series: a * (r^n - 1) / (r - 1)
+    let totalCost = startCost * (Math.pow(multiplier, quantity) - 1) / (multiplier - 1);
+    
+    if (discount > 0) {
+      totalCost *= (1 - discount);
+    }
+    return Math.floor(totalCost);
+  },
+
+  /**
+   * Calculate maximum affordable quantity.
+   * @param {number} base - Base cost.
+   * @param {number} multiplier - Growth factor.
+   * @param {number} count - Current quantity owned.
+   * @param {number} money - Available money.
+   * @param {number} discount - Discount percentage.
+   * @returns {number} Maximum affordable quantity.
+   */
+  calculateMaxAffordable: (base, multiplier, count, money, discount = 0) => {
+    if (money <= 0) return 0;
+    
+    // Effective money considering discount (reverse the discount logic)
+    // Cost * (1 - discount) <= Money  =>  Cost <= Money / (1 - discount)
+    const effectiveMoney = discount < 1 ? money / (1 - discount) : money;
+    
+    if (multiplier === 1) {
+      return Math.floor(effectiveMoney / base);
+    }
+
+    const startCost = base * Math.pow(multiplier, count);
+    if (startCost > effectiveMoney) return 0;
+
+    // Formula derived from geometric series sum:
+    // r^n <= (Available * (r - 1) / startCost) + 1
+    const term = (effectiveMoney * (multiplier - 1) / startCost) + 1;
+    const n = Math.floor(Math.log(term) / Math.log(multiplier));
+    
+    return Math.max(0, n);
   }
 };

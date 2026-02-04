@@ -39,37 +39,37 @@
 
             <main>
                 <!-- LEFT: Production & Resources -->
-                <section class="panel production-panel">
-                    <h2>O PONTO</h2>
+                <section class="panel production-panel" aria-labelledby="heading-production">
+                    <h2 id="heading-production">O PONTO</h2>
 
-                    <div class="resources">
+                    <div class="resources" role="group" aria-label="Recursos Atuais">
                         <div class="res-item money">
                             <span class="label">CAIXA</span>
-                            <span class="value" id="money">$0.00</span>
-                            <span class="rate" id="money-rate">(+$0/s)</span>
+                            <span class="value" id="money" aria-live="polite">$0.00</span>
+                            <span class="rate" id="money-rate" aria-live="off">(+$0/s)</span>
                         </div>
                         <div class="res-item widgets">
                             <span class="label">MERCADORIA</span>
-                            <span class="value" id="widgets">0</span>
-                            <span class="rate" id="widget-rate">(+0/s)</span>
+                            <span class="value" id="widgets" aria-live="polite">0</span>
+                            <span class="rate" id="widget-rate" aria-live="off">(+0/s)</span>
                         </div>
                         <div class="res-item heat">
                             <span class="label">CALOR</span>
-                            <div class="progress-bar">
+                            <div class="progress-bar" role="progressbar" aria-label="Nível de perigo policial" aria-valuemin="0" aria-valuemax="100">
                                 <div class="fill" id="heat-bar"
                                     style="width: 0%"></div>
                             </div>
-                            <span class="value" id="heat-val">0%</span>
+                            <span class="value" id="heat-val" aria-live="polite">0%</span>
                         </div>
                     </div>
 
                     <div class="actions">
-                        <button id="btn-make" class="btn-big make">
+                        <button id="btn-make" class="btn-big make" aria-label="Produzir Mercadoria">
                             PRODUZIR
                             <small>+<span id="click-power">1</span>
                                 Mercadoria</small>
                         </button>
-                        <button id="btn-sell" class="btn-big sell">
+                        <button id="btn-sell" class="btn-big sell" aria-label="Vender Mercadoria por Dinheiro">
                             PASSAR ADIANTE
                             <small>Transformar Mercadoria em Grana</small>
                         </button>
@@ -77,21 +77,31 @@
                 </section>
 
                 <!-- CENTER: Upgrades & Management -->
-                <section class="panel upgrades-panel">
-                    <h2>COMANDO</h2>
-                    <div id="upgrades-list" class="scroll-list">
+                <section class="panel upgrades-panel" aria-labelledby="heading-upgrades">
+                    <h2 id="heading-upgrades">COMANDO</h2>
+                    <div id="upgrades-list" class="scroll-list" aria-label="Lista de Melhorias">
                         <!-- Upgrades injected here -->
                     </div>
                 </section>
 
                 <!-- RIGHT: Automation & Logs -->
-                <section class="panel automation-panel">
-                    <h2>EQUIPE DO CORRE</h2>
-                    <div id="npcs-list" class="scroll-list">
+                <section class="panel automation-panel" aria-labelledby="heading-automation">
+                    <h2 id="heading-automation">EQUIPE DO CORRE</h2>
+                    
+                    <!-- Bulk Buy Controls -->
+                    <div class="buy-controls" role="group" aria-label="Multiplicador de Compra">
+                        <span class="label">COMPRAR:</span>
+                        <button class="btn-multiplier active" data-value="1" aria-pressed="true">x1</button>
+                        <button class="btn-multiplier" data-value="10" aria-pressed="false">x10</button>
+                        <button class="btn-multiplier" data-value="100" aria-pressed="false">x100</button>
+                        <button class="btn-multiplier" data-value="MAX" aria-pressed="false">MAX</button>
+                    </div>
+
+                    <div id="npcs-list" class="scroll-list" aria-label="Lista de Contratações">
                         <!-- NPCs injected here -->
                     </div>
 
-                    <div class="logs-container">
+                    <div class="logs-container" aria-live="polite" aria-atomic="false">
                         <h3>RÁDIO PEÃO</h3>
                         <div id="game-logs" class="logs-list"></div>
                     </div>

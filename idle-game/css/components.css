@@ -522,3 +522,48 @@ footer {
   background: var(--street-red);
   color: #000;
 }
+
+/* Bulk Buy Controls */
+.buy-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 5px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.buy-controls .label {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #aaa;
+  margin-right: 5px;
+}
+
+.btn-multiplier {
+  background: #333;
+  border: 1px solid #555;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 40px;
+  min-height: var(--touch-target-size); /* Touch friendly */
+}
+
+.btn-multiplier:hover {
+  background: #444;
+  border-color: #777;
+}
+
+.btn-multiplier.active {
+  background: var(--street-blue);
+  color: #000;
+  border-color: #009ecb;
+  font-weight: bold;
+  box-shadow: 0 0 5px var(--street-blue);
+}

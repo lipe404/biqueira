@@ -74,49 +74,11 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 14 — UX (Experiência do Jogador)
 
-- [ ] Implementar Tutorial interativo (onboarding) para novos jogadores.
-- [ ] Adicionar dicas de contexto (tooltips "Você sabia?").
-- [ ] Melhorar clareza dos números (cores para positivo/negativo).
-- [ ] Permitir compra em massa (x1, x10, x100, Max).
-- [ ] Adicionar atalhos de teclado (hotkeys) para PC.
-- [ ] Implementar "Undo" para última compra (se possível/justo).
 - [ ] Melhorar mensagem de erro/feedback quando não pode comprar.
-- [ ] Adicionar opção de exportar/importar save (string/arquivo).
-- [ ] Confirmar ações destrutivas (reset, compras muito caras).
-- [ ] Permitir fixar (pin) upgrades desejados no topo.
-- [ ] Mostrar tempo restante para poder comprar algo (time to afford).
-- [ ] Adicionar comparação de stats (antes/depois da compra).
-- [ ] Implementar busca/filtro na lista de upgrades.
 - [ ] Melhorar feedback de save (ícone girando, mensagem discreta).
-- [ ] Permitir ocultar upgrades comprados/obsoletos.
-- [ ] Adicionar modo "Zen" (interface mínima).
-- [ ] Mostrar changelog dentro do jogo após atualização.
-- [ ] Permitir reordenar listas (arrastar e soltar).
 - [ ] Adicionar feedback sonoro para ações importantes (opcional).
-- [ ] Realizar testes de usabilidade com usuários reais.
 
 ## Categoria 15 — Acessibilidade
-
-- [ ] Garantir navegação completa por teclado (Tab index, Focus states).
-- [ ] Adicionar descrições ARIA em todos os botões e inputs.
-- [ ] Implementar modo de Alto Contraste real.
-- [ ] Adicionar opção para reduzir movimento (prefers-reduced-motion).
-- [ ] Permitir aumentar tamanho da fonte (escala de UI).
-- [ ] Garantir que cores não sejam a única forma de informação (daltônicos).
-- [ ] Adicionar legendas para sons (se houver áudio/fala).
-- [ ] Implementar leitor de tela (Screen Reader) friendly labels.
-- [ ] Evitar flashes de luz (fotossensibilidade) ou dar opção de desligar.
-- [ ] Permitir remapear atalhos de teclado.
-- [ ] Adicionar modo de "Fonte Dislexia" (OpenDyslexic).
-- [ ] Garantir áreas de toque grandes o suficiente em mobile (44x44px).
-- [ ] Testar com ferramentas de auditoria de acessibilidade (Lighthouse).
-- [ ] Fornecer alternativas textuais para ícones e imagens.
-- [ ] Evitar timeouts curtos que exigem reação rápida (ou dar opção).
-- [ ] Permitir pausar o jogo a qualquer momento.
-- [ ] Garantir contraste de texto mínimo 4.5:1 (WCAG AA).
-- [ ] Estruturar HTML semanticamente (headings, regions).
-- [ ] Adicionar feedback visual redundante para áudio.
-- [ ] Documentar recursos de acessibilidade no menu.
 
 ## Categoria 16 — Responsividade (Mobile / Desktop)
 

@@ -32,12 +32,34 @@ export const NPCRenderer = {
   },
 
   render: (state, elements, formatCurrency) => {
+    const multiplier = state.settings?.buyMultiplier || 1;
+
     for (const key in NPCS) {
       const npc = NPCS[key];
       const count = state.automation.npcs[key] || 0;
       
       const discount = (state.discounts?.global || 0) + (state.discounts?.npcs?.[key] || 0);
-      const cost = MathUtils.calculateCost(npc.baseCost, npc.costMultiplier, count, discount);
+      
+      let cost = 0;
+      let quantity = 1;
+      let label = "";
+
+      if (multiplier === 'MAX') {
+          quantity = MathUtils.calculateMaxAffordable(npc.baseCost, npc.costMultiplier, count, state.resources.money, discount);
+          // Show cost for AT LEAST 1 if max is 0, so user knows next price
+          const displayQuantity = Math.max(1, quantity);
+          cost = MathUtils.calculateBatchCost(npc.baseCost, npc.costMultiplier, count, displayQuantity, discount);
+          
+          if (quantity > 0) {
+             label = ` (x${quantity})`;
+          } else {
+             label = " (x1)"; // Show next one price
+          }
+      } else {
+          quantity = multiplier;
+          cost = MathUtils.calculateBatchCost(npc.baseCost, npc.costMultiplier, count, quantity, discount);
+          if (quantity > 1) label = ` (x${quantity})`;
+      }
 
       const el = document.getElementById(`npc-${npc.id}`);
       if (!el) continue;
@@ -45,16 +67,27 @@ export const NPCRenderer = {
       // Update text
       document.getElementById(`count-${npc.id}`).textContent = count;
       document.getElementById(`cost-${npc.id}`).textContent =
-        formatCurrency(cost);
+        formatCurrency(cost) + label;
 
       // Update availability/affordability
-      if (state.resources.money >= cost) {
+      const canAfford = state.resources.money >= cost;
+      
+      // For MAX mode, if quantity > 0, we can afford.
+      // But if quantity is 0, we show cost of 1 and we CANNOT afford it.
+      // logic above: if MAX and qty=0, cost is for 1. money < cost(1). So canAfford is false. Correct.
+      
+      if (canAfford) {
         el.classList.add("affordable");
         el.classList.remove("locked");
+        el.setAttribute("aria-disabled", "false");
       } else {
         el.classList.remove("affordable");
         el.classList.add("locked"); // Optional: just dim it
+        el.setAttribute("aria-disabled", "true");
       }
+      
+      // Update ARIA label for accessibility
+      el.setAttribute("aria-label", `Contratar ${npc.name}. Custo: ${formatCurrency(cost)}. Possui: ${count}.`);
     }
   }
 };

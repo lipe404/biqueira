@@ -146,6 +146,42 @@ export const Bindings = {
       Bindings.buyUpgrade(id);
       Bindings.triggerVibration(item);
     });
+
+    // Bulk Buy Controls
+    const multiplierBtns = document.querySelectorAll('.btn-multiplier');
+    multiplierBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const val = e.target.dataset.value;
+            Bindings.setMultiplier(val);
+            
+            // UI Update
+            multiplierBtns.forEach(b => {
+                b.classList.remove('active');
+                b.ariaPressed = "false";
+            });
+            e.target.classList.add('active');
+            e.target.ariaPressed = "true";
+        });
+    });
+    
+    // Init state
+    const currentState = gameState.get();
+    if (!currentState.settings) currentState.settings = {};
+    if (!currentState.settings.buyMultiplier) currentState.settings.buyMultiplier = 1;
+    
+    // Init UI from state
+    const savedMult = currentState.settings.buyMultiplier;
+    const activeBtn = document.querySelector(`.btn-multiplier[data-value="${savedMult}"]`);
+    if (activeBtn) {
+        multiplierBtns.forEach(b => b.classList.remove('active'));
+        activeBtn.classList.add('active');
+    }
+  },
+
+  setMultiplier: (val) => {
+      const state = gameState.get();
+      if (!state.settings) state.settings = {};
+      state.settings.buyMultiplier = val === 'MAX' ? 'MAX' : parseInt(val);
   },
 
   triggerVibration: (element) => {
@@ -161,18 +197,41 @@ export const Bindings = {
 
     const count = state.automation.npcs[id] || 0;
     const discount = (state.discounts?.global || 0) + (state.discounts?.npcs?.[id] || 0);
-    const cost = MathUtils.calculateCost(npc.baseCost, npc.costMultiplier, count, discount);
+    const multiplier = state.settings?.buyMultiplier || 1;
+    
+    let quantity = 1;
+    let totalCost = 0;
 
-    if (state.resources.money >= cost) {
-      state.resources.money -= cost;
-      state.automation.npcs[id] = count + 1;
+    if (multiplier === 'MAX') {
+        quantity = MathUtils.calculateMaxAffordable(npc.baseCost, npc.costMultiplier, count, state.resources.money, discount);
+        if (quantity <= 0) return; // Can't afford any
+        totalCost = MathUtils.calculateBatchCost(npc.baseCost, npc.costMultiplier, count, quantity, discount);
+    } else {
+        quantity = multiplier;
+        totalCost = MathUtils.calculateBatchCost(npc.baseCost, npc.costMultiplier, count, quantity, discount);
+    }
+
+    if (state.resources.money >= totalCost && quantity > 0) {
+      state.resources.money -= totalCost;
+      state.automation.npcs[id] = count + quantity;
 
       // Log
       if (!state.logs) state.logs = [];
       state.logs.unshift({
         time: Date.now(),
-        message: `Contratou ${npc.name} por $${cost}.`,
+        message: `Contratou ${quantity}x ${npc.name} por $${Formatter.formatCurrency(totalCost)}.`,
       });
+      
+      // Visual Feedback for bulk
+      const item = document.querySelector(`.npc-item[data-id="${id}"]`);
+      if (item) {
+          VisualFX.spawnFloatingText(
+              item.getBoundingClientRect().left + 100, 
+              item.getBoundingClientRect().top, 
+              `+${quantity}`, 
+              'default'
+          );
+      }
     }
   },
 
