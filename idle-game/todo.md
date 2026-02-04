@@ -58,25 +58,4 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 
 ## Categoria 19 — Expansões Futuras e Conteúdo
 
-- [ ] Planejar DLC/Expansão "O Sindicato".
-- [ ] Planejar DLC/Expansão "Política e Influência".
-- [ ] Criar sistema de "Pets/Aliados" (Cachorro caramelo, Papagaio).
-- [ ] Adicionar minigame de "Invasão" (Tower Defense simples).
-- [ ] Planejar modo Multiplayer assíncrono (Leaderboards, Guildas).
-- [ ] Criar sistema de "Bolsa de Valores" do crime.
-- [ ] Adicionar mecânica de "Risco Biológico" (Pandemia?).
-- [ ] Planejar tradução para outros idiomas (EN, ES).
-- [ ] Criar sistema de "Temporadas" com recompensas exclusivas.
-- [ ] Adicionar customização de Avatar.
-- [ ] Planejar versão App (React Native/Cordova/Electron).
-- [ ] Criar Wiki oficial ou in-game encyclopedia.
-- [ ] Adicionar modo "História" com finais múltiplos.
-- [ ] Criar sistema de "Prestige Layers" (Resetar o Reset).
-- [ ] Adicionar "Daily Login Bonus".
-- [ ] Planejar integração com redes sociais (Share progress).
-- [ ] Criar sistema de "Artefatos" raros.
-- [ ] Adicionar "Secret Codes" distribuídos na comunidade.
-- [ ] Planejar eventos sazonais (Carnaval, Natal, Festa Junina).
-- [ ] Criar editor de mods simples para a comunidade.
-
 ## Categoria 20 — Manutenibilidade e Evolução do Projeto
