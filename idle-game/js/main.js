@@ -72,4 +72,9 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   // 4. Start Loop
   gameLoop.start();
+
+  // 5. Fade In Game
+  setTimeout(() => {
+    document.querySelector('.game-container').classList.add('loaded');
+  }, 100);
 });

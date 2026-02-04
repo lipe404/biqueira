@@ -121,8 +121,6 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 ## Categoria 16 — Responsividade (Mobile / Desktop)
 
 - [ ] Implementar layout fluido que se adapta a qualquer largura.
-- [ ] Testar em resoluções extremas (muito pequeno, ultrawide).
-- [ ] Ajustar tamanho de fontes via `clamp()` ou media queries.
 - [ ] Otimizar menus para toque (touch-friendly) vs mouse.
 - [ ] Gerenciar teclado virtual em mobile (não cobrir UI).
 - [ ] Implementar gestos (swipe) para trocar de abas em mobile.
@@ -147,15 +145,9 @@ Este documento serve como o roteiro central para o desenvolvimento, manutenção
 - [ ] Adicionar trilha sonora (BGM) dinâmica (muda com Heat ou Progresso).
 - [ ] Implementar controle de volume independente (SFX, Música, Master).
 - [ ] Adicionar "Juice": screenshake, partículas, flash, escala.
-- [ ] Adicionar transições suaves entre telas/estados.
-- [ ] Visualizar o "Heat" afetando a tela (bordas vermelhas, distorção).
 - [ ] Criar sons de ambiente (cidade, sirenes, fábrica).
-- [ ] Adicionar feedback tátil (Vibration API) aprimorado.
-- [ ] Implementar visualização de "Crítico" (texto maior/colorido).
-- [ ] Adicionar efeito de "Glitch" digital quando hackear/comprar upgrade ilegal.
 - [ ] Sincronizar áudio com animações visuais.
 - [ ] Permitir silenciar o jogo quando em background.
-- [ ] Adicionar efeito sonoro de "Typewriter" para logs importantes.
 - [ ] Criar jingle de Level Up ou Conquista.
 - [ ] Implementar áudio espacial (stereo panning) básico.
 - [ ] Adicionar opção de "Audio Ducking" (baixar música quando toca SFX).

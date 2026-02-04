@@ -5,6 +5,12 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 15px;
+  opacity: 0; /* Start hidden */
+  transition: opacity 0.8s ease-out;
+}
+
+.game-container.loaded {
+  opacity: 1;
 }
 
 /* Main Layout */
